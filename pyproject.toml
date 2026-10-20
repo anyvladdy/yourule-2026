@@ -1,0 +1,10 @@
+[project]
+name = "yourule-2026"
+version = "0.1.0"
+description = "Evidence pipeline for the Электрозавод communications strategy"
+requires-python = ">=3.11,<3.14"
+dependencies = [
+    "pymorphy3>=2.0.6",
+    "pymorphy3-dicts-ru>=2.4.417150.4580142",
+    "pyyaml>=6.0.3",
+]
