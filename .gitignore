@@ -1,0 +1,7 @@
+data/raw/
+data/interim/
+.env
+*.session
+.DS_Store
+__pycache__/
+.venv/
