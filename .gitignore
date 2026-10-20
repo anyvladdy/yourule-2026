@@ -1,7 +1,7 @@
-data/raw/
-data/interim/
-.env
-*.session
-.DS_Store
 __pycache__/
+.DS_Store
+.env
 .venv/
+*.session
+data/interim/
+data/raw/

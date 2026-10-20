@@ -7,11 +7,14 @@
 #   "Эталон"/"Группа Эталон" never count as a site anchor on their own: they need a core term
 #   or a geographic site_context term (street/district) in the same item.
 #   core regex must stop at word boundaries so it does not match "Электрозаводская" / "Электрозаводск".
+#   Co-mention rule: "Эталон" + any Электрозавод form in the same item (any order, distance tuned in the stage-1 pilot).
 #   then drop if any(exclude) matches and none of core matches.
 # Validation decision rule (stage 1 pilot, per platform): keep a query if precision ≥ 0.7 on ~30 hand-checked
 # hits AND it adds hits not found by other queries; otherwise narrow it or drop it (log in validation_log).
 
-version: 0
+version: 1
+# Word forms and tested regexes for core/site_context/exclude: workflow/stage0/T06_keyword_variants/out/variants.yaml (T06, accepted 2026-10-20).
+# Collectors should build patterns from case_forms with re.IGNORECASE rather than copy the regex strings.
 language: ru
 
 core:            # unambiguous references to the site/project
@@ -20,7 +23,6 @@ core:            # unambiguous references to the site/project
   - "МЭЛЗ"                    # successor enterprise on the site; check how often it is used for the site itself
   - "территория Электрозавода"
   - "редевелопмент Электрозавода"
-  - "Эталон Электрозавод"
   - "#электрозавод"
   - "#сохранитьэлектрозавод"  # hypothetical hashtag: confirm or drop in stage 1
 

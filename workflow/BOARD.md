@@ -8,7 +8,7 @@ Reader: people and agents. Goal: who has which task and its status. Rules: `work
 |------|-------|--------|-------------|-------|-------|----------|
 | T04 | Reality check C01–C08 + timeline | dsh | now (first) | – | ready | Codex |
 | T02 | VK + petitions | Gemini | now | – | ready | Codex |
-| T06 | Keyword morphology (2 batches) | OpenCode/qwen3:8b | now | – | ready | Codex |
+| T06 | Keyword forms + tested regexes | Codex | now | R1 | integrated | Claude |
 | T08 | Official docs, developer statements, building matrix | dsh | T04 R1 review done | – | waiting | Claude |
 | T01 | Telegram + video sources | dsh | T04 handed off (can run before T08 if T08 waits) | – | waiting | Codex |
 | T03 | Media + criticism lines | Gemini | after T02 handoff | – | waiting | Claude |
@@ -16,7 +16,7 @@ Reader: people and agents. Goal: who has which task and its status. Rules: `work
 | T07 | Merge into registry format | OpenCode/gemma4 | card finalised after T01–T03, T08 accepted | – | draft | Codex |
 
 Load: dsh 3 cards in sequence (T04 → T01 → T08), Gemini 3 in sequence (T02 → T03 → T05),
-local models 2 short batched cards. Planner work: Claude integrates; Codex runs scripted checks.
+Codex T06 (script-based), local model T07. Planner work: Claude integrates; Codex runs scripted checks.
 
 ## Stage 0 gate (Claude + Codex)
 - [ ] All cards `integrated` (or escalated items finished by Claude/Codex)

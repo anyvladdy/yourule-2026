@@ -14,7 +14,7 @@ Claude and Codex plan and check. dsh (DeepSeek), Gemini and two local models do 
 |-------|--------------------|-----------------|
 | dsh | Careful research on the web, long tasks, cheap to run | Checking facts, timelines, official documents, Telegram sources |
 | Gemini | Searching widely, reading long documents, writing in Russian | VK, petitions, media coverage, similar cases |
-| Local models in OpenCode | Free and private, but no internet and short memory | Simple text jobs: word forms, reformatting lists |
+| Local models in OpenCode | Free and private, but no internet and short memory | Simple text jobs: reformatting lists, labelling small batches of posts |
 | Claude and Codex | Planning and judging quality | Task cards, reviews, finishing what others could not |
 
 ## What happens to a task

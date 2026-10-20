@@ -22,7 +22,7 @@ with links and dates.
 |------|-----|-----------------|
 | T04 | dsh | Which claims in the brief are real, and what happened when. Runs first. |
 | T02 | Gemini | Which VK groups and petitions exist, how many signatures, what they demand |
-| T06 | local qwen3 | All word forms of our search terms, so later searches miss nothing |
+| T06 | Codex | All word forms of our search terms, with tested patterns, so later searches miss nothing and don't pick up the metro station |
 | T01 | dsh | Which Telegram channels and videos discuss the project |
 | T03 | Gemini | How the media covered it and what the main criticisms are |
 | T08 | dsh | Official documents, the developer's statements, and the status of each building |

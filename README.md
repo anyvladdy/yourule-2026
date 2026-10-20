@@ -19,7 +19,7 @@ Several AI agents share the work, and each has a different job:
 | Claude and Codex | Plan each stage, check every result, and fix whatever is still wrong after two attempts |
 | dsh (DeepSeek) | Research with web search: checking facts, timelines, official documents, Telegram |
 | Gemini (Antigravity) | Research with web search: VK, petitions, media, similar cases |
-| Local models in OpenCode (qwen3, gemma4) | Simple text tasks without the internet: word forms, reformatting lists |
+| Local models in OpenCode (qwen3, gemma4) | Simple text tasks without the internet: reformatting lists, labelling small batches |
 
 Using different models gives us more than one view. Giving each one small, clear tasks keeps any single agent
 from being overloaded.
