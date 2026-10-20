@@ -1,5 +1,7 @@
 # Working hypotheses
 
+Reader: people and agents. Goal: the ideas the analysis must test.
+
 Analysis tests these; it does not just describe data. Status: open | supported | weakened | rejected (with evidence ref).
 Seeded by Claude, 2026-10-20, from the brief only. Add new ones with date and author.
 Before stage 3, planners add for each: unit of analysis, denominator, what counter-evidence looks like,

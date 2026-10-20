@@ -1,5 +1,7 @@
 # T01 — Discover Telegram channels and video sources
 
+Reader: worker agent. Human summary of this stage: `workflow/stage0/README.md`.
+
 - **Stage:** 0 (after T04 handoff) · **Worker:** dsh · **Fallback (after R2):** Codex
 - **Time box:** 60 min · **Size cap:** ≤ 25 Telegram rows, ≤ 10 video rows (ceilings)
 - **No parsing / no scrapers / no bulk downloads.** Web search and opening pages by hand only

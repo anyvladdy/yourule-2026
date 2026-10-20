@@ -1,6 +1,6 @@
 # Board
 
-Protocol: `workflow/README.md`. Workers update only their own card's row.
+Reader: people and agents. Goal: who has which task and its status. Rules: `workflow/PROTOCOL.md` (agents), `workflow/README.md` (people). Workers update only their own row.
 
 ## Stage 0 — Scoping and source discovery (no parsing)
 

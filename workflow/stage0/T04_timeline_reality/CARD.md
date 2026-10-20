@@ -1,5 +1,7 @@
 # T04 — Reality check + event timeline
 
+Reader: worker agent. Human summary of this stage: `workflow/stage0/README.md`.
+
 - **Stage:** 0 · **Worker:** dsh · **Fallback (after R2):** Codex
 - **Time box:** 60 min · **Size cap:** ≤ 40 timeline rows (a ceiling, not a quota)
 - **No parsing / no scrapers.** Web search and manual reading only.

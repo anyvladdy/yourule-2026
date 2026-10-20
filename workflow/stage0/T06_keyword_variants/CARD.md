@@ -1,5 +1,7 @@
 # T06 — Keyword morphology and variants
 
+Reader: worker agent. Human summary of this stage: `workflow/stage0/README.md`.
+
 - **Stage:** 0 · **Worker:** OpenCode + Ollama `qwen3:8b` (local, no web) · **Fallback (after R2):** Codex
 - **Time box:** 30 min · **Batches:** run batch 1 (`core`), save, then batch 2 (`site_context`). `topic` terms are not
   needed: they will be matched by lemma later.

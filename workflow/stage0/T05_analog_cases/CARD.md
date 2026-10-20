@@ -1,5 +1,7 @@
 # T05 — Analogous cases
 
+Reader: worker agent. Human summary of this stage: `workflow/stage0/README.md`.
+
 - **Stage:** 0 (wave 2: after your T02 and T03 handoffs) · **Worker:** Gemini (agy) · **Fallback (after R2):** Claude
 - **Time box:** 60 min · **Size cap:** 4–6 well-evidenced cases (start with 4; add more only if time remains)
 - **No parsing / no scrapers.** Web search and manual reading only.

@@ -1,5 +1,7 @@
 # T03 — Media coverage and criticism lines
 
+Reader: worker agent. Human summary of this stage: `workflow/stage0/README.md`.
+
 - **Stage:** 0 · **Worker:** Gemini (agy) · **Fallback (after R2):** Claude
 - **Time box:** 60 min · **Size cap:** ≤ 30 articles (a ceiling)
 - **No parsing / no scrapers.** Web search and manual reading only.

@@ -1,5 +1,7 @@
 # T07 — Merge discovered sources into the registry format
 
+Reader: worker agent. Human summary of this stage: `workflow/stage0/README.md`.
+
 - **Stage:** 0 (wave 2) · **Worker:** OpenCode + Ollama `gemma4` (local, no web) · **Fallback (after R2):** Codex
 - **Status: DRAFT — not ready.** Planners finalise this card when T01, T02, T03, T08 are accepted, adding:
   1. an explicit column → field mapping per input file, with allowed nulls (fields absent in inputs stay null);

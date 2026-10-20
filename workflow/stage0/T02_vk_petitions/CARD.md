@@ -1,5 +1,7 @@
 # T02 — Discover VK communities and petitions
 
+Reader: worker agent. Human summary of this stage: `workflow/stage0/README.md`.
+
 - **Stage:** 0 · **Worker:** Gemini (agy) · **Fallback (after R2):** Codex
 - **Time box:** 60 min · **Size cap:** ≤ 20 VK rows, ≤ 10 petitions (ceilings)
 - **No parsing / no scrapers.** Web search and opening pages by hand only.

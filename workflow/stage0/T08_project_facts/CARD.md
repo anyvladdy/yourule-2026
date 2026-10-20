@@ -1,5 +1,7 @@
 # T08 — Project facts: official documents, developer statements, building matrix
 
+Reader: worker agent. Human summary of this stage: `workflow/stage0/README.md`.
+
 - **Stage:** 0 (after T04 is reviewed) · **Worker:** dsh · **Fallback (after R2):** Claude
 - **Time box:** 75 min · **Size cap:** ≤ 15 documents, ≤ 20 statements (ceilings)
 - **No parsing / no scrapers.** Web search and manual reading only.
