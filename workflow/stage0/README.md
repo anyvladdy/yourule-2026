@@ -29,6 +29,8 @@ with links and dates.
 | T05 | Gemini | How similar conflicts went elsewhere and what helped |
 | T07 | local gemma4 | Reformats the found sources into our source list (planned once T01–T03 and T08 are done) |
 
+To meet the 1 November deadline, T04, T01, T02 and T03 all run at once. T08 starts when T04 is handed in, and T05 when T02 is.
+
 T08 is checked line by line, because a wrong fact about which buildings are kept would hurt the client most.
 
 ## When the stage is done

@@ -40,17 +40,18 @@ and how we will know it is done.
 To save effort, reviewers check every row of the important facts (heritage status, official decisions, dates)
 and a random sample of the rest. If any sampled row turns out to be wrong, the whole file is checked again.
 
-## Stages
+## Stages and dates
 
-| Stage | What happens | Status |
-|-------|--------------|--------|
-| 0. Scoping | Find the sources and check which facts from the brief can be confirmed. No data collection yet. | in progress |
-| 1. Collection | Write collectors and gather posts, comments and articles | not started |
-| 2. Processing | Clean the data and keep what is relevant | not started |
-| 3. Analysis | Find out who thinks what, the main criticisms and the key actors | not started |
-| 4. Strategy | Public image, messages, answers to criticism, channels | not started |
-| 5. Budget and plan | Spending up to 10M RUB and a calendar to March 2027 | not started |
-| 6. Report | The final report in Russian, up to 8 pages | not started |
+The report is due on 1 November 2026. Research and report writing run side by side.
+
+| Dates | Research | Report |
+|-------|----------|--------|
+| 20–21 Oct | Stage 0: find sources, check the brief's facts | Outline, budget and plan skeletons |
+| 22–24 Oct | Stages 1–2: collect and clean data from the main sources | Draft audiences and the public image |
+| 25–26 Oct | Stage 3: analysis | Strategy and answers to criticism |
+| 27–28 Oct | Extra research where gaps remain | Final budget and plan |
+| 29–30 Oct | Fact check of every number | Russian text, Word file, length checks |
+| 31 Oct | | Final review and submission |
 
 ## Branches
 

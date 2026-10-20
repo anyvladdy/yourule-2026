@@ -2,6 +2,20 @@
 
 Reader: people and agents. Goal: who has which task and its status. Rules: `workflow/PROTOCOL.md` (agents), `workflow/README.md` (people). Workers update only their own row.
 
+## Deadline: submission 2026-11-01. Schedule (D-10)
+
+| Dates | Research track (workers) | Report track (Claude + Codex) |
+|-------|--------------------------|-------------------------------|
+| Oct 20–21 | Stage 0: all discovery cards, run in parallel | Report outline with character budget; budget and roadmap skeletons |
+| Oct 22–24 | Stages 1+2 together: small collectors for the top sources only, cleaning | Audience map and public-image concept drafts from stage-0 facts |
+| Oct 25–26 | Stage 3: analysis (stance, criticism lines, actors, timeline) | Strategy and answers to criticism, updated with findings |
+| Oct 27–28 | Gap-filling research on request | Budget and roadmap finalised |
+| Oct 29–30 | Fact check of every number in the report | Russian text, .docx, length and format checks |
+| Oct 31 | | Buffer, final review, submit |
+
+Speed rules for this deadline: cards run in parallel whenever their inputs exist (two sessions of the same agent are fine);
+review happens within hours of a handoff; the gate summary is written the same day.
+
 ## Stage 0 — Scoping and source discovery (no parsing)
 
 | Card | Title | Worker | Starts when | Round | State | Fallback |
@@ -9,13 +23,13 @@ Reader: people and agents. Goal: who has which task and its status. Rules: `work
 | T04 | Reality check C01–C08 + timeline | dsh | now (first) | – | ready | Codex |
 | T02 | VK + petitions | Gemini | now | – | ready | Codex |
 | T06 | Keyword forms + tested regexes | Codex | now | R1 | integrated | Claude |
-| T08 | Official docs, developer statements, building matrix | dsh | T04 R1 review done | – | waiting | Claude |
-| T01 | Telegram + video sources | dsh | T04 handed off (can run before T08 if T08 waits) | – | waiting | Codex |
-| T03 | Media + criticism lines | Gemini | after T02 handoff | – | waiting | Claude |
-| T05 | Analogous cases (4–6) | Gemini | after T02 + T03 handoffs | – | waiting | Claude |
+| T08 | Official docs, developer statements, building matrix | dsh | T04 handoff | – | waiting | Claude |
+| T01 | Telegram + video sources | dsh (2nd session) | now | – | ready | Codex |
+| T03 | Media + criticism lines | Gemini (2nd session) | now | – | ready | Claude |
+| T05 | Analogous cases (4–6) | Gemini | after T02 handoff | – | waiting | Claude |
 | T07 | Merge into registry format | OpenCode/gemma4 | card finalised after T01–T03, T08 accepted | – | draft | Codex |
 
-Load: dsh 3 cards in sequence (T04 → T01 → T08), Gemini 3 in sequence (T02 → T03 → T05),
+Load: dsh T04 + T01 in parallel, then T08; Gemini T02 + T03 in parallel, then T05;
 Codex T06 (script-based), local model T07. Planner work: Claude integrates; Codex runs scripted checks.
 
 ## Stage 0 gate (Claude + Codex)

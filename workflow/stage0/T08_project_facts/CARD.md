@@ -2,7 +2,7 @@
 
 Reader: worker agent. Human summary of this stage: `workflow/stage0/README.md`.
 
-- **Stage:** 0 (after T04 is reviewed) · **Worker:** dsh · **Fallback (after R2):** Claude
+- **Stage:** 0 (after T04 handoff) · **Worker:** dsh · **Fallback (after R2):** Claude
 - **Time box:** 75 min · **Size cap:** ≤ 15 documents, ≤ 20 statements (ceilings)
 - **No parsing / no scrapers.** Web search and manual reading only.
 
@@ -14,7 +14,7 @@ reputational risk, so reviewers check this card fully, not by sample.
 ## Inputs (read only these)
 - `AGENTS.md` §0
 - the brief, section «Описание кейса»
-- `workflow/stage0/T04_timeline_reality/out/` and its `REVIEW_R*.md` (reuse claim IDs C01–C08; do not redo verified rows)
+- `workflow/stage0/T04_timeline_reality/out/` and `REVIEW_R*.md` if present (reuse claim IDs C01–C08; do not redo verified rows)
 - `config/sources.yaml` — seeds with type `official` and `developer`
 
 ## Output

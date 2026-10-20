@@ -2,7 +2,7 @@
 
 Reader: worker agent. Human summary of this stage: `workflow/stage0/README.md`.
 
-- **Stage:** 0 (after T04 handoff) · **Worker:** dsh · **Fallback (after R2):** Codex
+- **Stage:** 0 (start now; read T04 output only if it already exists) · **Worker:** dsh · **Fallback (after R2):** Codex
 - **Time box:** 60 min · **Size cap:** ≤ 25 Telegram rows, ≤ 10 video rows (ceilings)
 - **No parsing / no scrapers / no bulk downloads.** Web search and opening pages by hand only
   (t.me/s/<channel> previews are fine to open).
@@ -14,7 +14,7 @@ redevelopment is discussed. Used later to configure collectors and to map actors
 ## Inputs (read only these)
 - `AGENTS.md` §0
 - `config/keywords.yaml` (`core` terms)
-- `workflow/stage0/T04_timeline_reality/out/timeline.csv` (events to search around)
+- `workflow/stage0/T04_timeline_reality/out/timeline.csv` if it exists (events to search around); otherwise skip
 
 ## Output
 `out/telegram.csv`:
