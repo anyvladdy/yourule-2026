@@ -1,5 +1,7 @@
 # YouRule 2026: communications strategy for Электрозавод
 
+This page is for people. AI agents work from `AGENTS.md`, which has the same rules in a stricter form.
+
 This repository holds our solution to a case competition. Группа «Эталон» is redeveloping the Электрозавод
 site in Moscow, and the plan has caused a public conflict. We need to write a communications strategy in Russian
 that runs until construction starts in March 2027, with a budget of up to 10 million RUB.
@@ -60,15 +62,17 @@ and a random sample of the rest. If any sampled row turns out to be wrong, the w
 
 ## Where to find things
 
-| File | What it is |
-|------|------------|
-| `workflow/BOARD.md` (stage branch) | Who has which task right now and its status |
-| `workflow/README.md` | The full workflow rules |
-| `workflow/prompts/` | Text to paste when starting a worker or Codex |
-| `workflow/stage0/T*/CARD.md` (stage branch) | The task cards |
-| `config/` (stage branch) | Search terms and the list of sources |
-| `docs/decisions.md` (stage branch) | Decisions we made and why |
-| `AGENTS.md` | Detailed instructions for the agents (`CLAUDE.md` points to it) |
+Most documents come in two versions: one for people and one for the agents. They cover the same ground.
+
+| Topic | For people | For agents |
+|-------|-----------|------------|
+| The project and its rules | `README.md` (this page) | `AGENTS.md` (`CLAUDE.md` points to it) |
+| How the work moves | `workflow/README.md` | `workflow/PROTOCOL.md` |
+| The current stage | `workflow/stage0/README.md` | `workflow/stage0/T*/CARD.md` |
+| Starting an agent | `workflow/README.md` | `workflow/prompts/` |
+
+Shared by everyone, on the stage branch: `workflow/BOARD.md` (who has which task), `docs/decisions.md`
+(what we decided and why), `docs/hypotheses.md` (what we want to test), `config/` (search terms and sources).
 
 ## Starting a worker
 
