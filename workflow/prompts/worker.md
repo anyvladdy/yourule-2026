@@ -1,5 +1,7 @@
 # Worker launch prompt (dsh, Gemini/agy, OpenCode)
 
+Reader: the person starting a worker, and the worker. Goal: start one card correctly.
+
 Paste this with `<CARD>` replaced by the card folder, e.g. `workflow/stage0/T04_timeline_reality`.
 Start the agent in the repository root.
 
@@ -7,7 +9,7 @@ Start the agent in the repository root.
 
 You are a worker on this project. Read, in this order and nothing else unless the card lists it:
 1. `AGENTS.md` section 0 (core rules)
-2. `workflow/README.md` sections 1–2 (only to understand your role)
+2. `workflow/PROTOCOL.md` sections 1–3
 3. `<CARD>/CARD.md`
 
 Then do the card. Write only inside `<CARD>/`: outputs to `out/`, and finish with `HANDOFF.md`
