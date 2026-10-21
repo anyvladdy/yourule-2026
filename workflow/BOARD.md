@@ -38,7 +38,7 @@ Codex T06 (script-based), local model T07. Planner work: Claude integrates; Code
 - [x] Proxy decision recorded in `docs/decisions.md` (from T04/T08: where real data exists, where we use proxies)
 - [ ] **Deliverable evidence map** (`docs/evidence_map.md`): for each of the 6 report sections — evidence ids in hand,
       open questions, owner, acceptance check
-- [ ] **Audience coverage matrix** skeleton (`docs/audiences.md`): residents, preservationists, architects, current tenants
+- [x] **Audience coverage matrix** skeleton (`docs/audiences.md`): residents, preservationists, architects, current tenants
       and cultural users of the site, journalists, officials/deputies, Etalon employees/investors, prospective
       tenants/buyers, wider Moscow public — evidence vs inference, gaps, how to validate later
 - [ ] Hypotheses H1–H7 specified per `docs/hypotheses.md` header
