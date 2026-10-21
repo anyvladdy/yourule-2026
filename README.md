@@ -90,6 +90,8 @@ Notes for each tool:
 ## Rules everyone follows
 
 - Do not make anything up. Every fact needs a link that was actually opened. "Not found" is an acceptable answer.
+- The report does not cite outlets banned in Russia as undesirable organisations, such as Meduza. Agents may
+  note them, but every fact needs another source.
 - Public content only, and private people are not named.
 - No bots, fake accounts or pressure on critics in our recommendations.
 - Write plainly, so a person can read it without effort.

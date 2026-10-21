@@ -23,10 +23,14 @@ Do not write parsers or scrapers, and do not bulk-download anything. Never inven
 ---
 
 ## Per-agent notes
-- **dsh:** default settings; web search allowed. Run T04 → T01 → T08 (T08 only after T04's R1 review).
+- **dsh:** default settings; web search allowed. T04 first; then T08 (after T04 handoff, D-10) and T01 in a
+  second session, in parallel.
 - **Gemini (agy):** run in the repo root, e.g. `agy -i "<prompt above>"` (sign in first by launching `agy` once).
-  Run T02 → T03 → T05.
+  T02 and T03 in two parallel sessions; T05 after T02 handoff.
+- **Filled prompt without copying by hand** (repo root; replace the card folder):
+  `sed -n '/^---$/,/^---$/p' workflow/prompts/worker.md | sed '1d;$d' | sed 's#<CARD>#workflow/stage0/T01_telegram_video#g'`
+  Add `| pbcopy` to copy it, or wrap it in `agy -i "$(...)"`.
 - **OpenCode + Ollama:** start `ollama serve`; in OpenCode select the model named in the card
-  (T06: `qwen3:8b`, T07: `gemma4`). Load one local model at a time (24 GB RAM). These cards need no web.
+  (T07: `gemma4`). Load one local model at a time (24 GB RAM). These cards need no web.
   If the model struggles with file tools, paste the input file content into the chat and save the answer
   into `out/` yourself.
