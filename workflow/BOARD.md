@@ -20,11 +20,11 @@ review happens within hours of a handoff; the gate summary is written the same d
 
 | Card | Title | Worker | Starts when | Round | State | Fallback |
 |------|-------|--------|-------------|-------|-------|----------|
-| T04 | Reality check C01–C08 + timeline | dsh | now (first) | R1 | fix_R2 | Claude |
+| T04 | Reality check C01–C08 + timeline | dsh | now (first) | R2 | review_R2 | Claude |
 | T02 | VK + petitions | Gemini | now | – | ready | Claude |
 | T06 | Keyword forms + tested regexes | Codex | now | R1 | integrated | Claude |
-| T08 | Official docs, developer statements, building matrix | dsh | T04 handoff | – | ready | Claude |
-| T01 | Telegram + video sources | dsh (2nd session) | now | – | ready | Claude |
+| T08 | Official docs, developer statements, building matrix | dsh | T04 handoff | R1 | integrated | Claude |
+| T01 | Telegram + video sources | dsh (2nd session) | now | R1 | review_R1 | Claude |
 | T03 | Media + criticism lines | Gemini (2nd session) | now | – | ready | Claude |
 | T05 | Analogous cases (4–6) | Gemini | after T02 handoff | – | waiting | Claude |
 | T07 | Merge into registry format | OpenCode/gemma4 | card finalised after T01–T03, T08 accepted | – | draft | Claude |
