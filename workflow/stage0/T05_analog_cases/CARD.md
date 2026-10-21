@@ -2,7 +2,7 @@
 
 Reader: worker agent. Human summary of this stage: `workflow/stage0/README.md`.
 
-- **Stage:** 0 (after your T02 handoff) · **Worker:** Gemini (agy) · **Fallback (after R2):** Claude
+- **Stage:** 0 (start now) · **Worker:** dsh (moved from Gemini, D-15) · **Fallback (after R2):** Claude
 - **Time box:** 60 min · **Size cap:** 4–6 well-evidenced cases (start with 4; add more only if time remains)
 - **No parsing / no scrapers.** Web search and manual reading only.
 

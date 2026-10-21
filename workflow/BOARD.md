@@ -26,10 +26,10 @@ review happens within hours of a handoff; the gate summary is written the same d
 | T08 | Official docs, developer statements, building matrix | dsh | T04 handoff | R1 | integrated | Claude |
 | T01 | Telegram + video sources | dsh (2nd session) | now | R1 | accepted | Claude |
 | T03 | Media + criticism lines | Gemini (2nd session) | now | – | ready | Claude |
-| T05 | Analogous cases (4–6) | Gemini | after T02 handoff | – | waiting | Claude |
+| T05 | Analogous cases (4–6) | dsh | now | – | ready | Claude |
 | T07 | Merge into registry format | OpenCode/gemma4 | card finalised after T01–T03, T08 accepted | – | draft | Claude |
 
-Load: dsh T04 + T01 in parallel, then T08; Gemini T02 + T03 in parallel, then T05;
+Load: dsh T04 + T01 in parallel, then T08 and T05; Gemini T02 + T03 in parallel;
 Codex T06 (script-based), local model T07. Planner work: Claude integrates; Codex runs scripted checks.
 
 ## Stage 0 gate (Claude + Codex)

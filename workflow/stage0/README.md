@@ -26,10 +26,10 @@ with links and dates.
 | T01 | dsh | Which Telegram channels and videos discuss the project |
 | T03 | Gemini | How the media covered it and what the main criticisms are |
 | T08 | dsh | Official documents, the developer's statements, and the status of each building |
-| T05 | Gemini | How similar conflicts went elsewhere and what helped |
+| T05 | dsh | How similar conflicts went elsewhere and what helped |
 | T07 | local gemma4 | Reformats the found sources into our source list (planned once T01–T03 and T08 are done) |
 
-To meet the 1 November deadline, T04, T01, T02 and T03 all run at once. T08 starts when T04 is handed in, and T05 when T02 is.
+To meet the 1 November deadline, T04, T01, T02 and T03 all run at once. T08 starts when T04 is handed in. T05 moved to dsh, which was free, so it does not wait for T02.
 
 T08 is checked line by line, because a wrong fact about which buildings are kept would hurt the client most.
 
