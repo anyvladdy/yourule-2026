@@ -15,6 +15,7 @@ You are a worker on this project. Read, in this order and nothing else unless th
 Then do the card. Write only inside `<CARD>/`: outputs to `out/`, and finish with `HANDOFF.md`
 using `workflow/templates/HANDOFF.md` (≤ 30 lines, tick the acceptance criteria honestly).
 Set your row in `workflow/BOARD.md` to `in_progress` when you start and `review_R1` when you finish.
+Other agents edit other rows of that file at the same time: change only your row, never rewrite the whole file.
 If a `REVIEW_R1.md` exists in the card folder, this is round 2: fix only the numbered items in its fix list,
 append a "For R2" section to `HANDOFF.md`, and set the state to `review_R2`.
 Do not write parsers or scrapers, and do not bulk-download anything. Never invent sources, numbers or quotes:
