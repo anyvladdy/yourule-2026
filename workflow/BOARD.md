@@ -21,12 +21,12 @@ review happens within hours of a handoff; the gate summary is written the same d
 | Card | Title | Worker | Starts when | Round | State | Fallback |
 |------|-------|--------|-------------|-------|-------|----------|
 | T04 | Reality check C01–C08 + timeline | dsh | now (first) | R2 | integrated | Claude |
-| T02 | VK + petitions | Claude (was Gemini, D-16) | now | R1 | review_R1 | Codex |
+| T02 | VK + petitions | Claude (was Gemini, D-16) | now | R2 | accepted | Codex |
 | T06 | Keyword forms + tested regexes | Codex | now | R1 | integrated | Claude |
 | T08 | Official docs, developer statements, building matrix | dsh | T04 handoff | R1 | integrated | Claude |
 | T01 | Telegram + video sources | dsh (2nd session) | now | R1 | accepted | Claude |
-| T03 | Media + criticism lines | Claude (was Gemini, D-16) | now | R1 | review_R1 | Codex |
-| T05 | Analogous cases (4–6) | dsh | now | – | ready | Claude |
+| T03 | Media + criticism lines | Claude (was Gemini, D-16) | now | R2 | accepted | Codex |
+| T05 | Analogous cases (4–6) | dsh | now | R1 | integrated | Claude |
 | T07 | Merge into registry format | OpenCode/gemma4 | card finalised after T01–T03, T08 accepted | – | draft | Claude |
 
 Load: dsh T04 + T01 in parallel, then T08 and T05; Gemini T02 + T03 in parallel;

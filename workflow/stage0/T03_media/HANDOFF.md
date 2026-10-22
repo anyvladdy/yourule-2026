@@ -1,10 +1,10 @@
 # HANDOFF T03 — R1 — Claude (instead of Gemini, D-16) — 2026-10-22
 
 **Done:**
-- `out/articles.csv` — 27 articles, 16 outlets, 2025-07-15 → 2026-09-10. Viewpoint: critical 15, developer 6, balanced 5, other 1.
+- `out/articles.csv` — 27 articles, 16 outlets, 2025-07-15 → 2026-09-10. Viewpoint (after R2): critical 16, developer 6, balanced 5.
 - `out/seed_check.md` — 5 media seeds checked; 12 new outlets listed.
 
-**Criticism lines (articles carrying the line, n = 27):** heritage_loss 21; facadism_fake_reproduction 9; loss_of_cultural_spaces 7;
+**Criticism lines (articles carrying the line, n = 27):** heritage_loss 20; facadism_fake_reproduction 9; loss_of_cultural_spaces 6;
 commercial_density 6; no_masterplan_transparency 4; collusion_with_city 3; no_real_hearings 1; local_impacts 0.
 Counts of articles, not of readers; media framing only.
 
@@ -24,3 +24,4 @@ Counts of articles, not of readers; media framing only.
 - A16: Etalon's bureau «Крупный план» calls the design «вариант, согласованный с мэром». Feeds the collusion line.
 
 **Unsure:** A05 claims demolition work began in March 2025 (not confirmed elsewhere). A10 page shows no year.
+**For R2:** F1 A16 lines → collusion_with_city; commercial_density. F2 A07, A18 copies emptied. F3 A25 → critical, note rewritten. F4 A10, A22 speakers added (roles). F5 A22 unopened copies moved to note. Counts above recomputed by script.

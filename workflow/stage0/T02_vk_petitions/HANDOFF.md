@@ -19,9 +19,10 @@
 «ВКонтакте сообщество Преображенское Соколиная гора Электрозавод снос обсуждение» · «"Электрозавод" сбор подписей обращение мэру Москвы градозащитники июль 2026».
 Direct: change.org search page (empty listing); vk.com/archnadzor, vk.com/etalongroup, vk.com/act_preobrajenka (tool refuses vk.com). The last 4 searches added nothing new.
 
-**Deviations:** VK discovery moves to stage 1, through the official VK API (groups and posts search by the core keywords).
+**Deviations:** VK discovery moves to stage 1, through the official VK API (groups and posts search by the core keywords); decision D-17.
 
 **Unsure / could not verify:**
 - KPRF Moscow newspaper PDF (msk.kprf.ru, 2026-07) may mention the site; certificate expired, not opened.
 - P02 "200 m towers" is the petition author's claim; no other source checked.
 - P01 addressee: the letter page names both Путин and Собянин; T04 timeline row 2026-06-25 can now cite it.
+**For R2:** F1 VK moved to stage 1 by decision D-17 (card scope amended by Claude as planner). F2 P03 title = press-release headline; note says why.
