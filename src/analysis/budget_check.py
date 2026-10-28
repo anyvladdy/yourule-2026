@@ -56,6 +56,9 @@ def main():
                 continue
             base = payroll if row['category'] == INSURANCE else purchases
             totals[row['line_id']] = rate * base[row['phase']]
+    for category, base in ((INSURANCE, payroll), (VAT, purchases)):
+        lines = {row['phase'] for row in rows if row['category'] == category}
+        problems |= {f'{category}: no line for {phase}, its base is not taxed' for phase in base if phase not in lines}
     subtotal = sum(totals.values())
     for row in rows:
         if row['category'] == RESERVE:
