@@ -1,5 +1,6 @@
 {
   "version": "v2",
+  "revision": "R2_C1_C3",
   "seed": 20261028,
   "input_sha256": "61e290fe28c4079a67eb7bd13048c811ca0c7828be7b82950c3337ba88bfc46e",
   "broad_reactions_p3": 5458,
@@ -11,6 +12,9 @@
     3001,
     2269
   ],
+  "ngram_count_unit": "distinct (platform, author_id_hash) per phrase; no cross-message phrases",
+  "ngram_unique_authors": 1775,
+  "ngram_unknown_author_messages_excluded": 35,
   "nmf_topics": 8,
   "nmf_iterations": 72,
   "nmf_reconstruction_error": 53.59155441214296,

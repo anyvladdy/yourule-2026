@@ -56,7 +56,7 @@ def render():
  ax.set_xlabel('Комментарии и ответы, сообщений',labelpad=14)
  save(fig,'01_corpus','Цвет — строгий срез; серый — исходный отбор. Исключены 522 реакции дайджестов и 17 записей с неполным контекстом.')
 
- fig=base('Историческая ценность лидирует среди тем','Самая частая из восьми проверяемых лексических тем на каждой из трёх площадок.',2)
+ fig=base('Слова о проекте: девять тем обсуждения','Доли сообщений со словами каждого словаря; ширина словарей различается, ранжирование не применяется.',2)
  ax=fig.add_axes([.30,.22,.60,.48]);clean(ax)
  keys=list(dict.fromkeys(r['theme'] for r in themes));titles={r['theme']:r['title'] for r in themes}
  matrix=np.array([[float(next(r['percent'] for r in themes if r['theme']==k and r['platform']==p)) for p in PLAT] for k in keys])
@@ -65,7 +65,7 @@ def render():
  ax.set_yticks(range(len(keys)),[titles[k] for k in keys],fontsize=14)
  ax.set_xticks(range(3),[PLAT[r['platform']][0]+'\nn = '+nfmt(r['strict_complete_p3']) for r in coverage],fontsize=16)
  for i in range(len(keys)):
-  for j in range(3):ax.text(j,i,f'{matrix[i,j]:.1f}%'.replace('.',','),ha='center',va='center',color='white' if matrix[i,j]>10 else INK,size=17,weight='bold')
+  for j in range(3):ax.text(j,i,f'{matrix[i,j]:.1f}%'.replace('.',','),ha='center',va='center',color='white' if matrix[i,j]>matrix.max()*.68 else INK,size=17,weight='bold')
  save(fig,'02_themes','Доля реакций со словами темы. Темы пересекаются; это не доли критиков и не оценка отношения к проекту.')
 
  fig=base('Один материал даёт 27–31% реакций площадки','Проверять выводы нужно и без крупнейшей публикации.',3)
@@ -108,7 +108,7 @@ def render():
  save(fig,'05_sensitivity','Закрашенная точка — полный строгий срез; контур — без лидера. Это проверка частоты словаря, не устойчивости всех выводов.')
 
  topicrows=read('nmf_topics.csv');topiccounts={int(r['topic']):int(r['documents']) for r in read('nmf_topic_counts.csv')}
- labels={1:'Экономика, жильё и повседневная дискуссия',2:'Снос и сравнения с другими объектами',3:'Облик и сохранность зданий',4:'Снос памятников и новое строительство',5:'Охранный статус и культурное наследие',6:'История и утрата памяти',7:'Будущая застройка и функции',8:'Образ города и городская идентичность'}
+ labels={1:'Повседневные реплики без единой темы',2:'Снос и сравнения с другими объектами',3:'Облик и сохранность зданий',4:'Снос памятников и новое строительство',5:'Охранный статус и культурное наследие',6:'История и утрата памяти',7:'Будущая застройка и функции',8:'Образ города и городская идентичность'}
  fig=base('Восемь направлений для чтения дискуссии','Автоматическая тематическая модель; названия групп — интерпретация для навигации по текстам.',6)
  ax=fig.add_axes([.42,.23,.47,.47]);clean(ax)
  ordered=sorted(topiccounts,key=topiccounts.get,reverse=True)
@@ -117,7 +117,7 @@ def render():
  ax.set_yticks(range(len(vals)),[labels[k] for k in ordered],fontsize=12);ax.invert_yaxis()
  for i,v in enumerate(vals):ax.text(v+12,i,nfmt(v),va='center',fontsize=14)
  ax.set_xlim(0,max(vals)*1.12);ax.grid(axis='x',color=GRID,lw=.6);ax.set_xlabel('Сообщений с преобладающей модельной темой',labelpad=12,fontsize=13)
- save(fig,'06_nlp_topics',f"Модель охватывает {nfmt(meta['nlp_eligible_messages'])} из 4 919 реакций. Тексты без достаточной лексики не размечены; позиции не оценивались.")
+ save(fig,'06_nlp_topics',f"Модель охватывает {nfmt(meta['nlp_eligible_messages'])} из 4 919 реакций. Единица — сообщение; повторения одного автора могут влиять на группы.")
 
  for r in topicrows:r['editorial_label']=labels[int(r['topic'])]
  with (OUT/'topic_interpretation.csv').open('w',newline='') as f:

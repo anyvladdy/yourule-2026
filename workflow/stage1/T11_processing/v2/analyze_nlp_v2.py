@@ -21,6 +21,7 @@ STOP=set('и в во на с со к ко из за у о об по до от д
 STOP.update('сам ничего пока однако теперь видимо именно действительно должный нужный'.split())
 THEMES={
  'heritage':('Историческая ценность',r'\b(?:истори\w*|наслед\w*|памятник\w*|архитектур\w*|старин\w*)'),
+ 'demolition':('Снос и утрата',r'\b(?:снос\w*|снес\w*|снест\w*|уничтож\w*|ломать\w*|разруш\w*)'),
  'preservation':('Фасады и подлинность',r'\b(?:фасад\w*|новодел\w*|подлин\w*|воссозда\w*|входн\w*\s+групп\w*|муляж\w*)'),
  'development':('Новая застройка',r'\b(?:застрой\w*|жиль\w*|жилищ\w*|квартир\w*|небоскр[её]б\w*|человейник\w*|коммерц\w*)'),
  'governance':('Город и принятие решений',r'\b(?:власт\w*|мэри\w*|собянин\w*|чиновник\w*|коррупц\w*|сговор\w*|девелопер\w*)'),
@@ -52,6 +53,29 @@ def save_csv(name,rows,fields=None):
     if fields is None:fields=list(rows[0]) if rows else []
     with (OUT/name).open('w',newline='') as f:
         w=csv.DictWriter(f,fieldnames=fields);w.writeheader();w.writerows(rows)
+
+def author_ngrams(eligible, limit=40):
+    """One vote per (platform, author hash, phrase); unknown authors excluded.
+
+    No phrase may cross a message boundary. Authors on different platforms are
+    distinct accounts, not assumed to be distinct people.
+    """
+    authors=defaultdict(lambda: {2:set(),3:set()});unknown=0
+    for row,doc in eligible:
+        if not row.get('author_id_hash'):
+            unknown+=1;continue
+        phrases=authors[(row['platform'],row['author_id_hash'])]
+        words=doc.split()
+        for n in (2,3):
+            phrases[n].update(' '.join(words[i:i+n]) for i in range(len(words)-n+1))
+    result=[]
+    for n in (2,3):
+        counts=Counter()
+        for phrases in authors.values():counts.update(phrases[n])
+        for phrase,count in sorted(counts.items(),key=lambda x:(-x[1],x[0]))[:limit]:
+            result.append(dict(n=n,lemma_phrase=phrase,unique_author_count=count,
+                               denominator=len(authors)))
+    return result,len(authors),unknown
 
 def main():
     argparse.ArgumentParser(description=__doc__).parse_args()
@@ -152,16 +176,13 @@ def main():
     pq.write_table(pa.Table.from_pylist(annotations),OUT/'nlp_annotations.parquet',compression='zstd')
     topic_counts=Counter(mapped[doc][0] for _,doc in eligible if doc in mapped)
     save_csv('nmf_topic_counts.csv',[dict(topic=k,documents=n,denominator=len(eligible)) for k,n in sorted(topic_counts.items())])
-    grams=[]
-    for n in (2,3):
-        df=Counter()
-        for doc in unique:
-            words=doc.split();df.update(set(' '.join(words[i:i+n]) for i in range(len(words)-n+1)))
-        for text,count in df.most_common(40):grams.append(dict(n=n,lemma_phrase=text,unique_document_count=count,denominator=len(unique)))
+    grams,gram_authors,gram_unknown=author_ngrams(eligible)
     save_csv('ngrams.csv',grams)
-    meta={'version':'v2','seed':SEED,'input_sha256':hashlib.sha256(path.read_bytes()).hexdigest(),
+    meta={'version':'v2','revision':'R2_C1_C3','seed':SEED,'input_sha256':hashlib.sha256(path.read_bytes()).hexdigest(),
           'broad_reactions_p3':len(broad),'strict_complete_reactions_p3':len(mainrows),
           'nlp_eligible_messages':len(eligible),'nlp_unique_documents':len(unique),'zero_vector_documents_excluded':initial_unique_count-len(unique),'tfidf_shape':list(X.shape),
+          'ngram_count_unit':'distinct (platform, author_id_hash) per phrase; no cross-message phrases',
+          'ngram_unique_authors':gram_authors,'ngram_unknown_author_messages_excluded':gram_unknown,
           'nmf_topics':n_topics,'nmf_iterations':model.n_iter_,'nmf_reconstruction_error':float(model.reconstruction_err_),
           'normalization':'pymorphy3, Russian tokens >=3 letters; stopwords; person-name tags removed',
           'scope':'P3 reactions only; explicit-site threads for YouTube digests; complete parent context',

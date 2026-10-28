@@ -6,6 +6,7 @@
 
 ```sh
 .venv/bin/python workflow/stage1/T11_processing/v2/test_v2.py
+.venv/bin/python workflow/stage1/T11_processing/v2/test_nlp_r2.py
 .venv/bin/python workflow/stage1/T11_processing/v2/build_corpus_v2.py
 .venv/bin/python workflow/stage1/T11_processing/v2/analyze_nlp_v2.py
 .venv/bin/python workflow/stage1/T11_processing/v2/render_executive.py
@@ -23,3 +24,5 @@
 - `out/etalon_analysis_v2.zip` — комплект для просмотра без исходных текстов и идентификаторов авторов.
 
 `out/build_checks.txt` содержит результаты проверок и предупреждение о пропущенных родителях Telegram. Буквальная приёмка всех критериев исходной T11 требует решения ревьюера; новый корпус не заменяет молча прежний. Для разметки следующего этапа следует использовать путь с `_v2`.
+
+Правки R2 (C1, C3): девять словарных тем без ранжирования; n-граммы считаются один раз на авторский аккаунт, неизвестные авторы исключены. Для пересчёта только аналитики запускать `analyze_nlp_v2.py` и `render_executive.py`, без сборщика корпуса. Поле `unique_author_count` в `ngrams.csv` заменяет прежнее `unique_document_count`.

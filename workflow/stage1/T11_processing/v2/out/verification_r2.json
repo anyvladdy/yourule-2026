@@ -1,0 +1,16 @@
+{
+  "review": "R2_C1_C3",
+  "corpus_sha256_unchanged": "61e290fe28c4079a67eb7bd13048c811ca0c7828be7b82950c3337ba88bfc46e",
+  "repeat_identical": {
+    "ngrams.csv": "2f38fa0f9d2fae68b08f9d4d8f15ae9c1eea5b25bc5e193b3e70bc29e28145fc",
+    "theme_mentions.csv": "d1bf00bf66aa829661d8fc9ecd943c05871abd9bd1e38187d4039b0735462bf7",
+    "nmf_topic_counts.csv": "e2b4305a6320303106859759a2d1905157b1f488cf50d2fdf4091c16ee442079",
+    "nlp_manifest.json": "c925b98b121fadd878f55537af5813e7cc7dbca0896923a3248ffcab69edbfc0"
+  },
+  "theme_rows": 27,
+  "ngram_rows": 80,
+  "ngram_denominator_accounts": 1775,
+  "new_regression_tests": 4,
+  "figure_02_06": "visually inspected",
+  "html": "six embedded SVG pages; content checks passed"
+}
