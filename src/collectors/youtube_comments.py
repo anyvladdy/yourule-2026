@@ -2,12 +2,14 @@
 
 Run from the repository root. Needs YOUTUBE_API_KEY in .env or in the environment.
 Raw API items go to data/raw/youtube/<YYYY-MM-DD>/ as JSONL, each line with _collected_at;
-every run is appended to _run.json there. Existing files are never overwritten.
+every run is appended to _run.json there, with requests counted per API method. Existing files are never overwritten.
 
   search    find videos by query; saves search hits and video metadata, prints a list to choose from
-  comments  saves all comment threads with all replies for the given videos (resumable)
+  comments  saves all comment threads with all replies for the given videos, plus metadata for --video ids
 
-Quota: one search page costs 100 units, a comment page 1 unit; the free daily quota is 10,000.
+Per-video status: complete_for_run (all pages the API returned), limited (--max-pages pilot), disabled,
+partial (stopped by an error; pages received so far are kept in comments_<id>_partial_<time>.jsonl), failed.
+Quota: search.list and the other methods have separate daily limits; check them in the project's Cloud Console.
 """
 import argparse
 import json
@@ -18,23 +20,30 @@ import time
 import urllib.error
 import urllib.parse
 import urllib.request
+from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 
-VERSION = 'youtube_comments/0.1'
+VERSION = 'youtube_comments/0.2'
 API = 'https://www.googleapis.com/youtube/v3/'
 ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_QUERIES = ['Электрозавод снос', 'Электрозавод Эталон', 'Электрозавод редевелопмент', 'сохранить Электрозавод']
+REQUESTS = Counter()
 
 
 class ApiError(Exception):
     def __init__(self, code, reasons, message=''):
         super().__init__(f'HTTP {code}: {", ".join(sorted(reasons)) or "no reason given"} {message}'.strip())
         self.reasons = reasons
+        self.partial = {}
 
 
 def now():
     return datetime.now(timezone.utc).isoformat(timespec='seconds')
+
+
+def stamp():
+    return datetime.now(timezone.utc).strftime('%H%M%S')
 
 
 def api_key():
@@ -53,6 +62,7 @@ def api_key():
 def call(method, params, key):
     url = API + method + '?' + urllib.parse.urlencode({**params, 'key': key})
     for attempt in range(4):
+        REQUESTS[method] += 1
         try:
             with urllib.request.urlopen(url, timeout=30) as response:
                 return json.load(response)
@@ -62,7 +72,7 @@ def call(method, params, key):
             except ValueError:
                 body = {}
             reasons = {e.get('reason', '') for e in body.get('error', {}).get('errors', [])}
-            if error.code < 500:
+            if error.code < 500 and error.code != 429:
                 raise ApiError(error.code, reasons, body.get('error', {}).get('message', ''))
         except urllib.error.URLError:
             pass
@@ -98,23 +108,28 @@ def log_run(out, record):
     path.write_text(json.dumps(runs + [record], ensure_ascii=False, indent=1), encoding='utf-8')
 
 
+def fetch_videos(ids, key):
+    videos = []
+    for start in range(0, len(ids), 50):
+        data = call('videos', {'part': 'snippet,statistics,contentDetails,liveStreamingDetails',
+                               'id': ','.join(ids[start:start + 50])}, key)
+        videos += [{**item, '_collected_at': now()} for item in data.get('items', [])]
+    return videos
+
+
 def search(args, key, out, record):
-    stamp = datetime.now(timezone.utc).strftime('%H%M%S')
+    run = stamp()
     hits = []
     for query in args.query or DEFAULT_QUERIES:
         params = {'part': 'snippet', 'type': 'video', 'q': query, 'maxResults': 50, 'order': 'relevance',
                   'regionCode': 'RU', 'relevanceLanguage': 'ru', 'publishedAfter': args.after + 'T00:00:00Z'}
         for page in pages('search', params, key, args.pages):
             hits += [{**item, '_query': query, '_collected_at': now()} for item in page.get('items', [])]
-    ids = list(dict.fromkeys(hit['id']['videoId'] for hit in hits))
-    videos = []
-    for start in range(0, len(ids), 50):
-        data = call('videos', {'part': 'snippet,statistics,liveStreamingDetails', 'id': ','.join(ids[start:start + 50])}, key)
-        videos += [{**item, '_collected_at': now()} for item in data.get('items', [])]
-    write_jsonl(out / f'search_{stamp}.jsonl', hits)
-    write_jsonl(out / f'videos_{stamp}.jsonl', videos)
+    write_jsonl(out / f'search_{run}.jsonl', hits)
+    videos = fetch_videos(list(dict.fromkeys(hit['id']['videoId'] for hit in hits)), key)
+    write_jsonl(out / f'videos_{run}.jsonl', videos)
     record['counts'] = {'search_hits': len(hits), 'unique_videos': len(videos)}
-    record['files'] = [f'search_{stamp}.jsonl', f'videos_{stamp}.jsonl']
+    record['files'] = [f'search_{run}.jsonl', f'videos_{run}.jsonl']
     for video in sorted(videos, key=lambda v: -int(v['statistics'].get('commentCount', 0))):
         print(video['id'], video['snippet']['publishedAt'][:10], video['statistics'].get('commentCount', '-'),
               video['snippet']['channelTitle'], '|', video['snippet']['title'], sep='\t')
@@ -123,9 +138,9 @@ def search(args, key, out, record):
 def collect_comments(video, key, out, max_pages):
     path = out / f'comments_{video}{f"_pilot{max_pages}" if max_pages else ""}.jsonl'
     if path.exists():
-        return 'skipped_exists', 0
+        return {'status': 'skipped_exists'}
     part = path.with_name(path.name + '.part')
-    count = 0
+    counts = {'threads': 0, 'replies': 0}
     try:
         with part.open('w', encoding='utf-8') as stream:
             params = {'part': 'snippet,replies', 'videoId': video, 'maxResults': 100, 'textFormat': 'plainText'}
@@ -133,39 +148,56 @@ def collect_comments(video, key, out, max_pages):
                 for thread in page.get('items', []):
                     shown = thread.get('replies', {}).get('comments', [])
                     if thread['snippet']['totalReplyCount'] > len(shown):
-                        params_r = {'part': 'snippet', 'parentId': thread['id'], 'maxResults': 100, 'textFormat': 'plainText'}
+                        parent = thread['snippet']['topLevelComment']['id']
+                        params_r = {'part': 'snippet', 'parentId': parent, 'maxResults': 100, 'textFormat': 'plainText'}
                         thread['replies'] = {'comments': [c for p in pages('comments', params_r, key) for c in p.get('items', [])]}
                     stream.write(json.dumps({**thread, '_collected_at': now()}, ensure_ascii=False) + '\n')
-                    count += 1 + len(thread.get('replies', {}).get('comments', []))
+                    counts['threads'] += 1
+                    counts['replies'] += len(thread.get('replies', {}).get('comments', []))
     except ApiError as error:
-        part.unlink(missing_ok=True)
         if 'commentsDisabled' in error.reasons:
-            return 'comments_disabled', 0
+            part.unlink(missing_ok=True)
+            return {'status': 'disabled'}
+        if counts['threads']:
+            part.rename(path.with_name(f'{path.stem}_partial_{stamp()}.jsonl'))
+        else:
+            part.unlink(missing_ok=True)
+        error.partial = counts
         raise
     part.rename(path)
-    return 'ok', count
+    return {'status': 'limited' if max_pages else 'complete_for_run', **counts}
 
 
 def comments(args, key, out, record):
     ids = [video_id(v) for v in args.video or []]
+    if ids:
+        name = f'videos_{stamp()}.jsonl'
+        write_jsonl(out / name, fetch_videos(ids, key))
+        record['files'] = [name]
     if args.from_videos:
         for line in Path(args.from_videos).read_text(encoding='utf-8').splitlines():
             item = json.loads(line)
-            if int(item['statistics'].get('commentCount', 0)) >= args.min_comments:
+            text = item['snippet']['title'] + '\n' + item['snippet'].get('description', '')
+            if (int(item['statistics'].get('commentCount', 0)) >= args.min_comments
+                    and (not args.match or re.search(args.match, text, re.IGNORECASE))
+                    and item['snippet']['channelTitle'] not in (args.skip_channel or [])):
                 ids.append(item['id'])
     ids = list(dict.fromkeys(ids))
     record['params']['videos'] = ids
     record['counts'] = {}
     for video in ids:
         try:
-            status, count = collect_comments(video, key, out, args.max_pages)
+            result = collect_comments(video, key, out, args.max_pages)
         except ApiError as error:
+            result = {'status': 'partial' if error.partial.get('threads') else 'failed', **error.partial, 'error': str(error)}
             record['errors'].append(f'{video}: {error}')
+            record['counts'][video] = result
+            print(video, *result.values(), sep='\t')
             if error.reasons & {'quotaExceeded', 'dailyLimitExceeded'}:
                 break
             continue
-        record['counts'][video] = {'status': status, 'comments': count}
-        print(video, status, count, sep='\t')
+        record['counts'][video] = result
+        print(video, *result.values(), sep='\t')
 
 
 def main():
@@ -176,10 +208,12 @@ def main():
     p_search.add_argument('--after', default='2025-01-01', help='published on or after, YYYY-MM-DD (default: 2025-01-01)')
     p_search.add_argument('--pages', type=int, default=1, help='result pages of 50 per query (default: 1)')
     p_comments = commands.add_parser('comments', help='save comments for videos')
-    p_comments.add_argument('--video', action='append', help='video id or URL; repeatable')
+    p_comments.add_argument('--video', action='append', help='video id or URL; repeatable; its metadata is saved too')
     p_comments.add_argument('--from-videos', help='videos_*.jsonl from a search run: take all its videos')
     p_comments.add_argument('--min-comments', type=int, default=1, help='with --from-videos: skip videos with fewer comments')
-    p_comments.add_argument('--max-pages', type=int, help='comment pages of 100 per video; for pilots')
+    p_comments.add_argument('--match', help='with --from-videos: keep a video only if this regex matches its title or description')
+    p_comments.add_argument('--skip-channel', action='append', help='with --from-videos: channel title to skip; repeatable')
+    p_comments.add_argument('--max-pages', type=int, help='top-level comment pages of 100 per video; for pilots')
     args = parser.parse_args()
     if args.command == 'comments' and not (args.video or args.from_videos):
         parser.error('comments needs --video or --from-videos')
@@ -195,6 +229,7 @@ def main():
         record['errors'].append(str(error))
         print(f'stopped: {error}', file=sys.stderr)
     finally:
+        record['requests'] = dict(REQUESTS)
         record['finished_at'] = now()
         log_run(out, record)
     return 1 if record['errors'] else 0

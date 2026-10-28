@@ -72,8 +72,9 @@ Branch `stage-1-collection`. No video content; residents' voices also from distr
 
 | Task | Owner | When | State |
 |------|-------|------|-------|
-| YouTube: video search + all comments, official API (`src/collectors/youtube_comments.py`) | Claude | Oct 28 | pilot done (50 videos for 1 query, 100 threads from 1 video); full run waits for the user's OK |
-| Telegram channels from T01 + residents' chats: the user's Selenium parser, add comments | Claude + user | Oct 28–29 | waiting for the parser path |
+| YouTube: video search + all comments, official API (`src/collectors/youtube_comments.py`) | Claude | Oct 28 | done: 80 videos, 10,926 comments; see `docs/data_cards/corpus_manifest.md` |
+| Telegram channels from T01: the user's parser ported to `src/collectors/telegram_web.py`, public pages, no login (D-23) | Claude | Oct 28–29 | pilot done on 2 channels; full run waits for the user's OK |
+| Residents' Telegram chats (need login) | Claude + user | Oct 29 | find first; collect only if found |
 | VK groups: Selenium, reader pace | Claude | Oct 29 | not started |
 | District party newspapers: find and read a few issues by hand | to assign | Oct 29 | not started |
 | Media: relabel all 27 T03 articles | to assign | Oct 29 | not started |
@@ -81,14 +82,12 @@ Branch `stage-1-collection`. No video content; residents' voices also from distr
 | Labelling: one codebook; Claude 50%, Codex 25%, dsh 25%; user re-checks a random sample from each (D-20) | Claude, Codex, dsh, user | Oct 29–30 | codebook not written |
 | Analysis: timeline vs T04 events, stance, criticism lines, actors, message gap | Claude | Oct 30 | not started |
 
-In parallel: stage-0 fixes in `docs/`, budget pricing, report sections 1, 4, 5, 6.
+In parallel: stage-0 fixes in `docs/`, report sections 1, 4, 5, 6. Budget with prices and the launch line before
+Nov 1 comes first (Codex review P13).
 
-Open proposals, waiting for the user:
-- YouTube full run: all 4 default queries; keep a video only if "Электрозавод" is in its title or description;
-  comments under general news digests are filtered by keywords later. Under 1,000 of 10,000 daily quota units.
-- Skip the Meduza podcast video found by search (R12).
-- Transcripts: not collected. The official API gives captions only to the video owner; unofficial tools would bypass
-  the API and add video content, which D-19 excludes.
+Codex review of Oct 28 and Claude's answer to each point: `workflow/stage1/REVIEW_CODEX_2026-10-28.md`,
+`workflow/stage1/REVIEW_CODEX_2026-10-28_REPLY.md`.
+Transcripts are not collected: `captions.download` needs OAuth and the right to edit the video (D-22).
 
 ## Later stages (cards written at each gate, not now)
 4. Synthesis

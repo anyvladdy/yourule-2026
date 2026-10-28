@@ -71,7 +71,8 @@ Graphics allowed. Long tables, Gantt, budget sheet, methods, source list → app
 ### Stage 1 sources and access
 | Source | Data | Access |
 |---|---|---|
-| Telegram public channels/chats | posts, views, forwards, comments | Selenium in the user's logged-in browser, reader pace, public only (D-21) |
+| Telegram public channels | posts, views, forwards, comments | public pages without login: `t.me/s` search + discussion widget in headless Selenium, reader pace (D-23) |
+| Telegram chats | messages | Selenium with the user's login, only if residents' chats are found (D-21) |
 | VK groups | posts, comments, likes, reposts | Selenium in the user's logged-in browser, reader pace, public only (D-21) |
 | Petitions | text, signature counts over time, organisers | scheduled snapshots |
 | Media | articles, framing, quoted actors | RSS, site search; district party newspapers read by hand (D-19) |

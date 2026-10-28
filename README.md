@@ -98,8 +98,11 @@ go to `data/raw/<source>/<date>/`, which is not in git either.
 
 - YouTube, official API: `.venv/bin/python src/collectors/youtube_comments.py search` finds videos and prints a list;
   `... comments --video <id>` saves all comments of a video. `--help` lists the options.
-- Telegram and VK: Selenium in your own logged-in browser, at reading pace. A captcha or a block stops the run;
-  we do not get around it (decision D-21).
+- Telegram channels, no login needed: `.venv/bin/python src/collectors/telegram_web.py` searches the public channel
+  pages and opens the public comment widgets in a hidden Chrome. `--channel <name> --max-comment-posts 2` is a pilot.
+- VK and closed Telegram chats: Selenium in your own logged-in browser, at reading pace. A captcha or a block stops
+  the run; we do not get around it (decision D-21).
+- What has been collected and how it was selected: `docs/data_cards/corpus_manifest.md`.
 
 ## Rules everyone follows
 
