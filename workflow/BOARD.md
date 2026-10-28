@@ -79,13 +79,13 @@ Branch `stage-1-collection`. No video content; residents' voices also from distr
 | VK: global post search + communities, manual login in Brave incognito (`src/collectors/vk_web.py`) | Claude | Oct 28 | stopped after logout (D-26): 303 posts, 1,360 comments; 13 communities not covered |
 | Etalon's own channels: Telegram (collected), project site and press statements (T08) for the message gap; VK community not collected (D-26) | Claude | Oct 29 | done: `docs/etalon_channels.md` — no posts about the site in own channels during the conflict |
 | Wordstat and Google Trends export; petition signature snapshot (`Tasks_for_humans.md` 1–3) | user | Oct 28–29 | ready |
-| T14 Tenants, cultural spaces, deputies: public statements (`workflow/stage1/T14_tenants_deputies`) | dsh | Oct 28–29 | review_R1 |
+| T14 Tenants, cultural spaces, deputies: public statements (`workflow/stage1/T14_tenants_deputies`) | dsh | Oct 28–29 | integrated: 12 statements; no deputy spoke in public; see REVIEW_R1.md |
 | T16 Dzen: Selenium pilot, full run only if useful (`workflow/stage1/T16_dzen`) | dsh (2nd session) | Oct 28–29 | accepted: 22 items, 987 comments, all from June 2026; see REVIEW_R1.md |
 | T17 Dzen processing into the corpus_v2 schema (`workflow/stage1/T17_dzen_processing`) | dsh | Oct 28–29 | accepted: 1,009 rows, 986 reactions in P3; see REVIEW_R1.md |
 | T15 Media: relabel all 27 T03 articles with `docs/codebook.md` (`workflow/stage1/T15_media_relabel`) | Codex or local Qwen (user decides) | Oct 29 | ready |
 | T11 Processing: YouTube + Telegram + VK → `data/processed/corpus_v2.parquet` (`workflow/stage1/T11_processing`) | Codex | Oct 28–29 | accepted after R2: 9 descriptive themes, n-grams once per author; see REVIEW_R2.md |
 | T06 fix: saved variants (22 terms) vs config (21), generator error | Codex | Oct 29 | not started |
-| Labelling (D-28, D-34): sample of ~1,200 by a language model with `docs/codebook.md`; classifier for the rest; tone, topics, n-grams; zip archive for the user | user via Cheaper Inference or OpenRouter (`src/analysis/label_sample.py`, D-37); user re-checks a sample | Oct 29–30 | ready: sample of 1,522 (400 YouTube, Telegram, VK each + 300 Dzen, D-35; Telegram case thread 22, D-36); local models rejected (D-34) |
+| Labelling (D-28, D-34): sample of ~1,200 by a language model with `docs/codebook.md`; classifier for the rest; tone, topics, n-grams; zip archive for the user | user via Cheaper Inference or OpenRouter (`src/analysis/label_sample.py`, D-37); user re-checks a sample | Oct 29–30 | in progress: gemini-3.8-flash chosen, 88% on the 60 reference items (D-38); sample of 1,522 (400 YouTube, Telegram, VK each + 300 Dzen, D-35; Telegram case thread 22, D-36); local models rejected (D-34) |
 | Analysis: timeline vs T04 events, stance, criticism lines, actors, message gap | Claude | Oct 30 | not started |
 
 In parallel: stage-0 fixes in `docs/`, report sections 1, 4, 5, 6. Budget with prices and the launch line before
