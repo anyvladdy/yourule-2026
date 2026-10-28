@@ -6,7 +6,8 @@ Run from the repository root with .venv/bin/python. Texts stay in data/interim/l
             keep drawn rows: --add-platform dzen (D-35); --add-case-thread for a thread labelled as a separate case,
             never mixed into shares (column `stratum`, D-36).
   label     send each sampled text with its publication and parent to a model; temperature 0; resumable.
-            Backends: Ollama (local) or OpenRouter (OPENROUTER_API_KEY in .env).
+            Backends: Ollama (local) or an OpenAI-compatible cloud service: OpenRouter (OPENROUTER_API_KEY in .env)
+            or Cheaper Inference (CHEAPERINFERENCE_API_KEY in .env, D-37).
   evaluate  agreement of the model's stance with 60 reference items labelled by Claude
   export    labels in the codebook CSV format and a re-check sheet for the user (Tasks_for_humans, item 7)
 The model answers two questions (does the author defend the site? approve the demolition?) and the script derives
@@ -37,7 +38,9 @@ CODEBOOK = ROOT / 'docs/codebook.md'
 OUT = ROOT / 'data/interim/labelling'
 COVERAGE = ROOT / 'workflow/stage1/T11_processing/v2/out/coverage.csv'
 REFERENCE = OUT / 'reference_claude.csv'
-OPENROUTER = 'https://openrouter.ai/api/v1/chat/completions'
+# OpenAI-compatible cloud backends: chat completions URL and the .env name of the key.
+CLOUD = {'openrouter': ('https://openrouter.ai/api/v1/chat/completions', 'OPENROUTER_API_KEY'),
+         'cheaperinference': ('https://api.cheaperinference.com/v1/chat/completions', 'CHEAPERINFERENCE_API_KEY')}
 SEED = 20261029
 # A case thread (D-36) is labelled on top of the random sample: texts where words about the site outnumber words of
 # the party-political argument. Lexical selection, so the case is reported on its own, never mixed into shares.
@@ -300,17 +303,17 @@ def normalise(answer):
                 criticism_lines=sorted(set(lines)), pro_lines=sorted(set(pro)), note=str(answer.get('note') or '')[:100])
 
 
-def openrouter_key():
-    """OPENROUTER_API_KEY from the environment or .env (quotes stripped); never printed."""
-    if not os.environ.get('OPENROUTER_API_KEY') and (ROOT / '.env').exists():
+def api_key(var):
+    """The key named `var` from the environment or .env (quotes stripped); never printed."""
+    if not os.environ.get(var) and (ROOT / '.env').exists():
         for line in (ROOT / '.env').read_text(encoding='utf-8').splitlines():
             name, _, value = line.partition('=')
             value = value.strip().strip('"\'')
-            if name.strip() == 'OPENROUTER_API_KEY' and value:
-                os.environ['OPENROUTER_API_KEY'] = value
-    if not os.environ.get('OPENROUTER_API_KEY'):
-        sys.exit('OPENROUTER_API_KEY is not set: add it to .env')
-    return os.environ['OPENROUTER_API_KEY']
+            if name.strip() == var and value:
+                os.environ[var] = value
+    if not os.environ.get(var):
+        sys.exit(f'{var} is not set: add it to .env')
+    return os.environ[var]
 
 
 def ask(args, system, row):
@@ -328,7 +331,7 @@ def ask(args, system, row):
     body = {'model': args.model, 'temperature': 0, 'messages': messages,
             'response_format': {'type': 'json_schema', 'json_schema': {'name': 'label', 'strict': True, 'schema': SCHEMA}}}
     for wait in (5, 20, 60, None):
-        response = requests.post(OPENROUTER, json=body, timeout=180,
+        response = requests.post(CLOUD[args.backend][0], json=body, timeout=180,
                                  headers={'Authorization': f'Bearer {args.key}', 'X-Title': 'yourule-labelling'})
         if response.status_code not in (429, 502, 503) or wait is None:
             break
@@ -375,7 +378,7 @@ def label(args):
         except requests.RequestException as error:
             sys.exit(f'Ollama is not reachable at {args.host}: run `ollama serve` first ({type(error).__name__})')
     else:
-        args.key = openrouter_key()
+        args.key = api_key(CLOUD[args.backend][1])
     print(f'{len(done)} labelled before, {len(todo)} to label with {args.model} ({args.backend})', flush=True)
     started, errors = time.time(), 0
     with path.open('a', encoding='utf-8') as stream, ThreadPoolExecutor(max_workers=args.workers) as pool:
@@ -456,9 +459,9 @@ def main():
         p.add_argument('--model', default='qwen3:8b', help='model name for the backend (default qwen3:8b on Ollama)')
         p.add_argument('--tag', help='suffix of the labels file, e.g. pilot; the main run uses no tag')
     lab = sub.choices['label']
-    lab.add_argument('--backend', choices=['ollama', 'openrouter'], default='ollama',
-                     help='ollama (local) or openrouter (OPENROUTER_API_KEY in .env; texts leave the computer)')
-    lab.add_argument('--workers', type=int, default=1, help='parallel requests; 1 for Ollama, 4-8 for OpenRouter')
+    lab.add_argument('--backend', choices=['ollama', *CLOUD], default='ollama',
+                     help='ollama (local), openrouter or cheaperinference (key in .env; texts leave the computer)')
+    lab.add_argument('--workers', type=int, default=1, help='parallel requests; 1 for Ollama, 4-8 for a cloud backend')
     lab.add_argument('--limit', type=int, help='label at most N new items; for a pilot')
     lab.add_argument('--reference', action='store_true',
                      help='label only the 60 reference items labelled by Claude; then run `evaluate`')

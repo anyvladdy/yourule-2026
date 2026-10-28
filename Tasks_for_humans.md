@@ -52,21 +52,26 @@ T11: сбор Telegram завершён — data/raw/telegram/2026-10-28/, 13 к
       `workflow/stage1/T15_media_relabel/in/A01.txt` … `A27.txt` (ссылки — в `workflow/stage0/T03_media/out/articles.csv`).
       Если на это нет времени, отдайте карточку Codex.
 
-### 5а. Разметить выборку через OpenRouter (D-28, D-34)
+### 5а. Разметить выборку через Cheaper Inference или OpenRouter (D-28, D-34, D-37)
 Локальные модели проверены 28.10 и не подошли: совпадение с эталонной разметкой 53–68% (D-34). Ollama можно выключить.
-Тексты уходят в OpenRouter и к провайдеру модели; авторов в них нет, но в отдельных ответах встречаются имена адресатов.
-- [ ] Добавьте в `.env` строку `OPENROUTER_API_KEY=...` (файл не в git; ключ никому не показывайте).
-- [ ] Выберите недорогую модель с хорошим русским на openrouter.ai/models и подставьте её id вместо `<model>`.
-      Объём: около 2 750 входных и 100 выходных токенов на текст, на 1 522 текста ≈ 4,2 млн входных и 0,15 млн
-      выходных; умножьте на цену модели.
-- [ ] Пилот на 60 текстах, у которых есть эталонная разметка Claude (YouTube, Telegram, VK), и проверка согласия:
+Тексты уходят в выбранный сервис и к провайдеру модели; авторов в них нет, но в отдельных ответах встречаются имена
+адресатов. Cheaper Inference пишет, что хранит только данные для оплаты, без текстов запросов; у моделей ниже режима
+нулевого хранения у провайдера нет (каталог от 29.10).
+- [ ] Добавьте в `.env` строку `CHEAPERINFERENCE_API_KEY=ci_live_...` (ключ: platform.cheaperinference.com).
+      Для OpenRouter — `OPENROUTER_API_KEY=...` и `--backend openrouter`. Файл `.env` не в git; ключ никому не показывайте.
+- [ ] Пилот на 60 текстах, у которых есть эталонная разметка Claude (YouTube, Telegram, VK), и проверка согласия.
+      Прогоните две-три модели, пилот одной стоит меньше 5 центов. Id моделей в Cheaper Inference без префикса провайдера.
+      Цены за 1 млн токенов (вход / выход) и весь прогон 1 522 текстов (≈ 4,2 млн входных и 0,15 млн выходных):
+      `deepseek-v4.1-flash` $0.083 / $0.33, ≈ $0.40; `claude-haiku-5.5` $0.084 / $0.42, ≈ $0.42;
+      `gemini-3.1-flash-lite` $0.163 / $0.975, ≈ $0.83. Если модель рассуждает перед ответом, выходных токенов больше.
 ```
-.venv/bin/python src/analysis/label_sample.py label --backend openrouter --model <model> --workers 6 --reference
-.venv/bin/python src/analysis/label_sample.py evaluate --model <model>
+.venv/bin/python src/analysis/label_sample.py label --backend cheaperinference --model deepseek-v4.1-flash --workers 6 --reference
+.venv/bin/python src/analysis/label_sample.py evaluate --model deepseek-v4.1-flash
 ```
-- [ ] Покажите Claude строку `agreement … kappa …`. Если согласие от 75% — разметить остальное и выгрузить:
+- [ ] Покажите Claude строку `agreement … kappa …` по каждой модели. Если у лучшей согласие от 75% — разметить остальное
+      и выгрузить:
 ```
-.venv/bin/python src/analysis/label_sample.py label --backend openrouter --model <model> --workers 6
+.venv/bin/python src/analysis/label_sample.py label --backend cheaperinference --model <model> --workers 6
 .venv/bin/python src/analysis/label_sample.py export --model <model>
 ```
   Прерванный запуск можно повторить той же командой: размеченное пропускается.
