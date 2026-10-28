@@ -37,7 +37,7 @@
 Сбор Telegram и VK закончен. Вставьте Codex:
 
 ```
-T11: сбор Telegram завершён — data/raw/telegram/2026-10-28/, 13 каналов (11 из T01 + sosedi_preobrazhenskoe, sokolinaya_gora_vao из T13), файлы без _pilot и без _early (их не брать, D-30). Пересобери корпус с Telegram.
+T11: сбор Telegram завершён — data/raw/telegram/2026-10-28/, 13 каналов (11 из T01 + sosedi_preobrazhenskoe, sokolinaya_gora_vao из T13), файлы без _pilot; файлы с _early (январь–август 2025) тоже берём, D-31. Пересобери корпус с Telegram.
 Дополнение к карточке: добавь VK — data/raw/vk/2026-10-28/posts_*.jsonl и comments_*.jsonl (без _pilot; файлы с _v2 и без — один корпус, дедупликация по id). Поля: id, source, owner_kind (person|community), author_hash, author_display (только сообщества), published_raw, published_at (дата или UTC), text (упоминания людей уже заменены на [user]), likes/comments/reposts (строки как на странице), mentions_site; у комментариев post_id, parent_id, thread_id. source_kind = источник (search или slug сообщества); relevant для поста — по site regex, для комментария — как у поста (thread_context). Описание сбора: src/collectors/vk_web.py.
 ```
 

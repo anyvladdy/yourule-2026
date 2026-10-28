@@ -8,7 +8,7 @@ Every share in the analysis must name the slice of this manifest it comes from. 
 - Cut date: 2026-10-28. Nothing published after collection is in the corpus.
 - Analysis window for shares: 2026-06-01 → 2026-10-28 (the leak and the conflict). Earlier items are kept as background
   and reported separately by period (D-29): P0 before the fire of 2025-02-08; P1 2025-02-08 – 2025-09-14;
-  P2 2025-09-15 – 2026-05-31; P3 2026-06-01 – 2026-10-28. Telegram starts at 2025-09-01 (files `*_early.jsonl` are not used, D-30); Dzen at 2025-01-01; YouTube videos at
+  P2 2025-09-15 – 2026-05-31; P3 2026-06-01 – 2026-10-28. Telegram starts at 2025-01-01 (files `*_early.jsonl` cover January–August 2025, D-31); Dzen at 2025-01-01; YouTube videos at
   2025-01-01; VK posts of all dates, VK comments only under posts from 2025-09-01.
 - Unit of analysis: one post or one comment. Authors are counted separately from messages.
 - People in the corpus are "participants of public discussion". Living in the district is not established for anyone,
@@ -44,6 +44,7 @@ Two more of the five largest comment sets are under videos that are not about th
 | Window | posts on or after 2025-09-01 |
 | Pilot | 2026-10-28: act_preobrajenka 24 posts, engineer_media 23 posts; comments opened under 3 posts |
 | Full run | 2026-10-28, `data/raw/telegram/2026-10-28/_run.json`, no errors: 13 channels, 140 posts, 1,464 comments. Most comments: moskvichmag 553, archnadzor_official 266, engineer_media 215, mskved 190. Group_etalon: 8 posts, 0 comments |
+| Early run | 2026-10-28, January–August 2025 (`*_early.jsonl`): 36 posts in 8 channels, 35 after the fire of 2025-02-08; 76 comments (D-31) |
 | Not covered | closed chats and groups (need login); reactions |
 
 ## VK (Selenium in Brave incognito with the user's manual login, `src/collectors/vk_web.py`)
