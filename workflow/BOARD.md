@@ -73,7 +73,7 @@ Branch `stage-1-collection`. No video content; residents' voices also from distr
 | Task | Owner | When | State |
 |------|-------|------|-------|
 | YouTube: video search + all comments, official API (`src/collectors/youtube_comments.py`) | Claude | Oct 28 | done: 80 videos, 10,926 comments; see `docs/data_cards/corpus_manifest.md` |
-| Telegram channels from T01: the user's parser ported to `src/collectors/telegram_web.py`, public pages, no login (D-23) | Claude | Oct 28–29 | pilot done on 2 channels; full run waits for the user's OK |
+| Telegram channels from T01: the user's parser ported to `src/collectors/telegram_web.py`, public pages, no login (D-23) | Claude | Oct 28–29 | done: 13 channels (11 from T01, 2 from T13), 140 posts, 1,464 comments |
 | T13 District newspapers and residents' chats: find and read (`workflow/stage1/T13_district_voices`) | dsh (2nd session) | Oct 28–29 | accepted |
 | T12 Price benchmarks for budget lines (`workflow/stage1/T12_price_benchmarks`) | dsh | Oct 28–29 | accepted |
 | VK: global post search + communities, manual login in Brave incognito (`src/collectors/vk_web.py`) | Claude | Oct 28 | stopped after logout (D-26): 303 posts, 1,360 comments; 13 communities not covered |
@@ -84,7 +84,7 @@ Branch `stage-1-collection`. No video content; residents' voices also from distr
 | T15 Media: relabel all 27 T03 articles with `docs/codebook.md` (`workflow/stage1/T15_media_relabel`) | Codex or local Qwen (user decides) | Oct 29 | ready |
 | T11 Processing: raw YouTube + Telegram → `data/processed/corpus.parquet` (`workflow/stage1/T11_processing`) | Codex | Oct 28–29 | in_progress: YouTube; Telegram pending full collection |
 | T06 fix: saved variants (22 terms) vs config (21), generator error | Codex | Oct 29 | not started |
-| Labelling: codebook `docs/codebook.md` v0 written; Claude 50%, Codex 25%, dsh 25%; user re-checks a random sample from each (D-20) | Claude, Codex, dsh, user | Oct 29–30 | codebook not written |
+| Labelling: codebook `docs/codebook.md` v0 written; Claude 50%, Codex 25%, dsh 25%; user re-checks a random sample from each (D-20) | Claude, Codex, dsh, user | Oct 29–30 | codebook v0 ready; labelling starts after T11 |
 | Analysis: timeline vs T04 events, stance, criticism lines, actors, message gap | Claude | Oct 30 | not started |
 
 In parallel: stage-0 fixes in `docs/`, report sections 1, 4, 5, 6. Budget with prices and the launch line before
