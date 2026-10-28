@@ -6,3 +6,4 @@ __pycache__/
 data/interim/
 data/raw/
 .secrets/
+data/processed/*.parquet

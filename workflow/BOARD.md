@@ -74,11 +74,12 @@ Branch `stage-1-collection`. No video content; residents' voices also from distr
 |------|-------|------|-------|
 | YouTube: video search + all comments, official API (`src/collectors/youtube_comments.py`) | Claude | Oct 28 | done: 80 videos, 10,926 comments; see `docs/data_cards/corpus_manifest.md` |
 | Telegram channels from T01: the user's parser ported to `src/collectors/telegram_web.py`, public pages, no login (D-23) | Claude | Oct 28–29 | pilot done on 2 channels; full run waits for the user's OK |
-| Residents' Telegram chats (need login) | Claude + user | Oct 29 | find first; collect only if found |
+| T13 District newspapers and residents' chats: find and read (`workflow/stage1/T13_district_voices`) | dsh (2nd session) | Oct 28–29 | ready |
+| T12 Price benchmarks for budget lines (`workflow/stage1/T12_price_benchmarks`) | dsh | Oct 28–29 | ready |
 | VK groups: Selenium, reader pace | Claude | Oct 29 | not started |
-| District party newspapers: find and read a few issues by hand | to assign | Oct 29 | not started |
 | Media: relabel all 27 T03 articles | to assign | Oct 29 | not started |
-| Processing: dedupe, keyword filter (T06 generator fixed by Codex first), hash authors | Claude; Codex for T06 | Oct 29 | not started |
+| T11 Processing: raw YouTube + Telegram → `data/processed/corpus.parquet` (`workflow/stage1/T11_processing`) | Codex | Oct 28–29 | ready |
+| T06 fix: saved variants (22 terms) vs config (21), generator error | Codex | Oct 29 | not started |
 | Labelling: one codebook; Claude 50%, Codex 25%, dsh 25%; user re-checks a random sample from each (D-20) | Claude, Codex, dsh, user | Oct 29–30 | codebook not written |
 | Analysis: timeline vs T04 events, stance, criticism lines, actors, message gap | Claude | Oct 30 | not started |
 
