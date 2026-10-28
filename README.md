@@ -95,3 +95,10 @@ Notes for each tool:
 - Public content only, and private people are not named.
 - No bots, fake accounts or pressure on critics in our recommendations.
 - Write plainly, so a person can read it without effort.
+
+## Повторная проверка этапа 0
+
+Из корня репозитория: `.venv/bin/python workflow/stage0/validate_factcheck.py`.
+Команда читает CSV, YAML и результаты T06, выводит JSON с результатами и не меняет исходные файлы.
+Проверка содержания веб-источников выполняется отдельно; её результаты от 26 октября 2026 года
+сведены в `workflow/stage0/FACTCHECK_CODEX_2026-10-26.md`.
