@@ -86,6 +86,7 @@ Branch `stage-1-collection`. No video content; residents' voices also from distr
 | T11 Processing: YouTube + Telegram + VK → `data/processed/corpus_v2.parquet` (`workflow/stage1/T11_processing`) | Codex | Oct 28–29 | accepted after R2: 9 descriptive themes, n-grams once per author; see REVIEW_R2.md |
 | T06 fix: saved variants (22 terms) vs config (21), generator error | Codex | Oct 29 | not started |
 | Labelling (D-28, D-34): sample of ~1,200 by a language model with `docs/codebook.md`; classifier for the rest; tone, topics, n-grams; zip archive for the user | user via Cheaper Inference or OpenRouter (`src/analysis/label_sample.py`, D-37); user re-checks a sample | Oct 29–30 | in progress: gemini-3.8-flash chosen, 88% on the 60 reference items (D-38); sample of 1,522 (400 YouTube, Telegram, VK each + 300 Dzen, D-35; Telegram case thread 22, D-36); local models rejected (D-34) |
+| T18 Speech register and self-disclosure × stance: who is dissatisfied (`workflow/stage1/T18_speech_register`, D-39) | Codex | Oct 29–30 | ready (starts when the gemini labels have 1,522 lines) |
 | Analysis: timeline vs T04 events, stance, criticism lines, actors, message gap | Claude | Oct 30 | not started |
 
 In parallel: stage-0 fixes in `docs/`, report sections 1, 4, 5, 6. Budget with prices and the launch line before

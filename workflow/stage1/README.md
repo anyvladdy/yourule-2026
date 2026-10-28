@@ -21,6 +21,7 @@ Tasks:
 | T15 | Codex or a local Qwen | The 27 media articles labelled again with the shared guide `docs/codebook.md` |
 | T16 | dsh, second session | Dzen: a small test first; a full collection only if it finds something new |
 | T17 | dsh | Dzen articles and comments added to the same clean table as T11 |
+| T18 | Codex | Who is dissatisfied: youth slang, older register and what people say about themselves, crossed with stance. The texts have no age, so the card may end with "the data cannot answer this" |
 
 Also: VK posts and comments are collected by Claude in a browser where you log in yourself (no API, decision D-21),
 and Claude looks at Etalon's own channels to compare what the company said with what people heard. Your own tasks
