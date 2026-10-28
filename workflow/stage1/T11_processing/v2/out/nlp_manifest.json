@@ -1,0 +1,22 @@
+{
+  "version": "v2",
+  "seed": 20261028,
+  "input_sha256": "61e290fe28c4079a67eb7bd13048c811ca0c7828be7b82950c3337ba88bfc46e",
+  "broad_reactions_p3": 5458,
+  "strict_complete_reactions_p3": 4919,
+  "nlp_eligible_messages": 3018,
+  "nlp_unique_documents": 3001,
+  "zero_vector_documents_excluded": 7,
+  "tfidf_shape": [
+    3001,
+    2269
+  ],
+  "nmf_topics": 8,
+  "nmf_iterations": 72,
+  "nmf_reconstruction_error": 53.59155441214296,
+  "normalization": "pymorphy3, Russian tokens >=3 letters; stopwords; person-name tags removed",
+  "scope": "P3 reactions only; explicit-site threads for YouTube digests; complete parent context",
+  "stance": "not estimated: no validated labels or local Ollama server; no fabricated agreement/accuracy",
+  "theme_mentions": "lexical mentions, NOT classified criticism, stance or causality",
+  "sentiment": "not estimated; no validated/pretrained local model used"
+}

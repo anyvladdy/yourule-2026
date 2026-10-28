@@ -1,0 +1,697 @@
+{
+  "version": "v2",
+  "analysis_window": [
+    "2026-06-01",
+    "2026-10-28"
+  ],
+  "excluded_sources": [
+    "dsh outputs",
+    "Dzen",
+    "T12",
+    "T13 artifacts",
+    "T14",
+    "T15"
+  ],
+  "inputs": [
+    {
+      "path": "data/raw/telegram/2026-10-28/comments_AnticorruptionAcademy.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "data/raw/telegram/2026-10-28/comments_AnticorruptionAcademy_early.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "data/raw/telegram/2026-10-28/comments_Group_etalon.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "data/raw/telegram/2026-10-28/comments_Group_etalon_early.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "data/raw/telegram/2026-10-28/comments_Pamyat_mesta.jsonl",
+      "sha256": "46d7d8ef42f2f1e38db040fa49b3d1e4ab767d7e208a243c15d63bc653a80ab6"
+    },
+    {
+      "path": "data/raw/telegram/2026-10-28/comments_Pamyat_mesta_early.jsonl",
+      "sha256": "d324b71b6539cd0648ed00caba24f6853858add36c2c184ece47a5dcae8f7da8"
+    },
+    {
+      "path": "data/raw/telegram/2026-10-28/comments_act_preobrajenka.jsonl",
+      "sha256": "5f1bc7a0e44907f60b65af8c0ce78cd4fd23ccd2a161b94e15c6a408a4d2823c"
+    },
+    {
+      "path": "data/raw/telegram/2026-10-28/comments_act_preobrajenka_early.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "data/raw/telegram/2026-10-28/comments_archi_ru.jsonl",
+      "sha256": "b1ee6a0a42b7662f895d8a6eef03b5046021bfcb348d4abeee793bc8f045b796"
+    },
+    {
+      "path": "data/raw/telegram/2026-10-28/comments_archi_ru_early.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "data/raw/telegram/2026-10-28/comments_archnadzor_official.jsonl",
+      "sha256": "73e2677c050854fd9b5ad0d57b6fd66df1ff916182a982f362c48182a34e48f2"
+    },
+    {
+      "path": "data/raw/telegram/2026-10-28/comments_archnadzor_official_early.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "data/raw/telegram/2026-10-28/comments_engineer_media.jsonl",
+      "sha256": "1a44de681cd71e7ba7f4bb028bf6444ba8af08e08ddd9cc8531c34984fb931a8"
+    },
+    {
+      "path": "data/raw/telegram/2026-10-28/comments_engineer_media_early.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "data/raw/telegram/2026-10-28/comments_good_hood1.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "data/raw/telegram/2026-10-28/comments_good_hood1_early.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "data/raw/telegram/2026-10-28/comments_moscowmap.jsonl",
+      "sha256": "fa0627142f98e47542c65acc7c0945eb53b0077c2d6e8b1a64593607147c4ff8"
+    },
+    {
+      "path": "data/raw/telegram/2026-10-28/comments_moscowmap_early.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "data/raw/telegram/2026-10-28/comments_moskvichmag.jsonl",
+      "sha256": "5bab629ddd985edcb3ab841df5a51087f92c003e953db132e58abf7f3bf02cdd"
+    },
+    {
+      "path": "data/raw/telegram/2026-10-28/comments_moskvichmag_early.jsonl",
+      "sha256": "8159ebfe66d5dbe3c7fae8f7792dd1f572dc9fe03196e39a6864f5f88468de6e"
+    },
+    {
+      "path": "data/raw/telegram/2026-10-28/comments_mskved.jsonl",
+      "sha256": "f2e1e08a72a5ea6064820d481fc5569b216fa40df15c1861e2494dca88a5bcb3"
+    },
+    {
+      "path": "data/raw/telegram/2026-10-28/comments_mskved_early.jsonl",
+      "sha256": "76b3df10acb7a435b415d7c14600329192c522b8d49d1e4428adc84da57d0d37"
+    },
+    {
+      "path": "data/raw/telegram/2026-10-28/comments_sokolinaya_gora_vao.jsonl",
+      "sha256": "234025090c0e212bf39c6f0b109448193df46fc29cc1ebbcd3c4702c3fc7e9f6"
+    },
+    {
+      "path": "data/raw/telegram/2026-10-28/comments_sokolinaya_gora_vao_early.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "data/raw/telegram/2026-10-28/comments_sosedi_preobrazhenskoe.jsonl",
+      "sha256": "13218cd45ada03761a8cb09776d851ee86df9f12260e0571610054f9f494df4e"
+    },
+    {
+      "path": "data/raw/telegram/2026-10-28/comments_sosedi_preobrazhenskoe_early.jsonl",
+      "sha256": "443ed1461b8675206cca1fe25abf651a88d0462e5d378cbbba3c8359bd4b2d7f"
+    },
+    {
+      "path": "data/raw/telegram/2026-10-28/posts_AnticorruptionAcademy.jsonl",
+      "sha256": "d8866c430591eb9d15a37ec8b64008a7ba64a4a018958893e23a28e86dc80fb2"
+    },
+    {
+      "path": "data/raw/telegram/2026-10-28/posts_AnticorruptionAcademy_early.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "data/raw/telegram/2026-10-28/posts_Group_etalon.jsonl",
+      "sha256": "dbead3b5dd77585e506c1556cd12336e93fd576c5119a99d56fddc318bb11c49"
+    },
+    {
+      "path": "data/raw/telegram/2026-10-28/posts_Group_etalon_all.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "data/raw/telegram/2026-10-28/posts_Group_etalon_early.jsonl",
+      "sha256": "f1112a387b476ba5482d6467e9f8acbb75f361635b8db45f6d7116a8bdf85a35"
+    },
+    {
+      "path": "data/raw/telegram/2026-10-28/posts_Group_etalon_fort.jsonl",
+      "sha256": "31f58b9f8f3222e697a4aac331685af91b016224de67abeea07ad7c029a0143c"
+    },
+    {
+      "path": "data/raw/telegram/2026-10-28/posts_Pamyat_mesta.jsonl",
+      "sha256": "35b2ebc80e5ca3d7126471a3175615aab315ff3105be734be056e28528341420"
+    },
+    {
+      "path": "data/raw/telegram/2026-10-28/posts_Pamyat_mesta_early.jsonl",
+      "sha256": "4b5f52be0f10804d9ce801d4238151293a509f4c9960b892d4a530b2cd59f0e4"
+    },
+    {
+      "path": "data/raw/telegram/2026-10-28/posts_act_preobrajenka.jsonl",
+      "sha256": "432480aae8a142f3f119a925f9c787c2516cb22695ddaab2da1cacc97a277762"
+    },
+    {
+      "path": "data/raw/telegram/2026-10-28/posts_act_preobrajenka_early.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "data/raw/telegram/2026-10-28/posts_archi_ru.jsonl",
+      "sha256": "50d21270b82c2fe00b18bb156824f32823d5f8fafdf90a64169ad5ede118e87c"
+    },
+    {
+      "path": "data/raw/telegram/2026-10-28/posts_archi_ru_early.jsonl",
+      "sha256": "02539307d4e0b9b584094314cdb2e9c538db0d29683a720a29089b1b9b5ed817"
+    },
+    {
+      "path": "data/raw/telegram/2026-10-28/posts_archnadzor_official.jsonl",
+      "sha256": "458bb70618a94834d64d9364f391234b4d7edc4196fcb1cdd96abea26ee345c9"
+    },
+    {
+      "path": "data/raw/telegram/2026-10-28/posts_archnadzor_official_early.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "data/raw/telegram/2026-10-28/posts_engineer_media.jsonl",
+      "sha256": "bc3ecc5dd7ffdf59dc4b9ae956a5a74af80a5488420099d469493d15d33af17b"
+    },
+    {
+      "path": "data/raw/telegram/2026-10-28/posts_engineer_media_early.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "data/raw/telegram/2026-10-28/posts_good_hood1.jsonl",
+      "sha256": "6a9e9bc4761b5443b4465e34d67328d45dba289e555d45da694b446eb52d486e"
+    },
+    {
+      "path": "data/raw/telegram/2026-10-28/posts_good_hood1_early.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "data/raw/telegram/2026-10-28/posts_moscowmap.jsonl",
+      "sha256": "f124262a8036eada347250a18e86cc453e24a6e92dfd7f6296993dee09334067"
+    },
+    {
+      "path": "data/raw/telegram/2026-10-28/posts_moscowmap_early.jsonl",
+      "sha256": "e534931a6de20d6292cadaa899650e22e385aae6c88f6e72a052f3c91f0f666d"
+    },
+    {
+      "path": "data/raw/telegram/2026-10-28/posts_moskvichmag.jsonl",
+      "sha256": "4585745008e6eb9f01b7a7774e26b24a2bd41ab87f45400de7e7ca37d53f24b7"
+    },
+    {
+      "path": "data/raw/telegram/2026-10-28/posts_moskvichmag_early.jsonl",
+      "sha256": "8968fb1968ad87011c210820cad72c42751beafb69ce8461df37860b7e604331"
+    },
+    {
+      "path": "data/raw/telegram/2026-10-28/posts_mskved.jsonl",
+      "sha256": "51fa7ebb026a5fd6b399e968e91742ffafe0845697d13c63f1cb9e4ca6e0aec0"
+    },
+    {
+      "path": "data/raw/telegram/2026-10-28/posts_mskved_early.jsonl",
+      "sha256": "6e05fe56d833d6c6de31efd19c3329e5b47c057275b2b762502e4b01638edc03"
+    },
+    {
+      "path": "data/raw/telegram/2026-10-28/posts_sokolinaya_gora_vao.jsonl",
+      "sha256": "cd97918277a03cd365b55844b84caa2224dd7a60d930652b78d43855d95fc9fe"
+    },
+    {
+      "path": "data/raw/telegram/2026-10-28/posts_sokolinaya_gora_vao_early.jsonl",
+      "sha256": "1ec7df6bf01935f5126b5a6fa5e4a7becf227fb35bb68276ed127c61b5a25921"
+    },
+    {
+      "path": "data/raw/telegram/2026-10-28/posts_sosedi_preobrazhenskoe.jsonl",
+      "sha256": "edd8e06a65b3c3b1371d7db579c04dd31131829dea19129db4e3c00f790b8313"
+    },
+    {
+      "path": "data/raw/telegram/2026-10-28/posts_sosedi_preobrazhenskoe_early.jsonl",
+      "sha256": "b4fe4cd3bf0042f69abae8038b99949f3db35501b72f9f356c0126c095687f5a"
+    },
+    {
+      "path": "data/raw/vk/2026-10-28/comments_best_vao_v2.jsonl",
+      "sha256": "fbeefb548fcaf4d7b76b1acc61644988f240f7d9c1a865b8e7f36ac78ae8d823"
+    },
+    {
+      "path": "data/raw/vk/2026-10-28/comments_club230930257.jsonl",
+      "sha256": "94ec608de3ab2013f5f793596e148a04f669ab58e4a3b97688aab7bd0b005c6d"
+    },
+    {
+      "path": "data/raw/vk/2026-10-28/comments_podsluh_preobr_v2.jsonl",
+      "sha256": "cbaa06d008b516b248a47e925bd8656c608ac41ba72ba02c51c78cca0fe3ae7e"
+    },
+    {
+      "path": "data/raw/vk/2026-10-28/comments_search.jsonl",
+      "sha256": "42bba0ce21506d9c98006dfbfee159093f46ddda5f94d68d63e45a555b04aa1e"
+    },
+    {
+      "path": "data/raw/vk/2026-10-28/comments_search_v2.jsonl",
+      "sha256": "0cc3ad878361b66dbe1f776047fc19b8bc8c3a887a8cd753849e85dee52d8078"
+    },
+    {
+      "path": "data/raw/vk/2026-10-28/comments_sokgor.jsonl",
+      "sha256": "936ec971ac74053744fbff25142923c340b80369d90126b19ecf8d9228ee6bb0"
+    },
+    {
+      "path": "data/raw/vk/2026-10-28/comments_vao_moscow_v2.jsonl",
+      "sha256": "a9485229ad7e689f322644b4cb9a54137f9ebaa87ad044ec316f8b9add63aa39"
+    },
+    {
+      "path": "data/raw/vk/2026-10-28/comments_vao_officiall_v2.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "data/raw/vk/2026-10-28/comments_vaonews_v2.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "data/raw/vk/2026-10-28/comments_vostochnyiokrug_v2.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "data/raw/vk/2026-10-28/posts_best_vao_v2.jsonl",
+      "sha256": "4e2a717a5f7651ad16eb0620de097ed083df96a1c3ebe138d5fe295325b6df3a"
+    },
+    {
+      "path": "data/raw/vk/2026-10-28/posts_club230930257.jsonl",
+      "sha256": "007df57b4b6b47116a53800033084411da70e811950875f606e2af243b593a78"
+    },
+    {
+      "path": "data/raw/vk/2026-10-28/posts_podsluh_preobr_v2.jsonl",
+      "sha256": "92734e16f648e1e42aa8c0ed388db713ec33cfa2fdc5c4e2fa3e9e715c59d5e4"
+    },
+    {
+      "path": "data/raw/vk/2026-10-28/posts_search.jsonl",
+      "sha256": "91ff2ee5dc3f5ba53254d712342a10e8825482f3d75b768431463594ba1becf4"
+    },
+    {
+      "path": "data/raw/vk/2026-10-28/posts_search_v2.jsonl",
+      "sha256": "544c3582f2c4a4daa99b70ae4b305e47ae27cea47b6ae51d23dc3b68621207fb"
+    },
+    {
+      "path": "data/raw/vk/2026-10-28/posts_sokgor.jsonl",
+      "sha256": "4503bb18c1cdc3805dea45dbed454e322bbf780b0c5198c129d7bfcfbcdfc99c"
+    },
+    {
+      "path": "data/raw/vk/2026-10-28/posts_vao_moscow_v2.jsonl",
+      "sha256": "506c0adcb775af5e6f631ec12db8db63e3dbbddd72c97f77bda4271a95128d9f"
+    },
+    {
+      "path": "data/raw/vk/2026-10-28/posts_vao_officiall_v2.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "data/raw/vk/2026-10-28/posts_vaonews_v2.jsonl",
+      "sha256": "641940af74706dc2ccb99f4985403565d5a95dab391999aaa68cc8a1592f41c8"
+    },
+    {
+      "path": "data/raw/vk/2026-10-28/posts_vostochnyiokrug_v2.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_-_heMen5kEU.jsonl",
+      "sha256": "9d52d01bc5bb78752cb30ef18dcd6052e216626b9032e0baf189f5b0e9247893"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_-hcfoDRcgEk.jsonl",
+      "sha256": "d74eb3598333e5f4af7e4fa0ab00183b9ec36f8a35cf7cc2c839be4eeda7b6b3"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_1-7YM_ZBXPk.jsonl",
+      "sha256": "cad4dd0a8e3e7777a85cc043de1f1ce760154e763c8b8aae540f4f81a9833fa3"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_2KObcOGOBFg.jsonl",
+      "sha256": "740cd375d8ef3201763d065b4a371cd457be66b9b013a677c1972ee515dff5d9"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_3fVfrhEi_0Q.jsonl",
+      "sha256": "fa5b84c1b70c3ebfaf0d40822c5fae03d010d7800c1af5f0d7c3cf36159239d1"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_4qVX1iFZRpg.jsonl",
+      "sha256": "de76cf11a5282b2a8e37ff1a989a2cbc96ff88976546566cf72621685663af02"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_5SHgzZysMWc.jsonl",
+      "sha256": "568979798a4707c40f2bf8f0799a282ed79ed8ca3a1184bf3b663dea09a8dbe2"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_6MCZZQAtapA.jsonl",
+      "sha256": "599e5681efaa3e6cb43b29ad26627a76e812ac6aa25c0f00ec1b97824c5c4e93"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_6Xy8RkLvNBk.jsonl",
+      "sha256": "db0e96991a61d95956b1f6bd8908bfa7636e28850f25c5b399fe00a19cbccaca"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_7Oj9YIE3VM0.jsonl",
+      "sha256": "9b64a346909a99b6c4a2f16d22d6c9a6d625044b2c86cebc0afcdb013c1be83f"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_7b0WSl5tiPQ.jsonl",
+      "sha256": "5f17afb368e3d9a576eba8093ef397d6318b6097a67ccfd7c9faf18aa7c317d6"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_8zHtagCUPiU.jsonl",
+      "sha256": "edf09a631f938fc90f444d3387b703ea4525ce1a8ccb973f3272f1a46e7e0e0a"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_979znBZFSQU.jsonl",
+      "sha256": "33d6b47595a3fdcde2c9cbf2cddfc075fc3f7f694d0ce4ffbcb50f3bfa8187bf"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_9a_TmnG4vs4.jsonl",
+      "sha256": "2d8ccc54dea980c49217185562bcee07e3bd209cb7eedf9390bde606d6629356"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_AjxXZy8paiY.jsonl",
+      "sha256": "3e39f6edea42c9dcc09d8448643eb3eec47372c0d1a0eeea0863082eede01f02"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_CTlILTOgqJ0.jsonl",
+      "sha256": "38969d556e578d3a82eabd77bbff0de45d5d8997dbfa0ceee7081b65e8a5d10b"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_Cyqw4tCwwdU.jsonl",
+      "sha256": "1b826cbe31d16a97a1381600c0acb4211658ab1cfc437cb360fdb0ea988e5b82"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_DScvX3clkWs.jsonl",
+      "sha256": "d4745aded67aba0ab071b3e26c3e1022e2536bb537abb8f74172c2cc953ede08"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_EA-T1EyifbU.jsonl",
+      "sha256": "61a8f1bc1d58baa40adfd721fd6fc52046d85bbe8c72c4b64819b7a7902aa74d"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_EXVXqB7CPFQ.jsonl",
+      "sha256": "a53b5b81c470c7b6f6518599f08f0fd9ec4a41ddd43dfdf736cb9dbcc526156a"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_Hu6cGrwK8Rs.jsonl",
+      "sha256": "4d61366495967e04abb4350dc92637d6263d5e1dfc258920ea3bc7727f635798"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_IfzESH_Rfvo.jsonl",
+      "sha256": "a66d631e6b8934b2682f7ddc6279652e9b9cfe748a282e0a29f8c977a7ca06eb"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_KYjchX57K3w.jsonl",
+      "sha256": "e9e56bf8b16e00ab29d38d9d4e58f1fa3c8c1b899a82370e6c2f503cb1ffc498"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_KjkIYsnI3vk.jsonl",
+      "sha256": "7364aac64ab9be18da9e5b7c53a30841906a23c9551faf81782127e938755fab"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_KvBmU6T2Qeo.jsonl",
+      "sha256": "42b1a375edc721e5d1c9fe9f0089f660eb2f0a129ab65dc437c63894656140a4"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_LV1QmkKWeCw.jsonl",
+      "sha256": "4a4a6fc274ae175d49918bd869d39246d1ab62df6d7bdf1099bb587411ee139d"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_MxYpIUVSLiQ.jsonl",
+      "sha256": "1054c12ea285d14bd55d9fab7cc99466f209c9c7d80f5a5bcf3eb69111214f14"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_N2q35ZH2j9E.jsonl",
+      "sha256": "c785e150eeb1e71a10bc5369b8dec240fa642fc364c061a55c84514e5c9a0cf3"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_NOmcY3oY3HE.jsonl",
+      "sha256": "cb94d952df8ba2641b642d194a33929ef5a7aa89a2ededb451baafd489dc42b0"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_O6-lFlbvYAY.jsonl",
+      "sha256": "a4b6f3cb9cd29e9e928abf95ea67fe2b303796e1a6c804c077e587af7354117a"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_TuxWwf8A5vU.jsonl",
+      "sha256": "a98f5f9ce40533598b60855bfe76fe6e74b6364bbf28fd141efd09d35215666b"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_U3Z1tpremRA.jsonl",
+      "sha256": "6c7c822d740be40469536f35e7164e41ec25ffbe330d6bda57e608603d6523cb"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_UZBsnAUZTIE.jsonl",
+      "sha256": "5a12ce64f13b72df72923499f0a336b9c993582b386064d017668c0def72d8e4"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_UlbDZ_00luo.jsonl",
+      "sha256": "5fada3cc93caa86f671a1c88ee3f1b3290db64db321405fd8318288a738e6fb5"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_V-098Vx6Z4o.jsonl",
+      "sha256": "21f3244c2194ac628acf3d1727dc409bedff9689f31756a767b91f2d6dcee288"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_V6vpthx0miQ.jsonl",
+      "sha256": "6dceab19357fd5909567faaf73ae8099c72b178bcf5f5daec52f76245a820677"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_WZ6JL84k8rk.jsonl",
+      "sha256": "c4f0c8fbdf23e9aeae3de7fbea3ea9c8453a81cb58826dc01fd9dc1eca73d524"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_YePpJ5ppT-M.jsonl",
+      "sha256": "3d60d5a2ecfef8c52c98bb2e5a92d3ff45926f129f4bce60021fdd05d5e92481"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_ZXrxELCawB8.jsonl",
+      "sha256": "3c481593db6480520e678e3e38a8e100b3a2b75539da425a48d782039f34b157"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_ZbUpDLYYYVs.jsonl",
+      "sha256": "895e17c0b9574bc17a2db12c5d0515c5b47b497fb87214aecfdfd24501552881"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments__08UqCXwW0w.jsonl",
+      "sha256": "2d55c17aa27e9adfef8f98c0f2cc83d0b1a6b146beade3d79f38b1d72ca0548c"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments__FbgrHYPEIw.jsonl",
+      "sha256": "b18ba3efd8a1af3b0820f4aa393e8822bccf2bea846b5e34d1a8725e77eadf7f"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_ad4pQB3s5uY.jsonl",
+      "sha256": "aa2ce3b58de6a4010b61c91e563baa4e0592058987c5ad55e4b203680cacb199"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_bfc5K6o5ny8.jsonl",
+      "sha256": "67cf28587431d3598259b727b315319a17672567168ca142374365ddbb31a038"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_bu8jhxK4h2M.jsonl",
+      "sha256": "898d47140b4caca41c58e8369b0266fc8d5bfeb8a98e86510160635a37a43d63"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_budZYUlTIYg.jsonl",
+      "sha256": "c463ff797a9ba2cbb4976b71a9b7bde1bb848f4d8889761e3db4124a1f4ff990"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_cLdaUyyJdKU.jsonl",
+      "sha256": "cfac0337c0aac6a631a4bf2d63acdb80ef6e077630f9a43c11d9698175289102"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_cPehs-NQKcg.jsonl",
+      "sha256": "e589e240c93c5af0dbfaf3f119422290139e7207043506b5da38de4a3288509a"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_d-328cSTHl0.jsonl",
+      "sha256": "118f636364a2e0a4e92ecffaf42d2188d03f0f0ceae6ad0302a7fea320c709d5"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_d1qjoj3Am24.jsonl",
+      "sha256": "0f4e40796884db64ce04b939e8071637e8e2e1cf8faaf624182986407975e43e"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_fgvalo6sHa0.jsonl",
+      "sha256": "ee70da3484036626fbe81e49f6f6492f6afa7c34f5659ada52a8602f519fbe38"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_gr8mxUFmvxI.jsonl",
+      "sha256": "3f4025a4c5943ed6c674ccf3beaf66a260299e1f78040e5ca44091841c9ebdca"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_hEMdS1y3u60.jsonl",
+      "sha256": "c2cf2d208e1396a88d21f021ef0a90388e99ce2053e4e351c45349a81d5c5c15"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_iDLDelZA9PI.jsonl",
+      "sha256": "68e4ff15e82c0361d116a0cbe72305ad3afe0afa692aeea8c5e4d84b7476fa4b"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_jOFhi1NMDWM.jsonl",
+      "sha256": "9fe8438e6a2b1a9b510cac0f957a3970946ce948d7e3db2fb5641e77adbebe8b"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_kMy8lBrxEdM.jsonl",
+      "sha256": "11cf6630fe40910e9eb008706a5123c4911d20de809f9f1d9a7cc498a8eb8b51"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_kTi7X3hUCPM.jsonl",
+      "sha256": "ff406be0a8eebff35db9095d49b545fdd894e29e42c2c6f687de4e6843121df7"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_kh2UcEMfrLI.jsonl",
+      "sha256": "bb2fc599ec1282c9fc5f307c227ac1a2f16d84b08b776e9be47ce96a14f1dbf2"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_lZjaAr-xQJE.jsonl",
+      "sha256": "4e8c0848368cd46ffc953d48576eb90a68f2f943215b7d85bdad633fdb07b253"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_lyQmQtIw_yw.jsonl",
+      "sha256": "9be33e5501aaba4cf8febc632c6728921ecb87824b842ff6c47ca62c4a0c86c8"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_nJO5tThwSOc.jsonl",
+      "sha256": "c9a8bfad4563d2951ff6ed3a1c286ab4d44733957ca3f683b805324cc185f6e5"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_ntwYN48avsQ.jsonl",
+      "sha256": "15e6de1ea73cbc91d07760fa6a9eb3ae49a00f2192a77547c9c4466337ebb4de"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_oH9yMcnlHFA.jsonl",
+      "sha256": "b4f7715178a0d23314f3bb7bc4bd56b97e6213a22857a0457779e02a2b3d8467"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_obynuaJriq8.jsonl",
+      "sha256": "7f212c2ccc46782ae27e5174a1f846ff8a24f4643353eec5a2b5fbbf784ab2ea"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_p8b-SqC2GME.jsonl",
+      "sha256": "258ba2ab9d392f0c4d457253cb186e655123655a86d39ca7aab9b3be7c0cbf9e"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_qgHZKYdFW00.jsonl",
+      "sha256": "c7e1cef4b512cc1a510d65e08b76073c326aedb8896acda443b5d4e28c1ccb65"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_sbuXztiIzfY.jsonl",
+      "sha256": "16b9117a7404846b834acd4db3c0f20d336ae98e1c5ea1ede959be8f40fc5f6b"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_tE08vKStGPk.jsonl",
+      "sha256": "a4c09698dcb6b38f7ff59f7f3ed2d49337eefafd314f492880cf554d14a5ab5b"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_tGNuOBdX_lo.jsonl",
+      "sha256": "ef5cc07e7592488aa77cc327bf783c601004d28fb8a464c30c9517f04155dd5f"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_tQn0SLMdBdI.jsonl",
+      "sha256": "e7f893091593759836271ec4b73f1e2b1cab93d8a3d2ad4a22e89846e8628a01"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_tkEzR2JIyEE.jsonl",
+      "sha256": "94bdd477161ddc363f017fac91d99645630bfb8a3b10f9a92cbdf4ebc80ff289"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_u-ZNRME7ahw.jsonl",
+      "sha256": "f47567b59d377e49fc85a232681cc755f42a84a08e47d685c4f86576ac597301"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_udRERb8oSxI.jsonl",
+      "sha256": "6a1449cbb04056a09dd3ce4f08c2ad9ba635dd456d421ee0f634e55d7098b7d5"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_unazda7QvAk.jsonl",
+      "sha256": "73c438c384ba4384556cee60c09d5e62ad8dd3e346dd99d9186f6a62961b471d"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_vGP74hgezMA.jsonl",
+      "sha256": "0810b000de3aeddfda3070f01b09281d6f8df77e0d32dd67693a0e35dc444a7d"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_weDu2uUJays.jsonl",
+      "sha256": "d507a6f5a3316a463f0a84c25bdea280f3538c6d82f6d9843c394a116e915a68"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_woljyYtKbe4.jsonl",
+      "sha256": "9e6eca81f769d9239031c76b2777df1f9c159872854f08a23316313fb9af14e9"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_wvhVpqL6j7s.jsonl",
+      "sha256": "9eed48bfcc14518c48fd3442753ac9f3b9caac1d75c6478cbc3e9086ab323820"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_x95_W9sv8D0.jsonl",
+      "sha256": "3e9d5940478962b99d405c040ad4368295de2257e2a31ac4f4a2ee162f323223"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/comments_yElgHhgKSRA.jsonl",
+      "sha256": "b6654f789a36c7963a8d8ad97de54d5d69f0860b9d26472d01e8486681b8a19d"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/videos_105157.jsonl",
+      "sha256": "15ebe78b15c543c3ee7b131554f73239f220d882d1bde41d4ba966eef53294b7"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/videos_110659.jsonl",
+      "sha256": "09def9a08656247e4eeb4389b1a42318b2f28e9acd0a866555add1323ef6a11a"
+    },
+    {
+      "path": "data/raw/youtube/2026-10-28/videos_111440.jsonl",
+      "sha256": "de10a4b573c6050f7296af7571d11bda9a000e682cdb53e9e234e0a9da85f718"
+    }
+  ],
+  "counts": {
+    "duplicates_telegram_post": 3,
+    "duplicates_video": 76,
+    "duplicates_vk_comment": 188,
+    "duplicates_vk_post": 22,
+    "duplicates_youtube_message": 60,
+    "masked_rows": 1421,
+    "telegram_comment_files": 26,
+    "telegram_comments_status_complete": 154,
+    "telegram_comments_status_no_discussion": 19,
+    "telegram_comments_status_unknown": 3,
+    "telegram_declared_loaded_mismatch": 0,
+    "telegram_in_window_relevant_reactions": 1355,
+    "telegram_incomplete_context_rows": 18,
+    "telegram_missing_parent_rows": 8,
+    "telegram_missing_reply_parents": 8,
+    "telegram_missing_thread_rows": 0,
+    "telegram_post_files": 28,
+    "telegram_rounded_or_unknown_views_to_null": 126,
+    "telegram_rows": 1716,
+    "vk_comment_files": 10,
+    "vk_in_window_relevant_reactions": 1163,
+    "vk_incomplete_context_rows": 0,
+    "vk_missing_parent_rows": 0,
+    "vk_missing_thread_rows": 0,
+    "vk_post_files": 10,
+    "vk_rows": 1663,
+    "vk_unique_comments": 1360,
+    "vk_unique_posts": 303,
+    "youtube_comment_files": 80,
+    "youtube_duplicate_replies": 57,
+    "youtube_duplicate_top_level": 3,
+    "youtube_excluded_replies": 2,
+    "youtube_excluded_top_level": 3,
+    "youtube_excluded_videos_no_site_form": 71,
+    "youtube_in_window_relevant_reactions": 2940,
+    "youtube_included_videos": 100,
+    "youtube_incomplete_context_rows": 0,
+    "youtube_missing_parent_rows": 0,
+    "youtube_missing_thread_rows": 0,
+    "youtube_output_replies": 3657,
+    "youtube_output_top_level": 7204,
+    "youtube_raw_replies": 3714,
+    "youtube_raw_top_level": 7207,
+    "youtube_rows": 10961,
+    "youtube_unique_candidate_videos": 171,
+    "youtube_unique_raw_messages": 10861,
+    "youtube_unique_raw_replies": 3657,
+    "youtube_unique_raw_top_level": 7204,
+    "youtube_video_files": 3
+  },
+  "quality_note": "Original missing parents are preserved and flagged, never replaced with invented rows; day-only dates stay dates."
+}

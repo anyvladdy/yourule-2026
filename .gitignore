@@ -11,3 +11,6 @@ data/processed/*.parquet
 workflow/stage*/*/out/pages/
 workflow/stage*/*/out/_probe/
 workflow/stage*/*/in/
+workflow/**/out/*.parquet
+workflow/**/out/*.zip
+workflow/**/.mpl-cache/

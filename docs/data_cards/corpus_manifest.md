@@ -58,6 +58,18 @@ Two more of the five largest comment sets are under videos that are not about th
 | Stopped | run v2 was stopped by hand at 13:43 UTC after the user was logged out of VK on another device (D-26). Not searched: prebr, janjilui, podsluh_lef, club180407106, club177781605, nine city-wide communities, Etalon's VK community |
 | Privacy | people only as salted hashes; mentions of people in texts replaced with `[user]`; communities keep their names |
 
+## Processed corpus (T11 v2, `data/processed/corpus_v2.parquet`, not in git)
+
+| Item | Value |
+|---|---|
+| Rows | 14,340: YouTube 10,961 (100 videos, 7,204 top-level comments, 3,657 replies); Telegram 1,716 (176 posts, 1,540 comments); VK 1,663 (303 posts, 1,360 comments) |
+| YouTube against raw | one video left out (only the plural «Электрозаводы»: 3 + 2 messages); 3 top-level comments and 57 replies were repeated snapshots and are removed by id |
+| Analysis slice | reactions (comments and replies) in P3 that are relevant and have full context: 4,919 = YouTube 2,418, Telegram 1,338, VK 1,163. Left out: 522 YouTube messages in digest threads without a site mention, 17 Telegram messages without a parent |
+| Context gaps | 8 Telegram replies whose parent is not in raw (18 rows with descendants), flagged `context_complete=false` |
+| VK dates | 454 rows have a calendar date only (`date_precision=day`, `published_at` empty) |
+| Concentration | the largest publication holds 715 of 2,418 YouTube, 365 of 1,338 Telegram and 359 of 1,163 VK reactions |
+| Scripts and checks | `workflow/stage1/T11_processing/v2/` (build, NLP, tests, `out/build_checks.txt`); review `REVIEW_R1.md` |
+
 ## Still to add
 
 District party newspapers and statements (T13, read by hand), tenants and deputies (T14), Dzen (T16, if the pilot finds

@@ -82,7 +82,7 @@ Branch `stage-1-collection`. No video content; residents' voices also from distr
 | T14 Tenants, cultural spaces, deputies: public statements (`workflow/stage1/T14_tenants_deputies`) | dsh | Oct 28–29 | review_R1 |
 | T16 Dzen: Selenium pilot, full run only if useful (`workflow/stage1/T16_dzen`) | dsh (2nd session) | Oct 28–29 | in_progress |
 | T15 Media: relabel all 27 T03 articles with `docs/codebook.md` (`workflow/stage1/T15_media_relabel`) | Codex or local Qwen (user decides) | Oct 29 | ready |
-| T11 Processing: raw YouTube + Telegram → `data/processed/corpus.parquet` (`workflow/stage1/T11_processing`) | Codex | Oct 28–29 | in_progress: YouTube; Telegram pending full collection |
+| T11 Processing: YouTube + Telegram + VK → `data/processed/corpus_v2.parquet` (`workflow/stage1/T11_processing`) | Codex | Oct 28–29 | accepted with fixes C1 (theme ranking on slide 02 and in ANALYSIS.md) and C3 (n-grams once per author); see REVIEW_R1.md |
 | T06 fix: saved variants (22 terms) vs config (21), generator error | Codex | Oct 29 | not started |
 | Labelling (D-28): sample of ~1,200 by a local model via Ollama with `docs/codebook.md`; classifier for the rest; tone, topics, n-grams; zip archive for the user | Claude; user re-checks a sample | Oct 29–30 | waits for T11 with Telegram and VK, and for Ollama |
 | Analysis: timeline vs T04 events, stance, criticism lines, actors, message gap | Claude | Oct 30 | not started |

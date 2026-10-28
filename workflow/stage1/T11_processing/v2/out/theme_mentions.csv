@@ -1,0 +1,25 @@
+platform,theme,title,matches,denominator,percent
+youtube,heritage,Историческая ценность,376,2418,15.55
+youtube,preservation,Фасады и подлинность,49,2418,2.03
+youtube,development,Новая застройка,169,2418,6.99
+youtube,governance,Город и принятие решений,147,2418,6.08
+youtube,transparency,Документы и объяснения,35,2418,1.45
+youtube,participation,Участие в обсуждении,43,2418,1.78
+youtube,cultural_use,Арендаторы и культура,19,2418,0.79
+youtube,local_impacts,Бытовые последствия,29,2418,1.2
+telegram,heritage,Историческая ценность,115,1338,8.59
+telegram,preservation,Фасады и подлинность,29,1338,2.17
+telegram,development,Новая застройка,76,1338,5.68
+telegram,governance,Город и принятие решений,67,1338,5.01
+telegram,transparency,Документы и объяснения,32,1338,2.39
+telegram,participation,Участие в обсуждении,47,1338,3.51
+telegram,cultural_use,Арендаторы и культура,10,1338,0.75
+telegram,local_impacts,Бытовые последствия,24,1338,1.79
+vk,heritage,Историческая ценность,118,1163,10.15
+vk,preservation,Фасады и подлинность,25,1163,2.15
+vk,development,Новая застройка,85,1163,7.31
+vk,governance,Город и принятие решений,66,1163,5.67
+vk,transparency,Документы и объяснения,14,1163,1.2
+vk,participation,Участие в обсуждении,19,1163,1.63
+vk,cultural_use,Арендаторы и культура,13,1163,1.12
+vk,local_impacts,Бытовые последствия,17,1163,1.46

@@ -1,0 +1,16 @@
+{
+  "v1_unchanged": {
+    "/Users/vladdy/Documents/PETPROJECTS/YouRule2026/data/processed/corpus.parquet": "f3771a0450752f5228bee88889c9df12f270f2e609128adc7d39822a080bca31",
+    "/Users/vladdy/Documents/PETPROJECTS/YouRule2026/workflow/stage1/T11_processing/out/corpus_summary.csv": "9fd0119e2431b64c456f900bcd6761f68638b319d476b81e5969e1603b5b5bb8",
+    "/Users/vladdy/Documents/PETPROJECTS/YouRule2026/workflow/stage1/T11_processing/out/test_report.txt": "5090cf33fa5214ae020cda09d8aaca736a1829cbbb060ee82420265ffe2978a7"
+  },
+  "v2_repeat_identical": {
+    "/Users/vladdy/Documents/PETPROJECTS/YouRule2026/data/processed/corpus_v2.parquet": "61e290fe28c4079a67eb7bd13048c811ca0c7828be7b82950c3337ba88bfc46e",
+    "/Users/vladdy/Documents/PETPROJECTS/YouRule2026/workflow/stage1/T11_processing/v2/out/coverage.csv": "62328efcdf3260a45f9b9ddc79de34600232801ca843f26387c51df2c6865428",
+    "/Users/vladdy/Documents/PETPROJECTS/YouRule2026/workflow/stage1/T11_processing/v2/out/theme_mentions.csv": "18440b30783fbbeda73facb7675c65fcef211daedf325869c1d3b1ba68eaca40",
+    "/Users/vladdy/Documents/PETPROJECTS/YouRule2026/workflow/stage1/T11_processing/v2/out/nlp_manifest.json": "587c278857f246135bbb97cf3a5d12abfd40fcd0a088e3ef9faafe0efcf7c498"
+  },
+  "raw_sha256_verified": 157,
+  "figure_dimensions": "6 PNG, each 2400x1350",
+  "unit_tests": "5 VK regression tests passed"
+}

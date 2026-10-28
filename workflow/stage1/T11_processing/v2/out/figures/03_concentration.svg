@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1152pt" height="648pt" viewBox="0 0 1152 648" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-10-28T18:54:10.646837</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.7, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 648 
+L 1152 648 
+L 1152 0 
+L 0 0 
+z
+" style="fill: #f5f1e9"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 184.32 479.52 
+L 1048.32 479.52 
+L 1048.32 213.84 
+L 184.32 213.84 
+z
+" style="fill: #f5f1e9"/>
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1"/>
+     <g id="text_1">
+      <text style="font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #59686b" x="184.32" y="500.6775" transform="rotate(-0 184.32 500.6775)">0%</text>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_2"/>
+     <g id="text_2">
+      <text style="font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #59686b" x="400.32" y="500.6775" transform="rotate(-0 400.32 500.6775)">25%</text>
+     </g>
+    </g>
+    <g id="xtick_3">
+     <g id="line2d_3"/>
+     <g id="text_3">
+      <text style="font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #59686b" x="616.32" y="500.6775" transform="rotate(-0 616.32 500.6775)">50%</text>
+     </g>
+    </g>
+    <g id="xtick_4">
+     <g id="line2d_4"/>
+     <g id="text_4">
+      <text style="font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #59686b" x="832.32" y="500.6775" transform="rotate(-0 832.32 500.6775)">75%</text>
+     </g>
+    </g>
+    <g id="xtick_5">
+     <g id="line2d_5"/>
+     <g id="text_5">
+      <text style="font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #59686b" x="1048.32" y="500.6775" transform="rotate(-0 1048.32 500.6775)">100%</text>
+     </g>
+    </g>
+    <g id="text_6">
+     <text style="font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #172e36" x="616.32" y="531.435" transform="rotate(-0 616.32 531.435)">Доля сообщений в строгом срезе площадки</text>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_6"/>
+     <g id="text_7">
+      <text style="font-size: 20px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #172e36" x="175.32" y="256.888408" transform="rotate(-0 175.32 256.888408)">YouTube</text>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_7"/>
+     <g id="text_8">
+      <text style="font-size: 20px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #172e36" x="175.32" y="354.278437" transform="rotate(-0 175.32 354.278437)">Telegram</text>
+     </g>
+    </g>
+    <g id="ytick_3">
+     <g id="line2d_8"/>
+     <g id="text_9">
+      <text style="font-size: 20px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #172e36" x="175.32" y="451.668467" transform="rotate(-0 175.32 451.668467)">VK</text>
+     </g>
+    </g>
+   </g>
+   <g id="patch_3">
+    <path d="M 184.32 225.916364 
+L 1048.32 225.916364 
+L 1048.32 272.663578 
+L 184.32 272.663578 
+z
+" clip-path="url(#p750ef9cff4)" style="fill: #dadbd3"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 184.32 225.916364 
+L 439.8048 225.916364 
+L 439.8048 272.663578 
+L 184.32 272.663578 
+z
+" clip-path="url(#p750ef9cff4)" style="fill: #b24d36"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 184.32 323.306393 
+L 1048.32 323.306393 
+L 1048.32 370.053607 
+L 184.32 370.053607 
+z
+" clip-path="url(#p750ef9cff4)" style="fill: #dadbd3"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 184.32 323.306393 
+L 420.0192 323.306393 
+L 420.0192 370.053607 
+L 184.32 370.053607 
+z
+" clip-path="url(#p750ef9cff4)" style="fill: #2e6b78"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 184.32 420.696422 
+L 1048.32 420.696422 
+L 1048.32 467.443636 
+L 184.32 467.443636 
+z
+" clip-path="url(#p750ef9cff4)" style="fill: #dadbd3"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 184.32 420.696422 
+L 451.0368 420.696422 
+L 451.0368 467.443636 
+L 184.32 467.443636 
+z
+" clip-path="url(#p750ef9cff4)" style="fill: #697755"/>
+   </g>
+   <g id="text_10">
+    <text style="font-weight: 700; font-size: 23px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="312.0624" y="255.636533" transform="rotate(-0 312.0624 255.636533)">29,6%</text>
+   </g>
+   <g id="text_11">
+    <text style="font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172e36" x="457.0848" y="253.704971" transform="rotate(-0 457.0848 253.704971)">715 из 2 418</text>
+   </g>
+   <g id="text_12">
+    <text style="font-weight: 700; font-size: 23px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="302.1696" y="353.026563" transform="rotate(-0 302.1696 353.026563)">27,3%</text>
+   </g>
+   <g id="text_13">
+    <text style="font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172e36" x="437.2992" y="351.095" transform="rotate(-0 437.2992 351.095)">365 из 1 338</text>
+   </g>
+   <g id="text_14">
+    <text style="font-weight: 700; font-size: 23px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #ffffff" x="317.6784" y="450.416592" transform="rotate(-0 317.6784 450.416592)">30,9%</text>
+   </g>
+   <g id="text_15">
+    <text style="font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172e36" x="468.3168" y="448.485029" transform="rotate(-0 468.3168 448.485029)">359 из 1 163</text>
+   </g>
+  </g>
+  <g id="text_16">
+   <text style="font-weight: 700; font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #59686b" x="63.36" y="38.88" transform="rotate(-0 63.36 38.88)">ЭЛЕКТРОЗАВОД  /  ПУБЛИЧНАЯ ДИСКУССИЯ</text>
+  </g>
+  <g id="text_17">
+   <text style="font-weight: 700; font-size: 31px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172e36" x="63.36" y="117.951094" transform="rotate(-0 63.36 117.951094)">Один материал даёт 27–31% реакций площадки</text>
+  </g>
+  <g id="text_18">
+   <text style="font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #59686b" x="63.36" y="150.19625" transform="rotate(-0 63.36 150.19625)">Проверять выводы нужно и без крупнейшей публикации.</text>
+  </g>
+  <g id="text_19">
+   <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #59686b" x="63.36" y="618.84" transform="rotate(-0 63.36 618.84)">01.06–28.10.2026  •  Выборка публичных реакций  •  Аналитическая версия v2</text>
+  </g>
+  <g id="text_20">
+   <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #59686b" x="1088.64" y="618.84" transform="rotate(-0 1088.64 618.84)">03</text>
+  </g>
+  <g id="text_21">
+   <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #59686b" x="63.36" y="586.44" transform="rotate(-0 63.36 586.44)">После исключения крупнейшего материала доля словаря исторической ценности меняется не более чем на 1,3 п. п.</text>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p750ef9cff4">
+   <rect x="184.32" y="213.84" width="864" height="265.68"/>
+  </clipPath>
+ </defs>
+</svg>
