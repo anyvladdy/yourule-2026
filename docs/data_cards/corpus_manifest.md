@@ -7,7 +7,9 @@ Every share in the analysis must name the slice of this manifest it comes from. 
 
 - Cut date: 2026-10-28. Nothing published after collection is in the corpus.
 - Analysis window for shares: 2026-06-01 → 2026-10-28 (the leak and the conflict). Earlier items are kept as background
-  and reported separately.
+  and reported separately by period (D-29): P0 before the fire of 2025-02-08; P1 2025-02-08 – 2025-09-14;
+  P2 2025-09-15 – 2026-05-31; P3 2026-06-01 – 2026-10-28. Telegram and Dzen start at 2025-01-01, YouTube videos at
+  2025-01-01; VK posts of all dates, VK comments only under posts from 2025-09-01.
 - Unit of analysis: one post or one comment. Authors are counted separately from messages.
 - People in the corpus are "participants of public discussion". Living in the district is not established for anyone,
   so no slice is called "residents" (Codex review P10).

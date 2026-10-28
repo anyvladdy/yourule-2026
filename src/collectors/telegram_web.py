@@ -94,14 +94,14 @@ def parse_feed(html):
     return posts
 
 
-def search(session, channel, term, since):
+def search(session, channel, term, since, until='9999-12-31'):
     before = None
     query = {} if term == '*' else {'q': term}  # '*' reads the whole feed back to `since`
     while True:
         posts = parse_feed(fetch(session, f'https://t.me/s/{channel}', {**query, **({'before': before} if before else {})}))
         if not posts:
             return
-        yield from (p for p in posts if p['published_at'][:10] >= since)
+        yield from (p for p in posts if since <= p['published_at'][:10] <= until)
         oldest = min(posts, key=lambda p: p['id'])
         if oldest['published_at'][:10] < since or oldest['id'] <= 1 or before == oldest['id']:
             return
@@ -181,7 +181,7 @@ def collect_channel(session, driver_factory, channel, args, key, out):
         return {'status': 'skipped_exists'}
     found = {}
     for term in args.term or DEFAULT_TERMS:
-        for post in search(session, channel, term, args.since):
+        for post in search(session, channel, term, args.since, args.until):
             found.setdefault(post['id'], {**post, 'matched_terms': [], '_collected_at': now()})['matched_terms'].append(term)
     posts = sorted(found.values(), key=lambda p: p['id'])
     comments = []
@@ -206,6 +206,7 @@ def main():
     parser.add_argument('--channel', action='append', help='channel handle; repeatable; default: all channels from T01')
     parser.add_argument('--term', action='append', help=f'search term; repeatable; "*" = whole feed; default: {DEFAULT_TERMS}')
     parser.add_argument('--since', default='2025-09-01', help='keep posts on or after this date, YYYY-MM-DD (default: 2025-09-01)')
+    parser.add_argument('--until', default='9999-12-31', help='keep posts on or before this date, YYYY-MM-DD (default: no limit)')
     parser.add_argument('--max-comment-posts', type=int, help='open comments only under the N latest posts; for pilots')
     parser.add_argument('--no-comments', action='store_true', help='posts only, no browser')
     parser.add_argument('--tag', help='added to output file names, for a repeat run on the same day')
