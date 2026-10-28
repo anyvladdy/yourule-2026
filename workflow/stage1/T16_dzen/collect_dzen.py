@@ -107,6 +107,11 @@ def parse_date_text(raw, base):
         return base.isoformat(), f"relative date '{raw}' resolved with collection date"
     if 'вчера' in text:
         return (base - timedelta(days=1)).isoformat(), f"relative date '{raw}' resolved with collection date"
+    short = re.search(r'^(\d+)\s*(ч|мин)$', text)
+    if short:
+        number, unit = int(short.group(1)), short.group(2)
+        steps = timedelta(hours=number) if unit == 'ч' else timedelta(minutes=number)
+        return (base - steps).isoformat(), f"relative date '{raw}' resolved with collection date"
     match = re.search(r'(\d+)\s*(минут|час|дн|недел|месяц|год|лет)\w*\s+назад', text)
     if match:
         number, unit = int(match.group(1)), match.group(2)
@@ -158,6 +163,44 @@ def open_driver(tmp):
     driver = webdriver.Chrome(options=options)
     driver.set_page_load_timeout(60)
     return driver
+
+
+class Session:
+    """One Brave process per few pages: a long-lived tab on heavy Dzen pages dies under memory pressure."""
+
+    def __init__(self, args):
+        self.args = args
+        self.profiles = []
+        self.driver = None
+        self.starts = 0
+
+    def fresh(self):
+        self.close()
+        tmp = tempfile.TemporaryDirectory(prefix='dzen_')
+        self.profiles.append(tmp)
+        self.driver = open_driver(tmp.name)
+        self.starts += 1
+        return self.driver
+
+    def close(self):
+        if self.driver is not None:
+            try:
+                self.driver.quit()
+            except Exception:
+                pass
+            self.driver = None
+
+    def alive(self):
+        try:
+            self.driver.window_handles
+            return True
+        except Exception:
+            return False
+
+    def cleanup(self):
+        self.close()
+        for tmp in self.profiles:
+            tmp.cleanup()
 
 
 def incognito_confirmed(driver):
@@ -300,17 +343,24 @@ def expand_comments(driver, max_rounds):
     """Reveal every reply and every 'show more' block; a captcha stops the run instead of retrying."""
     driver.execute_script('document.querySelector(\'[data-testid="article-comments"], [data-testid="video-viewer-comments"], [data-testid="video-modal-comments"]\')?.scrollIntoView({block:"start"})')
     pause(2.0, 3.5)
-    pattern = re.compile(r'^(?:ещё\s+\d+(?:\s+ответ\w*|\s+коммент\w*)?|\d+\s+ответ\w*|показать\s+(?:ещё|все))$',
-                         re.IGNORECASE)
+    # Only reply expanders and "more comments" pagination. "Показать все" reveals comments the platform
+    # filtered out on purpose: it is clicked never (card: no working around platform controls).
+    pattern = re.compile(r'^(?:ещё\s+\d+(?:\s+ответ\w*|\s+коммент\w*)?|\d+\s+ответ\w*)$', re.IGNORECASE)
     quiet = 0
     for _ in range(max_rounds):
         clicked = 0
         for ellipsis in driver.find_elements('css selector', '[data-testid="rich-text-expand-ellipsis"]'):
             try:
-                if ellipsis.is_displayed():
+                if not ellipsis.is_displayed():
+                    continue
+                driver.execute_script('arguments[0].scrollIntoView({block:"center"})', ellipsis)
+                time.sleep(0.2)
+                try:
+                    ellipsis.click()  # native click: the clamp reacts to pointer events, not to element.click()
+                except Exception:
                     driver.execute_script('arguments[0].click();', ellipsis)
-                    clicked += 1
-                    time.sleep(random.uniform(0.6, 1.4))
+                clicked += 1
+                time.sleep(random.uniform(0.6, 1.4))
             except Exception:
                 continue
         for button in driver.find_elements('css selector', 'button'):
@@ -489,6 +539,8 @@ def main():
     parser.add_argument('--page-pause-low', type=float, default=2.0)
     parser.add_argument('--page-pause-high', type=float, default=5.0)
     parser.add_argument('--no-comments', action='store_true', help='items only, no comments')
+    parser.add_argument('--restart-every', type=int, default=0,
+                        help='restart the browser after this many items (default: 0, never on a schedule)')
     args = parser.parse_args()
 
     queries = args.query or [DEFAULT_QUERY]
@@ -505,8 +557,8 @@ def main():
               'incognito_confirmed': None, 'notes': []}
     counts = {'items_found': 0, 'items_relevant': 0, 'items_since_2025_09': 0, 'items_older': 0,
               'items_duplicate': 0, 'comments': 0, 'rows_scanned': 0}
-    tmp = tempfile.TemporaryDirectory(prefix='dzen_')
-    driver = open_driver(tmp.name)
+    session = Session(args)
+    driver = session.fresh()
     try:
         record['incognito_confirmed'] = incognito_confirmed(driver)
         if not record['incognito_confirmed']:
@@ -515,6 +567,7 @@ def main():
         for query in queries:
             rows += search_rows(driver, query, args.max_scrolls, args.max_search_rows)
             pause()
+        driver = session.fresh()  # the search page is heavy: start items in a clean browser
         counts['rows_scanned'] = len(rows)
         filtered, seen_urls = [], set()
         for row in rows:
@@ -545,14 +598,28 @@ def main():
             item_id = row['url'].rstrip('/').rsplit('/', 1)[-1]
             if item_id in seen_ids:
                 continue
+            if not session.alive() or (args.restart_every and opened and opened % args.restart_every == 0):
+                driver = session.fresh()
+                record['notes'].append(f'restarted the browser after {opened} items')
             try:
                 item, comments = collect_item(driver, row, key, args, base)
             except Stop:
                 raise
             except Exception as error:  # one page does not stop the others
-                record['errors'].append(f"{row['url']}: {type(error).__name__}: {error}")
-                print('  error', row['url'], type(error).__name__, error, flush=True)
-                continue
+                if type(error).__name__ in ('InvalidSessionIdException', 'WebDriverException',
+                                            'MaxRetryError', 'NoSuchWindowException'):
+                    driver = session.fresh()  # the tab died: one retry, not a workaround
+                    record['notes'].append(f'{row["url"]}: browser tab died; retried once')
+                    try:
+                        item, comments = collect_item(driver, row, key, args, base)
+                    except Exception as second:
+                        record['errors'].append(f"{row['url']}: {type(second).__name__}: {second}")
+                        print('  error', row['url'], type(second).__name__, second, flush=True)
+                        continue
+                else:
+                    record['errors'].append(f"{row['url']}: {type(error).__name__}: {error}")
+                    print('  error', row['url'], type(error).__name__, error, flush=True)
+                    continue
             opened += 1
             if item['published_at'] and item['published_at'] < args.since:
                 counts['items_older'] += 1
@@ -573,14 +640,13 @@ def main():
             counts['comments'] += len(comments)
             print(f"  [{opened}/{limit}] {item['published_at']} c={len(comments)} {item['title'][:70]}", flush=True)
     except Stop as error:
-        record['stopped_reason'] = str(error)
-        record['errors'].append(f'stopped: {error}')
+        text = str(error)
+        record['stopped_reason'] = ('captcha' if 'captcha' in text.lower() else
+                                    'login wall' if 'login' in text.lower() else text.split(' at ')[0][:120])
+        record['errors'].append(f'stopped: {text}')
         print(f'stopped: {error}', file=sys.stderr, flush=True)
     finally:
-        try:
-            driver.quit()
-        finally:
-            tmp.cleanup()
+        session.cleanup()
         record['finished_at'] = now()
         record['counts'] = counts
         if record['stopped_reason'] is None:

@@ -1,0 +1,7 @@
+run,items_found,items_relevant,items_since_2025_09,comments,stopped_reason
+pilot,36,10,10,778,pilot limit reached
+full,0,0,0,0,captcha
+full,62,0,0,0,browser tab died on every item
+full,65,20,20,985,captcha
+full,0,0,0,0,captcha
+full_resume,48,2,2,2,"stopped by the worker, no captcha"
