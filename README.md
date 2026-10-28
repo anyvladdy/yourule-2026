@@ -53,13 +53,17 @@ The report is due on 1 November 2026. Research and report writing run side by si
 | 29–30 Oct | Fact check of every number | Russian text, Word file, length checks |
 | 31 Oct | | Final review and submission |
 
+On 28 Oct the work was behind this plan. Stages 1–3 now run on 28–30 Oct in a cut form: YouTube comments, Telegram,
+VK, district newspapers; no video content (decision D-19). Who does what: `workflow/BOARD.md`.
+
 ## Branches
 
 | Branch | What is in it |
 |--------|---------------|
 | `main` | The brief, the instructions, how the workflow runs, templates and prompts. Finished stages are merged here. |
-| `stage-0-discovery` | The current stage: search terms, the source list, hypotheses, the task board and stage 0 cards with their results |
-| `stage-1-collection` … `stage-6-report` | Created when each stage starts |
+| `stage-0-discovery` | Stage 0: search terms, the source list, hypotheses and stage 0 cards with their results. Merged into `main` on 28 Oct before its checklist was closed (D-18) |
+| `stage-1-collection` | The current branch: stages 1–3 (collection, cleaning, analysis), cut to fit the deadline |
+| `stage-4-…` … `stage-6-report` | Created when each stage starts |
 
 ## Where to find things
 
@@ -77,7 +81,7 @@ Shared by everyone, on the stage branch: `workflow/BOARD.md` (who has which task
 
 ## Starting a worker
 
-1. Switch to the current stage branch: `git checkout stage-0-discovery`.
+1. Switch to the current stage branch: `git checkout stage-1-collection`.
 2. Open `workflow/BOARD.md` and pick a task marked `ready` for that worker.
 3. Start the agent in the repository folder and paste the prompt from `workflow/prompts/worker.md`,
    with the task folder filled in.
@@ -86,6 +90,16 @@ Shared by everyone, on the stage branch: `workflow/BOARD.md` (who has which task
 Notes for each tool:
 - Gemini: run `agy` once to sign in, then start it in this folder.
 - Local models: run `ollama serve` first. Use one model at a time, because gemma4 alone takes about 10 GB of memory.
+
+## Collecting data
+
+Keys go in `.env` (copy `.env.example`; `.env` is not in git). Raw results and the run log `_run.json`
+go to `data/raw/<source>/<date>/`, which is not in git either.
+
+- YouTube, official API: `.venv/bin/python src/collectors/youtube_comments.py search` finds videos and prints a list;
+  `... comments --video <id>` saves all comments of a video. `--help` lists the options.
+- Telegram and VK: Selenium in your own logged-in browser, at reading pace. A captcha or a block stops the run;
+  we do not get around it (decision D-21).
 
 ## Rules everyone follows
 

@@ -39,6 +39,16 @@ T01–T06 и T08 возвращены на рассмотрение Claude в п
 Новые замечания не сняты прежними статусами `accepted`/`integrated`; третий раунд исполнителям не назначен.
 T07: проверка отложена до появления результата слияния.
 
+## Stage 0 review, 2026-10-28 (Claude)
+
+- Cards T01–T06, T08 are done; all are back in review after the Codex re-check. Its fixes are not yet applied to `docs/`:
+  T03 criticism labels incomplete (counts unusable until relabelled), T04 dates and attribution, T05 chronology and
+  outcome claims, T06 saved output has 22 terms vs 21 in config and the generator fails, T08 promises vs document status,
+  `docs/audiences.md` counters without observation dates. `validate_factcheck.py` runs clean (17 CSV).
+- Gate: 2 of 7 items closed. Merged into `main` before the gate at the user's request (D-18).
+- Behind the D-10 schedule: stages 1–3 had no data or code by Oct 28; report sections 1, 4, 5, 6 not drafted;
+  budget has 62 lines, none priced.
+
 ## Stage 0 gate (Claude + Codex)
 - [ ] All cards `integrated` (or escalated items finished by Claude/Codex)
 - [ ] `config/sources.yaml` and `config/keywords.yaml` updated and validated by script
@@ -56,10 +66,31 @@ T07: проверка отложена до появления результа�
 ### Stage 0 summary
 _(≤ 20 lines, written at the gate: an index of accepted artifacts, ids, uncertainties and decisions)_
 
+## Stages 1–3 — cut collection, processing and analysis, Oct 28–30 (D-19, D-20, D-21)
+
+Branch `stage-1-collection`. No video content; residents' voices also from district party newspapers and Telegram chats.
+
+| Task | Owner | When | State |
+|------|-------|------|-------|
+| YouTube: video search + all comments, official API (`src/collectors/youtube_comments.py`) | Claude | Oct 28 | pilot done (50 videos for 1 query, 100 threads from 1 video); full run waits for the user's OK |
+| Telegram channels from T01 + residents' chats: the user's Selenium parser, add comments | Claude + user | Oct 28–29 | waiting for the parser path |
+| VK groups: Selenium, reader pace | Claude | Oct 29 | not started |
+| District party newspapers: find and read a few issues by hand | to assign | Oct 29 | not started |
+| Media: relabel all 27 T03 articles | to assign | Oct 29 | not started |
+| Processing: dedupe, keyword filter (T06 generator fixed by Codex first), hash authors | Claude; Codex for T06 | Oct 29 | not started |
+| Labelling: one codebook; Claude 50%, Codex 25%, dsh 25%; user re-checks a random sample from each (D-20) | Claude, Codex, dsh, user | Oct 29–30 | codebook not written |
+| Analysis: timeline vs T04 events, stance, criticism lines, actors, message gap | Claude | Oct 30 | not started |
+
+In parallel: stage-0 fixes in `docs/`, budget pricing, report sections 1, 4, 5, 6.
+
+Open proposals, waiting for the user:
+- YouTube full run: all 4 default queries; keep a video only if "Электрозавод" is in its title or description;
+  comments under general news digests are filtered by keywords later. Under 1,000 of 10,000 daily quota units.
+- Skip the Meduza podcast video found by search (R12).
+- Transcripts: not collected. The official API gives captions only to the video owner; unofficial tools would bypass
+  the API and add video content, which D-19 excludes.
+
 ## Later stages (cards written at each gate, not now)
-1. Collection: collectors + small validation pilots (planned by Claude + Codex after stage 0)
-2. Processing
-3. Analysis
 4. Synthesis
 5. Budget and roadmap
 6. Report
