@@ -71,19 +71,20 @@ Graphics allowed. Long tables, Gantt, budget sheet, methods, source list → app
 ### Stage 1 sources and access
 | Source | Data | Access |
 |---|---|---|
-| Telegram public channels/chats | posts, views, forwards, comments | MTProto client, public only |
-| VK groups | posts, comments, likes, reposts | official VK API |
+| Telegram public channels | posts, views, forwards, comments | public pages without login: `t.me/s` search + discussion widget in headless Selenium, reader pace (D-23) |
+| Telegram chats | messages | Selenium with the user's login, only if residents' chats are found (D-21) |
+| VK groups | posts, comments, likes, reposts | Selenium in the user's logged-in browser, reader pace, public only (D-21) |
 | Petitions | text, signature counts over time, organisers | scheduled snapshots |
-| Media | articles, framing, quoted actors | RSS, site search |
-| YouTube / Dzen | videos, comments | official APIs where available |
+| Media | articles, framing, quoted actors | RSS, site search; district party newspapers read by hand (D-19) |
+| YouTube | comments only, no video content (D-19) | official Data API |
 | Official (mos.ru, heritage registry, planning decisions, hearings) | status, decisions, dates | HTML/PDF |
 | Etalon channels, press releases | statements, reactions | HTML/API |
 | Wordstat, Google Trends | attention over time | manual export |
 | Analog cases | communication tactics, outcomes | secondary sources |
 
 Collector rules: one module per source → common schema (JSONL raw, Parquet processed); raw never edited;
-log query/window/counts/errors per run; respect rate limits and ToS; prefer official APIs; back off; cache;
-no access-control bypass; secrets only in `.env`/session files (gitignored), keep `.env.example`; repeated
+log query/window/counts/errors per run; respect rate limits; official APIs unless D-21 says otherwise; back off; cache;
+no access-control bypass: a Selenium collector that meets a captcha, login wall or block stops and asks the user; secrets only in `.env`/session files (gitignored), keep `.env.example`; repeated
 snapshots for changing counters.
 
 Common record schema (minimum):

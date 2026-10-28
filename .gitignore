@@ -5,3 +5,9 @@ __pycache__/
 *.session
 data/interim/
 data/raw/
+.secrets/
+data/processed/*.parquet
+.tmp/
+workflow/stage*/*/out/pages/
+workflow/stage*/*/out/_probe/
+workflow/stage*/*/in/

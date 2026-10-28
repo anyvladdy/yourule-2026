@@ -24,8 +24,9 @@ Do not write parsers or scrapers, and do not bulk-download anything. Never inven
 ---
 
 ## Per-agent notes
-- **dsh:** default settings; web search allowed. T04 first; then T08 (after T04 handoff, D-10) and T01 in a
-  second session, in parallel; then T05 (D-15).
+- **dsh:** default settings; web search allowed. Stage 1: T12 (`workflow/stage1/T12_price_benchmarks`) and
+  T13 (`workflow/stage1/T13_district_voices`) in two parallel sessions.
+- **Codex as a worker:** the same prompt. Stage 1: T11 (`workflow/stage1/T11_processing`).
 - **Gemini (agy):** run in the repo root, e.g. `agy -i "<prompt above>"` (sign in first by launching `agy` once).
   T02 and T03 in two parallel sessions.
 - **Filled prompt without copying by hand** (repo root; replace the card folder):
