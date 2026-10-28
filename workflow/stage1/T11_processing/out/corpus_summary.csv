@@ -1,0 +1,17 @@
+summary_type,platform,source_kind,row_type,relevant,relevance_reason,in_window,row_count,unique_authors
+group,youtube,digest,comment,False,off_topic_digest,False,50,48
+group,youtube,digest,comment,False,off_topic_digest,True,4898,4277
+group,youtube,digest,comment,True,thread_mentions,False,3,3
+group,youtube,digest,comment,True,thread_mentions,True,203,200
+group,youtube,digest,reply,False,off_topic_digest,False,48,13
+group,youtube,digest,reply,False,off_topic_digest,True,2030,947
+group,youtube,digest,reply,True,thread_mentions,True,444,299
+group,youtube,digest,video,True,digest_source,False,7,7
+group,youtube,digest,video,True,digest_source,True,26,23
+group,youtube,topical,comment,True,topical_source,False,575,560
+group,youtube,topical,comment,True,topical_source,True,1475,1357
+group,youtube,topical,reply,True,topical_source,False,317,177
+group,youtube,topical,reply,True,topical_source,True,818,430
+group,youtube,topical,video,True,topical_source,False,20,16
+group,youtube,topical,video,True,topical_source,True,47,36
+platform_authors,youtube,,,,,,10961,7486
