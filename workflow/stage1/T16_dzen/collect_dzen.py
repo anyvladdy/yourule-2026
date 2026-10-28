@@ -41,6 +41,9 @@ WALL_MARKERS = ('Подтвердите, что вы не робот', 'SmartCap
 LOGIN_MARKERS = ('Войдите в аккаунт, чтобы продолжить',)
 MONTHS = {'янв': 1, 'фев': 2, 'мар': 3, 'апр': 4, 'мая': 5, 'май': 5, 'июн': 6, 'июл': 7, 'авг': 8,
           'сен': 9, 'окт': 10, 'ноя': 11, 'дек': 12}
+MONTH_WORD = r'(?:янв\w*|фев\w*|мар\w*|апр\w*|ма[йя]|июн\w*|июл\w*|авг\w*|сен\w*|окт\w*|ноя\w*|дек\w*)'
+LABEL_RE = re.compile(r'(сегодня|вчера|\d+\s*(?:минут|час|дн|день|дня|дней|недел|месяц|год|лет)\w*\s+назад|'
+                      r'\d{1,2}\s+' + MONTH_WORD + r'(?:\s+\d{4})?)', re.IGNORECASE)
 MEDIA_TYPES = {'article': 'text', 'video': 'video'}
 MASK = re.compile(r'@[A-Za-z0-9_]{2,}')
 
@@ -85,6 +88,13 @@ def hash_key(text):
     return re.sub(r'\W+', '', (text or '').lower())[:120]
 
 
+def month_number(word):
+    word = word.lower().replace('ё', 'е')
+    if word.startswith('мар'):
+        return 3
+    return MONTHS.get(word[:3])
+
+
 def parse_date_text(raw, base):
     """Date from a Dzen label: '21 июн', '22 июля 2022 года', 'вчера', '3 недели назад'.
 
@@ -97,16 +107,18 @@ def parse_date_text(raw, base):
         return base.isoformat(), f"relative date '{raw}' resolved with collection date"
     if 'вчера' in text:
         return (base - timedelta(days=1)).isoformat(), f"relative date '{raw}' resolved with collection date"
-    match = re.search(r'(\d+)\s*(минут|час|дн|недел|месяц|год)', text)
+    match = re.search(r'(\d+)\s*(минут|час|дн|недел|месяц|год|лет)\w*\s+назад', text)
     if match:
         number, unit = int(match.group(1)), match.group(2)
         steps = {'минут': timedelta(minutes=number), 'час': timedelta(hours=number), 'дн': timedelta(days=number),
                  'недел': timedelta(weeks=number), 'месяц': timedelta(days=30 * number),
-                 'год': timedelta(days=365 * number)}[unit]
+                 'год': timedelta(days=365 * number), 'лет': timedelta(days=365 * number)}[unit]
         return (base - steps).isoformat(), f"relative date '{raw}' resolved with collection date (approximate)"
-    match = re.search(r'(\d{1,2})\s+([а-я]{3,})\.?\s*(\d{4})?', text)
-    if match and match.group(2)[:3] in MONTHS:
-        day, month = int(match.group(1)), MONTHS[match.group(2)[:3]]
+    match = re.search(r'(\d{1,2})\s+(' + MONTH_WORD + r')\s*(\d{4})?', text)
+    if match:
+        day, month = int(match.group(1)), month_number(match.group(2))
+        if month is None:
+            return None, f"unparsable date '{raw}'"
         year = int(match.group(3)) if match.group(3) else base.year
         try:
             value = date(year, month, day)
@@ -179,7 +191,7 @@ def scroll(driver, steps, low=1.5, high=3.5):
         time.sleep(random.uniform(low, high))
 
 
-def search_rows(driver, query, max_scrolls):
+def search_rows(driver, query, max_scrolls, max_rows):
     """Search page: scroll until no new rows, return rows in page order (deduplicated by URL)."""
     driver.get(f'https://dzen.ru/search?query={query}')
     pause(3, 6)
@@ -204,11 +216,8 @@ def search_rows(driver, query, max_scrolls):
                     author = {'name': name, 'url': anchor['href'].split('?')[0]}
                     break
             row_text = clean(row.get_text(' | ', strip=True))
-            date_label = None
-            match = re.search(r'(сегодня|вчера|\d+\s*(?:минут|час|дн|недел|месяц|год)\w*\s+назад|'
-                              r'\d{1,2}\s+[а-я]{3,}\.?(?:\s+\d{4})?)', row_text, re.IGNORECASE)
-            if match:
-                date_label = match.group(0)
+            match = LABEL_RE.search(row_text)
+            date_label = match.group(0) if match else None
             rows.append({'url': url, 'title': clean(title.get_text(' ', strip=True)) if title else None,
                          'description': clean(desc.get_text(' ', strip=True)) if desc else None,
                          'author': author, 'date_label': date_label, 'row_text': row_text[:400],
@@ -216,7 +225,7 @@ def search_rows(driver, query, max_scrolls):
         empty = empty + 1 if len(seen) == last_count else 0
         last_count = len(seen)
         print(f'  search step {step}: {len(seen)} rows', flush=True)
-        if len(seen) >= 60 or empty >= 3:
+        if len(seen) >= max_rows or empty >= 3:
             break
         scroll(driver, 1)
     return rows
@@ -255,15 +264,55 @@ def comment_counter(sec):
     return int(match.group(0)) if match else None
 
 
+COMMENTS_SELECTOR = ('[data-testid="article-comments"], [data-testid="video-viewer-comments"], '
+                     '[data-testid="video-modal-comments"]')
+
+
+def wait_for_comments(driver, timeout=25):
+    """The comment list loads lazily: wait for its first item or for the empty-state text."""
+    deadline = time.time() + timeout
+    while time.time() < deadline:
+        state = driver.execute_script('''
+            const section = document.querySelector('[data-testid="article-comments"], [data-testid="video-viewer-comments"], [data-testid="video-modal-comments"]');
+            if (!section) return 'no_section';
+            if (section.querySelector('[data-testid="root-comment"]')) return 'loaded';
+            if (/станет первым/.test(section.innerText)) return 'empty';
+            return 'pending';
+        ''')
+        if state == 'empty':
+            time.sleep(5)  # a list that is still loading shows the empty state for a moment
+            again = driver.execute_script('''
+                const section = document.querySelector('[data-testid="article-comments"], [data-testid="video-viewer-comments"], [data-testid="video-modal-comments"]');
+                if (!section) return 'no_section';
+                if (section.querySelector('[data-testid="root-comment"]')) return 'loaded';
+                return /станет первым/.test(section.innerText) ? 'empty' : 'pending';
+            ''')
+            if again == 'empty':
+                return 'empty'
+            state = again
+        if state in ('loaded', 'no_section'):
+            return state
+        scroll(driver, 1, 1.0, 2.0)
+    return 'timeout'
+
+
 def expand_comments(driver, max_rounds):
     """Reveal every reply and every 'show more' block; a captcha stops the run instead of retrying."""
-    driver.execute_script('document.querySelector(\'[data-testid="article-comments"]\')?.scrollIntoView({block:"start"})')
-    time.sleep(random.uniform(1.5, 3.0))
+    driver.execute_script('document.querySelector(\'[data-testid="article-comments"], [data-testid="video-viewer-comments"], [data-testid="video-modal-comments"]\')?.scrollIntoView({block:"start"})')
+    pause(2.0, 3.5)
     pattern = re.compile(r'^(?:ещё\s+\d+(?:\s+ответ\w*|\s+коммент\w*)?|\d+\s+ответ\w*|показать\s+(?:ещё|все))$',
                          re.IGNORECASE)
     quiet = 0
     for _ in range(max_rounds):
         clicked = 0
+        for ellipsis in driver.find_elements('css selector', '[data-testid="rich-text-expand-ellipsis"]'):
+            try:
+                if ellipsis.is_displayed():
+                    driver.execute_script('arguments[0].click();', ellipsis)
+                    clicked += 1
+                    time.sleep(random.uniform(0.6, 1.4))
+            except Exception:
+                continue
         for button in driver.find_elements('css selector', 'button'):
             try:
                 label = clean(button.text).lower()
@@ -289,9 +338,13 @@ def parse_comment(node, key, base, item_id, index, parent_index, kind):
     label = clean(date_node.get_text(' ', strip=True)) if date_node else ''
     published, note = parse_date_text(label, base) if label else (None, 'no date shown')
     body = node.select_one('[class*="comment-text__block"]')
+    if body is not None:
+        for quoted in body.select('[data-testid="comment-author-name"]'):
+            quoted.decompose()  # the addressee's name, not the comment text (R5)
     text = body.get_text('\n', strip=True) if body else ''
+    text = re.sub(r'^[\s,;:—-]+', '', text)
     like = node.select_one('[data-testid="reaction-like-count"]')
-    is_channel = bool(href) and not href.startswith('/id/')
+    is_channel = bool(href) and not href.startswith(('/id/', '/user/'))
     return {
         'id': f'{item_id}-{kind}{index}', 'source': 'dzen', 'parent_id': parent_index,
         'thread_id': item_id, 'url': None, 'url_note': 'Dzen shows no per-comment anchor',
@@ -304,7 +357,7 @@ def parse_comment(node, key, base, item_id, index, parent_index, kind):
 
 
 def parse_comments(soup, key, base, item_id):
-    sec = soup.select_one('[data-testid="article-comments"]')
+    sec = soup.select_one(COMMENTS_SELECTOR)
     if not sec:
         return [], {'status': 'no_comments_section', 'loaded': 0, 'hidden': 0, 'counter': None}
     rows, hidden = [], 0
@@ -317,8 +370,12 @@ def parse_comments(soup, key, base, item_id):
                 continue
             rows.append(parse_comment(child, key, base, item_id, len(rows), parent, 'child'))
     rows = [row for row in rows if row['text']]
-    return rows, {'status': 'complete_for_run', 'loaded': len(rows), 'hidden': hidden,
-                  'counter': comment_counter(sec)}
+    counter = comment_counter(sec)
+    if counter is None and not rows:
+        counter, status = 0, 'empty'
+    else:
+        status = 'complete_for_run'
+    return rows, {'status': status, 'loaded': len(rows), 'hidden': hidden, 'counter': counter}
 
 
 def collect_item(driver, row, key, args, base):
@@ -329,7 +386,9 @@ def collect_item(driver, row, key, args, base):
     html = driver.page_source
     soup = BeautifulSoup(html, 'html.parser')
     title_node = soup.select_one('h1') or soup.select_one('[data-testid="article-title"]')
-    title = clean(title_node.get_text(' ', strip=True)) if title_node else (row['title'] or '')
+    og_title = soup.select_one('meta[property="og:title"]')
+    title = (clean(title_node.get_text(' ', strip=True)) if title_node
+             else (clean(og_title.get('content')) if og_title and og_title.get('content') else (row['title'] or '')))
     published, date_source = item_date(html, soup)
     name, publisher_url = publisher_from_html(html, soup)
     body = soup.select_one('[data-testid="article-body"]')
@@ -352,8 +411,16 @@ def collect_item(driver, row, key, args, base):
     }
     comments, status = [], {'status': 'skipped', 'loaded': 0, 'hidden': 0, 'counter': None}
     if not args.no_comments:
-        expand_comments(driver, args.max_comment_rounds)
-        comments, status = parse_comments(BeautifulSoup(driver.page_source, 'html.parser'), key, base, item['id'])
+        state = wait_for_comments(driver, args.comments_wait)
+        for attempt in range(3):
+            expand_comments(driver, args.max_comment_rounds)
+            comments, status = parse_comments(BeautifulSoup(driver.page_source, 'html.parser'), key, base, item['id'])
+            if status['counter'] is None or status['loaded'] >= status['counter']:
+                break
+            print(f"  comments {status['loaded']}/{status['counter']}, attempt {attempt + 1}", flush=True)
+            pause()
+        if status['status'] == 'no_comments_section':
+            status['status'] = 'not_rendered' if state != 'no_section' else 'no_section'
     item['comments_count'] = status['counter']
     item['comments_loaded'] = status['loaded']
     item['comments_hidden'] = status['hidden']
@@ -366,7 +433,8 @@ def collect_item(driver, row, key, args, base):
     if published is None and row['date_label']:
         fallback, fallback_note = parse_date_text(row['date_label'], base)
         item['published_at'] = fallback
-        notes += [part for part in (fallback_note, 'date taken from the search card') if part]
+        page_note = 'the page shows no publication date' if kind == 'video' else 'date taken from the search card'
+        notes += [part for part in (page_note, fallback_note) if part]
     item['note'] = '; '.join(notes) or None
     return item, comments
 
@@ -414,8 +482,10 @@ def main():
     parser.add_argument('--since', default='2025-09-01', help='keep items on or after this date (default: 2025-09-01)')
     parser.add_argument('--pilot', action='store_true', help='stop after 10 items (pilot per the card)')
     parser.add_argument('--max-items', type=int, default=100, help='ceiling for items opened in this run (default: 100)')
-    parser.add_argument('--max-scrolls', type=int, default=25, help='search page scroll limit (default: 25)')
+    parser.add_argument('--max-scrolls', type=int, default=40, help='search page scroll limit (default: 40)')
+    parser.add_argument('--max-search-rows', type=int, default=100, help='search rows to keep (default: 100)')
     parser.add_argument('--max-comment-rounds', type=int, default=60, help='comment expansion rounds (default: 60)')
+    parser.add_argument('--comments-wait', type=int, default=25, help='seconds to wait for the lazy comment list (default: 25)')
     parser.add_argument('--page-pause-low', type=float, default=2.0)
     parser.add_argument('--page-pause-high', type=float, default=5.0)
     parser.add_argument('--no-comments', action='store_true', help='items only, no comments')
@@ -443,7 +513,7 @@ def main():
             raise Stop('browser did not start in incognito mode; refusing to collect')
         rows = []
         for query in queries:
-            rows += search_rows(driver, query, args.max_scrolls)
+            rows += search_rows(driver, query, args.max_scrolls, args.max_search_rows)
             pause()
         counts['rows_scanned'] = len(rows)
         filtered, seen_urls = [], set()
@@ -454,7 +524,17 @@ def main():
             if relevant_text(row['title'], row['description']):
                 filtered.append(row)
         counts['items_found'] = len(filtered)
-        print(f'{len(rows)} search rows, {len(filtered)} mention Электрозавод', flush=True)
+        candidates = []
+        for row in filtered:
+            estimate_iso, _ = parse_date_text(row['date_label'], base) if row['date_label'] else (None, None)
+            estimate = date.fromisoformat(estimate_iso) if estimate_iso else None
+            if estimate and estimate < date.fromisoformat(args.since):
+                counts['items_older'] += 1  # the search card says it is older: the page is not opened
+                continue
+            candidates.append((estimate, row))
+        candidates.sort(key=lambda pair: pair[0] or date.min, reverse=True)
+        filtered = [row for _, row in candidates]
+        print(f'{len(rows)} search rows, {len(filtered)} recent items to open', flush=True)
         items_path, comments_path = out / 'items.jsonl', out / 'comments.jsonl'
         seen_ids = load_seen(items_path)
         titles = load_titles(items_path)
