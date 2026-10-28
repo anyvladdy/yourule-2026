@@ -46,14 +46,14 @@ T07: проверка отложена до появления результа�
   outcome claims, T06 saved output has 22 terms vs 21 in config and the generator fails, T08 promises vs document status,
   `docs/audiences.md` counters without observation dates. `validate_factcheck.py` runs clean (17 CSV).
 - Gate: 2 of 7 items closed. Merged into `main` before the gate at the user's request (D-18).
-- Behind the D-10 schedule: stages 1–3 had no data or code by Oct 28; report sections 1, 4, 5, 6 not drafted;
-  budget has 62 lines, none priced.
+- Behind the D-10 schedule: stages 1–3 had no data or code by Oct 28; report sections 1, 4, 5, 6 not drafted.
+  Budget priced later the same day (8.69M of 10M); audit of Oct 29 in `docs/evidence_map.md`.
 
 ## Stage 0 gate (Claude + Codex)
 - [ ] All cards `integrated` (or escalated items finished by Claude/Codex)
 - [ ] `config/sources.yaml` and `config/keywords.yaml` updated and validated by script
 - [x] Proxy decision recorded in `docs/decisions.md` (from T04/T08: where real data exists, where we use proxies)
-- [ ] **Deliverable evidence map** (`docs/evidence_map.md`): for each of the 6 report sections — evidence ids in hand,
+- [x] **Deliverable evidence map** (`docs/evidence_map.md`, 2026-10-29, with the completeness audit): for each of the 6 report sections — evidence ids in hand,
       open questions, owner, acceptance check
 - [x] **Audience coverage matrix** skeleton (`docs/audiences.md`): residents, preservationists, architects, current tenants
       and cultural users of the site, journalists, officials/deputies, Etalon employees/investors, prospective
