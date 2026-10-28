@@ -5,7 +5,7 @@
 Пустая дата: ссылка взята из заметки без даты открытия; перед цитированием открыть заново.
 Отметка R12: издание признано нежелательным в России; в отчёте не цитируется.
 
-Всего ссылок: 128; с датой открытия: 119.
+Всего ссылок: 131; с датой открытия: 122.
 
 | URL | Открыт | Где используется |
 |---|---|---|
@@ -50,8 +50,7 @@
 | https://kprf.ru/dep/gosduma/activities/246041.html | 2026-10-28 | T13 газеты Московская организация КПРФ, сводка о ра |
 | https://m.vz.ru/news/2026/9/21/1453465.html |  | audiences.md |
 | https://max.ru/id7717154511_biz |  | etalon_channels.md |
-| https://meduza.io/feature/2026/08/07/vse-leto-gradozaschitniki-obsuzhdayut-vozmozhnyy-snos-elektrozavoda-v-moskve-plohaya-novost-v-tom-chto-eto-daleko-ne-edinstvennoe-zdanie-v-zone-riska (R12) | 2026-10-22 | хронология 2026-04-10; хронология 2026-07-24; хронология 2026-08-07 |
-| https://meduza.io/feature/2026/09/08/v-moskve-snosyat-elektrozavod-fasady-obeschayut-sohranit-no-net-garantiy-chto-ih-ne-zamenyat-novodelom (R12) | 2026-10-22 | хронология 2026-09-08 |
+| https://meduza.io/feature/2026/08/07/vse-leto-gradozaschitniki-obsuzhdayut-vozmozhnyy-snos-elektrozavoda-v-moskve-plohaya-novost-v-tom-chto-eto-daleko-ne-edinstvennoe-zdanie-v-zone-riska (R12) | 2026-10-22 | хронология 2026-08-07 |
 | https://moskva.gorodrabot.ru/salaries/rukovoditel-otdela-pr | 2026-10-28 | цены K17 |
 | https://moskvichmag.ru/?p=452571 | 2026-10-22 | СМИ A02 |
 | https://moskvichmag.ru/?p=507047 | 2026-10-22 | СМИ A13 |
@@ -60,6 +59,8 @@
 | https://moskvichmag.ru/gorod/kassatsionnyj-sud-razreshil-snos-elektrozavoda-i-eshhe-1000-s-lishnim-istoricheskih-zdanij/ | 2026-10-22 | СМИ A18; проверка брифа C04; хронология 2025-07; хронология 2026-07-08 |
 | https://moskvichmag.ru/gorod/kolossalnaya-utrata-arhitektory-i-urbanisty-prizvali-spasti-elektrozavod-ot-snosa/ | 2026-10-22 | СМИ A07 |
 | https://moskvichmag.ru/gorod/sud-v-moskve-otklonil-isk-o-zashhite-elektrozavoda-i-drugih-razvyyavlennyh-pamyatnikov/ | 2026-10-22 | СМИ A23; официальные документы O02; официальные документы O03 |
+| https://msk1.ru/text/gorod/2026/07/03/76514306/ | 2026-10-26 | хронология 2026-07 |
+| https://msk1.ru/text/gorod/2026/07/07/76521626/ | 2026-10-26 | хронология 2026-04 |
 | https://msk1.ru/text/gorod/2026/09/08/76631945/ | 2026-10-22 | СМИ A25 |
 | https://msk1.ru/text/realty/2026/07/02/76511205/ | 2026-10-22 | СМИ A16 |
 | https://novayagazeta.ru/articles/2026/07/08/eto-prostor-dlia-prosto-pogroma-totalnogo | 2026-10-22 | СМИ A19 |
@@ -70,7 +71,7 @@
 | https://realty.rbc.ru/news/686bdfd69a7947769fbdd90a | 2026-10-22 | СМИ A01; заявления компании S08 |
 | https://sudexpa.ru/expertises/istoriko-kulturnaia-ekspertiza-nauchno-proektnoi-dokumentatcii/ | 2026-10-28 | цены K12 |
 | https://t-j.ru/elektrozavod-in-moscow/ | 2026-10-22 | СМИ A11 |
-| https://t-j.ru/news/snos-elektrozavod-moscow/ | 2026-10-22 | СМИ A17; хронология 2026-07 |
+| https://t-j.ru/news/snos-elektrozavod-moscow/ | 2026-10-22 | СМИ A17 |
 | https://t.me/AnnaShatunovskayaBurno | 2026-10-28 | T14 высказывания А. Г. Шатуновская-Бюрно, кандидат в Госд; audiences.md |
 | https://t.me/AnticorruptionAcademy | 2026-10-21 | T01 Telegram anticorruptionacademy |
 | https://t.me/AnticorruptionAcademy/1527 | 2026-10-21 | T01 Telegram anticorruptionacademy |
@@ -92,6 +93,7 @@
 | https://t.me/moscowmap/71948 | 2026-10-21 | T01 Telegram moscowmap |
 | https://t.me/moskvichmag | 2026-10-21 | T01 Telegram moskvichmag |
 | https://t.me/moskvichmag/29386 | 2026-10-21 | T01 Telegram moskvichmag |
+| https://t.me/moskvichmag/31014 | 2026-10-28 | хронология 2026-09-07 |
 | https://t.me/mskved | 2026-10-21 | T01 Telegram mskved |
 | https://t.me/mskved/1730 | 2026-10-21 | T01 Telegram mskved |
 | https://t.me/mskved/1805 |  | audiences.md |
@@ -113,6 +115,7 @@
 | https://www.consultant.ru/document/cons_doc_LAW_34683/a6a0176ee414c56cbffecc3d3fe9c161603a3b35/ | 2026-10-28 | цены K18 |
 | https://www.dp.ru/a/2013/09/25/ZHile_strojat_bez_mosta | 2026-10-22 | analog_cases.md |
 | https://www.dp.ru/a/2024/12/26/kanatnij-ceh-na-vasilevskom | 2026-10-22 | analog_cases.md |
+| https://www.gazeta.ru/social/news/2026/07/24/28964803.shtml | 2026-10-26 | хронология 2026-07-24 |
 | https://www.likeni.ru/events/kak-izmenilas-stoimost-kreativnykh-uslug-za-2025-god-issledovanie-akar/ | 2026-10-28 | цены K01 |
 | https://www.m24.ru/news/09092026/939320 | 2026-10-22 | СМИ A26; заявления компании S06 |
 | https://www.m24.ru/news/17072026/921120 | 2026-10-22 | заявления компании S04 |
