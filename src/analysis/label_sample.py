@@ -10,7 +10,7 @@ Run from the repository root with .venv/bin/python. Texts stay in data/interim/l
   export    labels in the codebook CSV format and a re-check sheet for the user (Tasks_for_humans, item 7)
 The model answers two questions (does the author defend the site? approve the demolition?) and the script derives
 the stance: in pilots, small local models picked the wrong one of four labels even when their own reason was right.
-Workflow: `label --limit 60` → `evaluate` → if agreement is acceptable, `label` (the rest) → `export`.
+Workflow: `label --reference` → `evaluate` → if agreement is acceptable, `label` (the rest) → `export`.
 """
 import argparse
 import hashlib
@@ -149,46 +149,71 @@ def context(df):
     return find
 
 
+def take(pool, n, per_author, rng, find):
+    """n random rows of one platform's pool, at most per_author per author, with their context."""
+    order = list(pool.index)
+    rng.shuffle(order)
+    taken, counts = [], {}
+    for i in order:
+        author = pool.at[i, 'author_id_hash']
+        if author and counts.get(author, 0) >= per_author:
+            continue
+        counts[author] = counts.get(author, 0) + 1
+        taken.append(i)
+        if len(taken) == n:
+            break
+    rows = []
+    for i in taken:
+        row = pool.loc[i]
+        publication, parent = find(row.platform, row.parent_id)
+        rows.append(dict(id=row.id, platform=row.platform, source_id=row.source_id, thread_id=row.thread_id,
+                         row_type=row.row_type, author_id_hash=row.author_id_hash, period=row.period,
+                         weight=len(pool) / len(taken), text=row.text, publication=publication, parent=parent))
+    print(pool.platform.iloc[0], 'slice', len(pool), 'sample', len(rows), sep='\t')
+    return rows
+
+
 def draw(args):
-    if (OUT / 'sample.parquet').exists() and not args.force:
-        sys.exit('sample.parquet exists and labels refer to its items; a new draw changes the sample. Use --force.')
+    path, log = OUT / 'sample.parquet', OUT / 'sample_run.json'
     df = load_corpus()
     part = analysis_slice(df)
     check_slice(part)
-    platforms = sorted(part.platform.unique())
-    per_platform = args.size // len(platforms)
     find = context(df)
-    rng = random.Random(SEED)
-    rows = []
-    for platform in platforms:
-        pool = part[part.platform == platform].sort_values('id')
-        order = list(pool.index)
-        rng.shuffle(order)
-        taken, per_author = [], {}
-        for i in order:
-            author = pool.at[i, 'author_id_hash']
-            if author and per_author.get(author, 0) >= args.per_author:
-                continue
-            per_author[author] = per_author.get(author, 0) + 1
-            taken.append(i)
-            if len(taken) == per_platform:
-                break
-        for i in taken:
-            row = pool.loc[i]
-            publication, parent = find(platform, row.parent_id)
-            rows.append(dict(id=row.id, platform=platform, source_id=row.source_id, thread_id=row.thread_id,
-                             row_type=row.row_type, author_id_hash=row.author_id_hash, period=row.period,
-                             weight=len(pool) / len(taken), text=row.text, publication=publication, parent=parent))
-        print(platform, 'slice', len(pool), 'sample', len(taken), sep='\t')
+    if args.add_platform:
+        # Adds one platform to the drawn sample; the rows already drawn (and labelled) do not change.
+        if not path.exists():
+            sys.exit('draw the main sample first')
+        sample = pd.read_parquet(path)
+        if args.add_platform in set(sample.platform):
+            sys.exit(f'{args.add_platform} is already in the sample')
+        pool = part[part.platform == args.add_platform].sort_values('id')
+        if pool.empty:
+            sys.exit(f'no {args.add_platform} rows in the analysis slice')
+        seed = f'{SEED}-{args.add_platform}'
+        added = take(pool, args.per_platform, args.per_author, random.Random(seed), find)
+        sample = pd.concat([sample, pd.DataFrame(added)], ignore_index=True)
+        run = json.loads(log.read_text(encoding='utf-8'))
+        run.setdefault('additions', []).append(
+            {'added_at': now(), 'platform': args.add_platform, 'seed': seed, 'slice': len(pool), 'sample': len(added),
+             'per_author': args.per_author, 'corpus_dzen_sha256': hashlib.sha256(DZEN.read_bytes()).hexdigest()
+             if DZEN.exists() else None})
+        run['size'], run['sample'] = len(sample), sample.platform.value_counts().to_dict()
+    else:
+        if path.exists() and not args.force:
+            sys.exit('sample.parquet exists and labels refer to its items; a new draw changes the sample. Use --force.')
+        platforms = sorted(args.platforms.split(','))
+        rng, rows = random.Random(SEED), []
+        for platform in platforms:
+            rows += take(part[part.platform == platform].sort_values('id'), args.size // len(platforms),
+                         args.per_author, rng, find)
+        sample = pd.DataFrame(rows)
+        run = {'version': VERSION, 'created_at': now(), 'seed': SEED, 'size': len(sample), 'per_author': args.per_author,
+               'corpus_sha256': hashlib.sha256(CORPUS.read_bytes()).hexdigest(), 'platforms': platforms,
+               'slice': part.platform.value_counts().to_dict(), 'sample': sample.platform.value_counts().to_dict()}
     OUT.mkdir(parents=True, exist_ok=True)
-    sample = pd.DataFrame(rows)
-    sample.to_parquet(OUT / 'sample.parquet', index=False)
-    (OUT / 'sample_run.json').write_text(json.dumps(
-        {'version': VERSION, 'created_at': now(), 'seed': SEED, 'size': len(sample), 'per_author': args.per_author,
-         'corpus_sha256': hashlib.sha256(CORPUS.read_bytes()).hexdigest(), 'dzen_included': DZEN.exists(),
-         'slice': part.platform.value_counts().to_dict(), 'sample': sample.platform.value_counts().to_dict()},
-        ensure_ascii=False, indent=1), encoding='utf-8')
-    print('written', OUT / 'sample.parquet', len(sample))
+    sample.to_parquet(path, index=False)
+    log.write_text(json.dumps(run, ensure_ascii=False, indent=1), encoding='utf-8')
+    print('written', path, len(sample))
 
 
 def clip(text, limit):
@@ -297,10 +322,12 @@ def label(args):
     prompt_version = hashlib.sha256(system.encode('utf-8')).hexdigest()[:12]
     path = labels_path(args)
     done = {json.loads(line)['id'] for line in path.open(encoding='utf-8')} if path.exists() else set()
-    # Hash order mixes platforms, so the first 60 items are the same mixed set for every model: they are the
-    # reference set of `evaluate`. A pilot with --limit 60 is enough to compare a model with the reference.
+    # Hash order mixes platforms, so a pilot of N items is the same mixed set for every model.
     todo = sorted((r for r in sample.to_dict('records') if r['id'] not in done),
                   key=lambda r: hashlib.sha256(r['id'].encode()).hexdigest())
+    if args.reference:
+        ids = set(pd.read_csv(REFERENCE).id)
+        todo = [r for r in todo if r['id'] in ids]
     todo = todo[:args.limit] if args.limit else todo
     if args.backend == 'ollama':
         try:
@@ -338,7 +365,7 @@ def evaluate(args):
     got = pd.read_json(labels_path(args), lines=True).drop_duplicates('id', keep='last')
     both = ref.merge(got[['id', 'stance']], on='id', suffixes=('_ref', '_model'))
     if both.empty:
-        sys.exit('no reference items labelled yet: run `label --limit 60` first')
+        sys.exit('no reference items labelled yet: run `label --reference` first')
     agree = (both.stance_ref == both.stance_model).mean()
     kappa = cohen_kappa_score(both.stance_ref, both.stance_model)
     print(f'{args.model}: {len(both)} of {len(ref)} reference items; agreement {agree:.0%}; Cohen kappa {kappa:.2f}')
@@ -377,6 +404,10 @@ def main():
     s.add_argument('--size', type=int, default=1200, help='total size, split equally by platform (default 1200)')
     s.add_argument('--per-author', type=int, default=3, help='at most this many items per author (default 3)')
     s.add_argument('--force', action='store_true', help='replace an existing sample')
+    s.add_argument('--platforms', default='telegram,vk,youtube',
+                   help='platforms of the main draw (default telegram,vk,youtube, as drawn on 2026-10-28)')
+    s.add_argument('--add-platform', help='add one platform (e.g. dzen) to the drawn sample without changing it')
+    s.add_argument('--per-platform', type=int, default=300, help='with --add-platform: rows to add (default 300)')
     for name in ('label', 'evaluate', 'export'):
         p = sub.add_parser(name)
         p.add_argument('--model', default='qwen3:8b', help='model name for the backend (default qwen3:8b on Ollama)')
@@ -385,7 +416,9 @@ def main():
     lab.add_argument('--backend', choices=['ollama', 'openrouter'], default='ollama',
                      help='ollama (local) or openrouter (OPENROUTER_API_KEY in .env; texts leave the computer)')
     lab.add_argument('--workers', type=int, default=1, help='parallel requests; 1 for Ollama, 4-8 for OpenRouter')
-    lab.add_argument('--limit', type=int, help='label at most N new items; --limit 60 labels the reference set')
+    lab.add_argument('--limit', type=int, help='label at most N new items; for a pilot')
+    lab.add_argument('--reference', action='store_true',
+                     help='label only the 60 reference items labelled by Claude; then run `evaluate`')
     lab.add_argument('--host', default='http://localhost:11434', help='Ollama only')
     lab.add_argument('--num-ctx', type=int, default=4096,
                      help='Ollama only: context window in tokens; 4096 keeps gemma3:4b near 2.3 GB, qwen3:8b near 5.1 GB')

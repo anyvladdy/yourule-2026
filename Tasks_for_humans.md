@@ -57,11 +57,11 @@ T11: сбор Telegram завершён — data/raw/telegram/2026-10-28/, 13 к
 Тексты уходят в OpenRouter и к провайдеру модели; авторов в них нет, но в отдельных ответах встречаются имена адресатов.
 - [ ] Добавьте в `.env` строку `OPENROUTER_API_KEY=...` (файл не в git; ключ никому не показывайте).
 - [ ] Выберите недорогую модель с хорошим русским на openrouter.ai/models и подставьте её id вместо `<model>`.
-      Объём: около 2 750 входных и 100 выходных токенов на текст, на 1 200 текстов ≈ 3,3 млн входных и 0,12 млн
+      Объём: около 2 750 входных и 100 выходных токенов на текст, на 1 500 текстов ≈ 4,1 млн входных и 0,15 млн
       выходных; умножьте на цену модели.
-- [ ] Пилот на 60 текстах, у которых есть эталонная разметка Claude, и проверка согласия:
+- [ ] Пилот на 60 текстах, у которых есть эталонная разметка Claude (YouTube, Telegram, VK), и проверка согласия:
 ```
-.venv/bin/python src/analysis/label_sample.py label --backend openrouter --model <model> --workers 6 --limit 60
+.venv/bin/python src/analysis/label_sample.py label --backend openrouter --model <model> --workers 6 --reference
 .venv/bin/python src/analysis/label_sample.py evaluate --model <model>
 ```
 - [ ] Покажите Claude строку `agreement … kappa …`. Если согласие от 75% — разметить остальное и выгрузить:
