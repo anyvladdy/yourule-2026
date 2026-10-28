@@ -85,7 +85,7 @@ Branch `stage-1-collection`. No video content; residents' voices also from distr
 | T15 Media: relabel all 27 T03 articles with `docs/codebook.md` (`workflow/stage1/T15_media_relabel`) | Codex or local Qwen (user decides) | Oct 29 | ready |
 | T11 Processing: YouTube + Telegram + VK → `data/processed/corpus_v2.parquet` (`workflow/stage1/T11_processing`) | Codex | Oct 28–29 | accepted after R2: 9 descriptive themes, n-grams once per author; see REVIEW_R2.md |
 | T06 fix: saved variants (22 terms) vs config (21), generator error | Codex | Oct 29 | not started |
-| Labelling (D-28, D-34): sample of ~1,200 by a language model with `docs/codebook.md`; classifier for the rest; tone, topics, n-grams; zip archive for the user | user via OpenRouter (`src/analysis/label_sample.py`); user re-checks a sample | Oct 29–30 | ready: sample of 1,500 (400 YouTube, Telegram, VK each + 300 Dzen, D-35); local models rejected (D-34) |
+| Labelling (D-28, D-34): sample of ~1,200 by a language model with `docs/codebook.md`; classifier for the rest; tone, topics, n-grams; zip archive for the user | user via OpenRouter (`src/analysis/label_sample.py`); user re-checks a sample | Oct 29–30 | ready: sample of 1,522 (400 YouTube, Telegram, VK each + 300 Dzen, D-35; Telegram case thread 22, D-36); local models rejected (D-34) |
 | Analysis: timeline vs T04 events, stance, criticism lines, actors, message gap | Claude | Oct 30 | not started |
 
 In parallel: stage-0 fixes in `docs/`, report sections 1, 4, 5, 6. Budget with prices and the launch line before

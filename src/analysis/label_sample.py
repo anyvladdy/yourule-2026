@@ -2,8 +2,9 @@
 
 Run from the repository root with .venv/bin/python. Texts stay in data/interim/labelling/ (gitignored).
   sample    draw reactions from the analysis slice of T11 v2 (P3, relevant, full context; YouTube digest threads
-            only when the thread names the site): the same number per platform, at most 3 per author. Dzen joins
-            when data/processed/corpus_dzen.parquet exists (T17).
+            only when the thread names the site): the same number per platform, at most 3 per author. Additions
+            keep drawn rows: --add-platform dzen (D-35); --add-case-thread for a thread labelled as a separate case,
+            never mixed into shares (column `stratum`, D-36).
   label     send each sampled text with its publication and parent to a model; temperature 0; resumable.
             Backends: Ollama (local) or OpenRouter (OPENROUTER_API_KEY in .env).
   evaluate  agreement of the model's stance with 60 reference items labelled by Claude
@@ -38,6 +39,12 @@ COVERAGE = ROOT / 'workflow/stage1/T11_processing/v2/out/coverage.csv'
 REFERENCE = OUT / 'reference_claude.csv'
 OPENROUTER = 'https://openrouter.ai/api/v1/chat/completions'
 SEED = 20261029
+# A case thread (D-36) is labelled on top of the random sample: texts where words about the site outnumber words of
+# the party-political argument. Lexical selection, so the case is reported on its own, never mixed into shares.
+FOCUS = re.compile(r'электрозавод(?!ск)|\b(?:снос|снес|снест|демонтаж|эталон|фасад|наслед|памятник|башн|завод|корпус|'
+                   r'застро|девелоп|архитект|охран|окн\b|статус|сохран|реконструк|суд|кассац|арк[аи]\b|кирпич)', re.I)
+POLITICS = re.compile(r'\b(?:коммунист|комуняк|совок|ссср|совет|сталин|ленин|либерал|капитал|буржу|большевик|кпрф|'
+                      r'парти|царь|царск|гулаг|лагер|репресс)', re.I)
 PLATFORM_NAMES = {'youtube': 'YouTube', 'telegram': 'Telegram', 'vk': 'ВКонтакте', 'dzen': 'Дзен'}
 STANCES = ['oppose', 'support', 'mixed', 'neutral']
 FLAGS = ['off_topic', 'unclear', 'sarcasm']
@@ -168,7 +175,8 @@ def take(pool, n, per_author, rng, find):
         publication, parent = find(row.platform, row.parent_id)
         rows.append(dict(id=row.id, platform=row.platform, source_id=row.source_id, thread_id=row.thread_id,
                          row_type=row.row_type, author_id_hash=row.author_id_hash, period=row.period,
-                         weight=len(pool) / len(taken), text=row.text, publication=publication, parent=parent))
+                         weight=len(pool) / len(taken), stratum='random', text=row.text, publication=publication,
+                         parent=parent))
     print(pool.platform.iloc[0], 'slice', len(pool), 'sample', len(rows), sep='\t')
     return rows
 
@@ -179,7 +187,38 @@ def draw(args):
     part = analysis_slice(df)
     check_slice(part)
     find = context(df)
-    if args.add_platform:
+    if args.add_case_thread:
+        if not path.exists():
+            sys.exit('draw the main sample first')
+        sample = pd.read_parquet(path)
+        stratum = f'case:{args.add_case_thread}'
+        if 'stratum' in sample and (sample.stratum == stratum).any():
+            sys.exit(f'{stratum} is already in the sample')
+        thread = part[part.thread_id == args.add_case_thread]
+        if thread.empty:
+            sys.exit(f'thread {args.add_case_thread} is not in the analysis slice')
+        score = thread.text.fillna('').map(lambda t: len(FOCUS.findall(t)) - len(POLITICS.findall(t)))
+        chosen = (thread.assign(score=score)[(score > 0) & ~thread.id.isin(sample.id)]
+                  .sort_values(['author_id_hash', 'score', 'id'], ascending=[True, False, True])
+                  .groupby('author_id_hash', dropna=False).head(args.case_per_author))
+        added = []
+        for _, row in chosen.sort_values('id').iterrows():
+            publication, parent = find(row.platform, row.parent_id)
+            added.append(dict(id=row.id, platform=row.platform, source_id=row.source_id, thread_id=row.thread_id,
+                              row_type=row.row_type, author_id_hash=row.author_id_hash, period=row.period, weight=None,
+                              stratum=stratum, text=row.text, publication=publication, parent=parent))
+        sample = pd.concat([sample.assign(stratum=sample.get('stratum', 'random')), pd.DataFrame(added)],
+                           ignore_index=True)
+        run = json.loads(log.read_text(encoding='utf-8'))
+        run.setdefault('additions', []).append(
+            {'added_at': now(), 'case_thread': args.add_case_thread, 'thread_reactions': len(thread),
+             'thread_authors': int(thread.author_id_hash.nunique()), 'focus_over_politics': int((score > 0).sum()),
+             'already_in_random_sample': int(thread.id.isin(sample.id).sum() - len(added)), 'added': len(added),
+             'per_author': args.case_per_author, 'rule': 'site words outnumber party-politics words (FOCUS, POLITICS)'})
+        run['size'], run['sample'] = len(sample), sample.platform.value_counts().to_dict()
+        print(f'case {args.add_case_thread}: {len(thread)} reactions, {int((score > 0).sum())} focused on the site, '
+              f'{len(added)} added')
+    elif args.add_platform:
         # Adds one platform to the drawn sample; the rows already drawn (and labelled) do not change.
         if not path.exists():
             sys.exit('draw the main sample first')
@@ -191,7 +230,8 @@ def draw(args):
             sys.exit(f'no {args.add_platform} rows in the analysis slice')
         seed = f'{SEED}-{args.add_platform}'
         added = take(pool, args.per_platform, args.per_author, random.Random(seed), find)
-        sample = pd.concat([sample, pd.DataFrame(added)], ignore_index=True)
+        sample = pd.concat([sample.assign(stratum=sample.get('stratum', 'random')), pd.DataFrame(added)],
+                           ignore_index=True)
         run = json.loads(log.read_text(encoding='utf-8'))
         run.setdefault('additions', []).append(
             {'added_at': now(), 'platform': args.add_platform, 'seed': seed, 'slice': len(pool), 'sample': len(added),
@@ -393,8 +433,9 @@ def export(args):
                    'pro_lines', 'note']].assign(user_stance='', user_lines='', user_comment='')
     check.to_csv(OUT / f'recheck_{name}.csv', index=False, encoding='utf-8-sig')
     print(f'{len(table)} labels → labels_{name}.csv; re-check sheet of {len(check)} → recheck_{name}.csv')
-    print(table.merge(sample[['platform']], left_on='id', right_index=True)
-          .groupby('platform').stance.value_counts(normalize=True).round(3).unstack(fill_value=0))
+    # Unweighted shares inside each stratum; a case thread is shown on its own line, never inside a platform.
+    print(table.merge(sample[['platform', 'stratum']], left_on='id', right_index=True)
+          .groupby(['stratum', 'platform']).stance.value_counts(normalize=True).round(3).unstack(fill_value=0))
 
 
 def main():
@@ -408,6 +449,8 @@ def main():
                    help='platforms of the main draw (default telegram,vk,youtube, as drawn on 2026-10-28)')
     s.add_argument('--add-platform', help='add one platform (e.g. dzen) to the drawn sample without changing it')
     s.add_argument('--per-platform', type=int, default=300, help='with --add-platform: rows to add (default 300)')
+    s.add_argument('--add-case-thread', help='add a case thread (thread_id) on top of the random sample (D-36)')
+    s.add_argument('--case-per-author', type=int, default=7, help='with --add-case-thread: texts per author (default 7)')
     for name in ('label', 'evaluate', 'export'):
         p = sub.add_parser(name)
         p.add_argument('--model', default='qwen3:8b', help='model name for the backend (default qwen3:8b on Ollama)')
