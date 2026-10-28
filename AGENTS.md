@@ -23,6 +23,9 @@ R9. Provenance: every row with a URL has `accessed` (YYYY-MM-DD, date you opened
 R10. The brief's scenario is fixed. Missing public evidence does not change it. Never state or imply that more of
     the site is preserved than the approved project preserves.
 R11. Any text a person will read (handoffs, reviews, notes, report): follow §6.
+R12. Outlets designated undesirable organisations in Russia (e.g. Meduza) are never the only source for a fact:
+    find another source for the same fact and put it in `source_url`; keep the designated outlet's link in `note`.
+    If no other source exists, write "only source: <outlet>" in `note`. The report does not cite them.
 
 ## 1. Context
 

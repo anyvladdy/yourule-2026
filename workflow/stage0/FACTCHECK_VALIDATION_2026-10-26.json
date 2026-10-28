@@ -1,0 +1,456 @@
+{
+  "csv": [
+    {
+      "file": "workflow/stage0/T01_telegram_video/out/telegram.csv",
+      "rows": 11,
+      "columns": [
+        "handle",
+        "url",
+        "title",
+        "kind",
+        "subscribers",
+        "subscribers_seen",
+        "owner_type",
+        "channel_stance",
+        "relevant_post_url",
+        "relevant_post_date",
+        "accessed",
+        "priority",
+        "note"
+      ],
+      "schema_matches": true,
+      "bad_width": 0,
+      "duplicate_rows": 0,
+      "duplicate_ids": {
+        "handle": []
+      },
+      "bad_dates": [],
+      "bad_categories": []
+    },
+    {
+      "file": "workflow/stage0/T01_telegram_video/out/video.csv",
+      "rows": 2,
+      "columns": [
+        "platform",
+        "url",
+        "title",
+        "channel",
+        "date",
+        "views",
+        "views_seen",
+        "accessed",
+        "channel_stance",
+        "note"
+      ],
+      "schema_matches": true,
+      "bad_width": 0,
+      "duplicate_rows": 0,
+      "duplicate_ids": {},
+      "bad_dates": [],
+      "bad_categories": []
+    },
+    {
+      "file": "workflow/stage0/T02_vk_petitions/out/petitions.csv",
+      "rows": 3,
+      "columns": [
+        "pet_id",
+        "url",
+        "platform",
+        "title",
+        "organiser",
+        "created_date",
+        "signatures",
+        "signatures_seen",
+        "accessed",
+        "target",
+        "main_demands",
+        "note"
+      ],
+      "schema_matches": true,
+      "bad_width": 0,
+      "duplicate_rows": 0,
+      "duplicate_ids": {
+        "pet_id": []
+      },
+      "bad_dates": [],
+      "bad_categories": []
+    },
+    {
+      "file": "workflow/stage0/T02_vk_petitions/out/vk.csv",
+      "rows": 0,
+      "columns": [
+        "url",
+        "name",
+        "members",
+        "members_seen",
+        "owner_type",
+        "channel_stance",
+        "relevant_post_url",
+        "relevant_post_date",
+        "accessed",
+        "priority",
+        "note"
+      ],
+      "schema_matches": true,
+      "bad_width": 0,
+      "duplicate_rows": 0,
+      "duplicate_ids": {},
+      "bad_dates": [],
+      "bad_categories": []
+    },
+    {
+      "file": "workflow/stage0/T03_media/out/articles.csv",
+      "rows": 27,
+      "columns": [
+        "art_id",
+        "url",
+        "outlet",
+        "date",
+        "accessed",
+        "title",
+        "viewpoint",
+        "criticism_lines",
+        "quoted_actors",
+        "key_claim",
+        "syndicated_copies",
+        "note"
+      ],
+      "schema_matches": true,
+      "bad_width": 0,
+      "duplicate_rows": 0,
+      "duplicate_ids": {
+        "art_id": []
+      },
+      "bad_dates": [],
+      "viewpoints": {
+        "developer": 6,
+        "balanced": 5,
+        "critical": 16
+      },
+      "criticism_lines": {
+        "facadism_fake_reproduction": 9,
+        "heritage_loss": 20,
+        "commercial_density": 6,
+        "loss_of_cultural_spaces": 6,
+        "no_masterplan_transparency": 4,
+        "collusion_with_city": 3,
+        "no_real_hearings": 1
+      },
+      "outlets": 16,
+      "bad_categories": []
+    },
+    {
+      "file": "workflow/stage0/T04_timeline_reality/out/reality_check.csv",
+      "rows": 8,
+      "columns": [
+        "claim_id",
+        "claim",
+        "status",
+        "source_url",
+        "source_date",
+        "accessed",
+        "queries_tried",
+        "note"
+      ],
+      "schema_matches": true,
+      "bad_width": 0,
+      "duplicate_rows": 0,
+      "duplicate_ids": {},
+      "bad_dates": [],
+      "claim_ids_complete": true,
+      "bad_categories": []
+    },
+    {
+      "file": "workflow/stage0/T04_timeline_reality/out/timeline.csv",
+      "rows": 18,
+      "columns": [
+        "date",
+        "event",
+        "actor",
+        "type",
+        "source_url",
+        "source_date",
+        "accessed",
+        "confidence",
+        "claim_id"
+      ],
+      "schema_matches": true,
+      "bad_width": 0,
+      "duplicate_rows": 0,
+      "duplicate_ids": {},
+      "bad_dates": [],
+      "sorted": true,
+      "bad_categories": []
+    },
+    {
+      "file": "workflow/stage0/T05_analog_cases/out/cases_summary.csv",
+      "rows": 5,
+      "columns": [
+        "site",
+        "city",
+        "years",
+        "conflict_level",
+        "outcome_for_developer",
+        "key_move",
+        "sources"
+      ],
+      "schema_matches": true,
+      "bad_width": 0,
+      "duplicate_rows": 0,
+      "duplicate_ids": {},
+      "bad_dates": [],
+      "bad_categories": []
+    },
+    {
+      "file": "workflow/stage0/T08_project_facts/out/building_matrix.csv",
+      "rows": 12,
+      "columns": [
+        "object",
+        "status",
+        "evidence",
+        "evidence_date",
+        "conflict",
+        "follow_up"
+      ],
+      "schema_matches": true,
+      "bad_width": 0,
+      "duplicate_rows": 0,
+      "duplicate_ids": {},
+      "bad_dates": [],
+      "bad_categories": []
+    },
+    {
+      "file": "workflow/stage0/T08_project_facts/out/developer_statements.csv",
+      "rows": 7,
+      "columns": [
+        "stmt_id",
+        "date",
+        "channel",
+        "url",
+        "accessed",
+        "speaker",
+        "what_was_said",
+        "reaction_seen",
+        "claim_id"
+      ],
+      "schema_matches": true,
+      "bad_width": 0,
+      "duplicate_rows": 0,
+      "duplicate_ids": {
+        "stmt_id": []
+      },
+      "bad_dates": [],
+      "bad_categories": []
+    },
+    {
+      "file": "workflow/stage0/T08_project_facts/out/official.csv",
+      "rows": 5,
+      "columns": [
+        "doc_id",
+        "url",
+        "issuer",
+        "doc_type",
+        "date",
+        "accessed",
+        "object",
+        "what_it_says",
+        "claim_id",
+        "note"
+      ],
+      "schema_matches": true,
+      "bad_width": 0,
+      "duplicate_rows": 0,
+      "duplicate_ids": {
+        "doc_id": []
+      },
+      "bad_dates": [],
+      "bad_categories": []
+    },
+    {
+      "file": "docs/analog_cases.csv",
+      "rows": 5,
+      "columns": [
+        "site",
+        "city",
+        "years",
+        "conflict_level",
+        "outcome_for_developer",
+        "key_move",
+        "sources"
+      ],
+      "schema_matches": true,
+      "bad_width": 0,
+      "duplicate_rows": 0,
+      "duplicate_ids": {},
+      "bad_dates": [],
+      "bad_categories": []
+    },
+    {
+      "file": "docs/project_facts/building_matrix.csv",
+      "rows": 13,
+      "columns": [
+        "object",
+        "status",
+        "evidence",
+        "evidence_date",
+        "conflict",
+        "follow_up"
+      ],
+      "schema_matches": true,
+      "bad_width": 0,
+      "duplicate_rows": 0,
+      "duplicate_ids": {},
+      "bad_dates": [],
+      "bad_categories": []
+    },
+    {
+      "file": "docs/project_facts/developer_statements.csv",
+      "rows": 8,
+      "columns": [
+        "stmt_id",
+        "date",
+        "channel",
+        "url",
+        "accessed",
+        "speaker",
+        "what_was_said",
+        "reaction_seen",
+        "claim_id"
+      ],
+      "schema_matches": true,
+      "bad_width": 0,
+      "duplicate_rows": 0,
+      "duplicate_ids": {
+        "stmt_id": []
+      },
+      "bad_dates": [],
+      "bad_categories": []
+    },
+    {
+      "file": "docs/project_facts/official.csv",
+      "rows": 5,
+      "columns": [
+        "doc_id",
+        "url",
+        "issuer",
+        "doc_type",
+        "date",
+        "accessed",
+        "object",
+        "what_it_says",
+        "claim_id",
+        "note"
+      ],
+      "schema_matches": true,
+      "bad_width": 0,
+      "duplicate_rows": 0,
+      "duplicate_ids": {
+        "doc_id": []
+      },
+      "bad_dates": [],
+      "bad_categories": []
+    },
+    {
+      "file": "docs/project_facts/reality_check.csv",
+      "rows": 8,
+      "columns": [
+        "claim_id",
+        "claim",
+        "status",
+        "source_url",
+        "source_date",
+        "accessed",
+        "queries_tried",
+        "note"
+      ],
+      "schema_matches": true,
+      "bad_width": 0,
+      "duplicate_rows": 0,
+      "duplicate_ids": {},
+      "bad_dates": [],
+      "claim_ids_complete": true,
+      "bad_categories": []
+    },
+    {
+      "file": "docs/project_facts/timeline.csv",
+      "rows": 18,
+      "columns": [
+        "date",
+        "event",
+        "actor",
+        "type",
+        "source_url",
+        "source_date",
+        "accessed",
+        "confidence",
+        "claim_id"
+      ],
+      "schema_matches": true,
+      "bad_width": 0,
+      "duplicate_rows": 0,
+      "duplicate_ids": {},
+      "bad_dates": [],
+      "sorted": true,
+      "bad_categories": []
+    }
+  ],
+  "handoffs": [
+    {
+      "file": "workflow/stage0/T01_telegram_video/HANDOFF.md",
+      "lines": 30,
+      "pass": true
+    },
+    {
+      "file": "workflow/stage0/T02_vk_petitions/HANDOFF.md",
+      "lines": 28,
+      "pass": true
+    },
+    {
+      "file": "workflow/stage0/T03_media/HANDOFF.md",
+      "lines": 27,
+      "pass": true
+    },
+    {
+      "file": "workflow/stage0/T04_timeline_reality/HANDOFF.md",
+      "lines": 30,
+      "pass": true
+    },
+    {
+      "file": "workflow/stage0/T05_analog_cases/HANDOFF.md",
+      "lines": 22,
+      "pass": true
+    },
+    {
+      "file": "workflow/stage0/T06_keyword_variants/HANDOFF.md",
+      "lines": 28,
+      "pass": true
+    },
+    {
+      "file": "workflow/stage0/T08_project_facts/HANDOFF.md",
+      "lines": 30,
+      "pass": true
+    }
+  ],
+  "yaml": [
+    {
+      "file": "config/keywords.yaml",
+      "valid": true
+    },
+    {
+      "file": "config/sources.yaml",
+      "valid": true
+    }
+  ],
+  "t06": {
+    "input_terms": 21,
+    "saved_terms": 22,
+    "main_guard_pass": false,
+    "obsolete_specs": [
+      "Эталон Электрозавод"
+    ],
+    "saved_matches_current": false,
+    "report_matches_current": false,
+    "current_regex_errors": [],
+    "current_test_summary": "ИТОГ: PASS; терминов 21/21; форм 302; отрицательных примеров 196; дополнительных проверок 4223; ошибок 0."
+  }
+}

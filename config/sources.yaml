@@ -1,0 +1,43 @@
+# Source registry. DRAFT v0 (Claude, 2026-10-20).
+# Every entry starts as verified: false. Stage-0 discovery tasks fill concrete URLs, verify them,
+# and add evidence of relevance. Do not add a URL you have not opened in the current session.
+#
+# Fields:
+#   id, name, type, url, access (api|rss|html|pdf|manual|export), tos_note,
+#   stance_hint (oppose|support|neutral|official|developer|unknown), audience,
+#   priority (1 must-have | 2 useful | 3 optional), verified (true|false),
+#   evidence (one line: why it is relevant, with date), added_by
+
+categories:
+  telegram:     {access: api, note: "public channels only; MTProto client later"}
+  vk:           {access: api, note: "official VK API; public groups only"}
+  petitions:    {access: html, note: "snapshot signature counts on a schedule"}
+  media:        {access: rss, note: "RSS/site search; keep full article URLs"}
+  video:        {access: api, note: "YouTube Data API; Dzen via html"}
+  official:     {access: html, note: "facts only: status, decisions, hearings"}
+  developer:    {access: html, note: "Etalon statements and reactions to them"}
+  search_trends: {access: export, note: "Wordstat / Google Trends, manual export"}
+  analog_cases: {access: manual, note: "secondary sources about comparable conflicts"}
+  maps_reviews: {access: html, note: "Yandex Maps reviews of tenants on the site; optional"}
+
+sources:
+  # --- seeds: known organisations, URLs to be confirmed by discovery tasks ---
+  - {id: civ_archnadzor, name: "Архнадзор", type: civic, url: null, access: html, stance_hint: oppose, priority: 1, verified: false, evidence: null, added_by: claude}
+  - {id: off_dkn, name: "Департамент культурного наследия г. Москвы (mos.ru)", type: official, url: null, access: html, stance_hint: official, priority: 1, verified: false, evidence: null, added_by: claude}
+  - {id: off_egrokn, name: "Единый госреестр объектов культурного наследия (opendata Минкультуры)", type: official, url: null, access: export, stance_hint: official, priority: 1, verified: false, evidence: null, added_by: claude}
+  - {id: off_gzk, name: "Решения ГЗК / проекты планировки (mos.ru)", type: official, url: null, access: html, stance_hint: official, priority: 1, verified: false, evidence: null, added_by: claude}
+  - {id: off_ag, name: "Активный гражданин / общественные обсуждения", type: official, url: null, access: html, stance_hint: official, priority: 2, verified: false, evidence: null, added_by: claude}
+  - {id: dev_etalon_site, name: "Группа «Эталон»: сайт, пресс-релизы", type: developer, url: null, access: html, stance_hint: developer, priority: 1, verified: false, evidence: null, added_by: claude}
+  - {id: dev_etalon_social, name: "Группа «Эталон»: Telegram / VK", type: developer, url: null, access: api, stance_hint: developer, priority: 1, verified: false, evidence: null, added_by: claude}
+  - {id: pet_main, name: "Основная петиция за сохранение Электрозавода (20k+)", type: petitions, url: null, access: html, stance_hint: oppose, priority: 1, verified: false, evidence: "brief mentions >20k signatures", added_by: claude}
+  - {id: med_kommersant, name: "Коммерсантъ", type: media, url: null, access: rss, stance_hint: neutral, priority: 1, verified: false, evidence: null, added_by: claude}
+  - {id: med_rbc, name: "РБК (в т.ч. РБК Недвижимость)", type: media, url: null, access: rss, stance_hint: neutral, priority: 1, verified: false, evidence: null, added_by: claude}
+  - {id: med_archiru, name: "Архи.ру", type: media, url: null, access: html, stance_hint: neutral, priority: 2, verified: false, evidence: null, added_by: claude}
+  - {id: med_m24, name: "Москва 24", type: media, url: null, access: rss, stance_hint: official, priority: 2, verified: false, evidence: null, added_by: claude}
+  - {id: med_moskvichmag, name: "Москвич Mag", type: media, url: null, access: html, stance_hint: unknown, priority: 2, verified: false, evidence: null, added_by: claude}
+  - {id: trd_wordstat, name: "Яндекс Wordstat", type: search_trends, url: null, access: export, stance_hint: neutral, priority: 2, verified: false, evidence: null, added_by: claude}
+  - {id: trd_gtrends, name: "Google Trends", type: search_trends, url: null, access: export, stance_hint: neutral, priority: 3, verified: false, evidence: null, added_by: claude}
+  # --- to be filled by stage-0 tasks (see workflow/BOARD.md) ---
+  # telegram channels/chats  → T01
+  # vk communities, petitions → T02
+  # media & official sources  → T03

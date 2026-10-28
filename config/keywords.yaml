@@ -1,0 +1,59 @@
+# Search vocabulary for discovery and (later) collection.
+# Status: DRAFT v0 (Claude, 2026-10-20). Nothing here has been validated on real data yet.
+# Validation (stage 1) = run each query on a small sample, hand-check ~30 hits, record precision below.
+#
+# Matching logic for collectors (later):
+#   relevant = any(core) OR (any(site_context) AND any(topic))
+#   "Эталон"/"Группа Эталон" never count as a site anchor on their own: they need a core term
+#   or a geographic site_context term (street/district) in the same item.
+#   core regex must stop at word boundaries so it does not match "Электрозаводская" / "Электрозаводск".
+#   Co-mention rule: "Эталон" + any Электрозавод form in the same item (any order, distance tuned in the stage-1 pilot).
+#   then drop if any(exclude) matches and none of core matches.
+# Validation decision rule (stage 1 pilot, per platform): keep a query if precision ≥ 0.7 on ~30 hand-checked
+# hits AND it adds hits not found by other queries; otherwise narrow it or drop it (log in validation_log).
+
+version: 1
+# Word forms and tested regexes for core/site_context/exclude: workflow/stage0/T06_keyword_variants/out/variants.yaml (T06, accepted 2026-10-20).
+# Collectors should build patterns from case_forms with re.IGNORECASE rather than copy the regex strings.
+language: ru
+
+core:            # unambiguous references to the site/project
+  - "Электрозавод"            # all case forms: Электрозавода, Электрозаводу, Электрозаводом, Электрозаводе
+  - "Московский электрозавод"
+  - "МЭЛЗ"                    # successor enterprise on the site; check how often it is used for the site itself
+  - "территория Электрозавода"
+  - "редевелопмент Электрозавода"
+  - "#электрозавод"
+  - "#сохранитьэлектрозавод"  # hypothetical hashtag: confirm or drop in stage 1
+
+site_context:    # ambiguous alone, relevant together with a topic term
+  - "Электрозаводская"        # street, metro station, bridge: high noise
+  - "Преображенская"
+  - "Преображенское"
+  - "Соколиная Гора"
+  - "Семёновская"
+  - "Яуза"
+  - "Эталон"                  # also a common word; only together with site terms
+  - "Группа Эталон"
+  - "ГК Эталон"
+
+topic:
+  heritage:      ["наследие", "памятник", "охранный статус", "объект культурного наследия", "ОКН", "конструктивизм", "индустриальное наследие", "фасад", "входная группа", "воссоздание", "муляж", "фасадизм"]
+  demolition:    ["снос", "демонтаж", "сносят", "уничтожение", "уничтожают", "разрушение"]
+  development:   ["редевелопмент", "застройка", "девелопер", "квартал", "офисы", "технопарк", "жилой комплекс", "ГЗК", "ППТ", "проект планировки"]
+  civic:         ["петиция", "подписи", "градозащитники", "Архнадзор", "общественные обсуждения", "публичные слушания", "митинг", "пикет", "сговор", "мэрия"]
+
+exclude:         # drop when no core term matched
+  - "станция метро Электрозаводская"
+  - "Электрозаводская линия"   # verify phrasing in transport news
+  - "закрытие станции"
+  - "ДТП"
+  - "вакансия"
+
+entities_to_track:   # actors whose mentions we will want to tag (names to be confirmed in stage 0 tasks)
+  developer: ["Эталон", "Etalon Group"]
+  city: ["Мосгорнаследие", "Департамент культурного наследия", "Москомархитектура", "Мосгордума", "Собянин"]
+  civic: ["Архнадзор"]
+  # add confirmed activist groups, architects, journalists, deputies after T02/T07
+
+validation_log: []   # entries: {query, source, date, sample_n, precision, note}
