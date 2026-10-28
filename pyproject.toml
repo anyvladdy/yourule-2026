@@ -10,4 +10,9 @@ dependencies = [
     "selenium>=4.51.0,<5",
     "requests>=2.34.2,<3",
     "beautifulsoup4>=4.15.0,<5",
+    "pandas>=3.1.0,<4",
+    "pyarrow>=22.0.0",
+    "scikit-learn>=1.9.1,<2",
+    "transformers>=5.21.0,<6",
+    "torch>=2.14.1,<3",
 ]

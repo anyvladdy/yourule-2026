@@ -96,8 +96,9 @@ def parse_feed(html):
 
 def search(session, channel, term, since):
     before = None
+    query = {} if term == '*' else {'q': term}  # '*' reads the whole feed back to `since`
     while True:
-        posts = parse_feed(fetch(session, f'https://t.me/s/{channel}', {'q': term, **({'before': before} if before else {})}))
+        posts = parse_feed(fetch(session, f'https://t.me/s/{channel}', {**query, **({'before': before} if before else {})}))
         if not posts:
             return
         yield from (p for p in posts if p['published_at'][:10] >= since)
@@ -203,7 +204,7 @@ def collect_channel(session, driver_factory, channel, args, key, out):
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument('--channel', action='append', help='channel handle; repeatable; default: all channels from T01')
-    parser.add_argument('--term', action='append', help=f'search term; repeatable; default: {DEFAULT_TERMS}')
+    parser.add_argument('--term', action='append', help=f'search term; repeatable; "*" = whole feed; default: {DEFAULT_TERMS}')
     parser.add_argument('--since', default='2025-09-01', help='keep posts on or after this date, YYYY-MM-DD (default: 2025-09-01)')
     parser.add_argument('--max-comment-posts', type=int, help='open comments only under the N latest posts; for pilots')
     parser.add_argument('--no-comments', action='store_true', help='posts only, no browser')

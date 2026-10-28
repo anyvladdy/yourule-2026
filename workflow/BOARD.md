@@ -84,7 +84,7 @@ Branch `stage-1-collection`. No video content; residents' voices also from distr
 | T15 Media: relabel all 27 T03 articles with `docs/codebook.md` (`workflow/stage1/T15_media_relabel`) | Codex or local Qwen (user decides) | Oct 29 | ready |
 | T11 Processing: raw YouTube + Telegram → `data/processed/corpus.parquet` (`workflow/stage1/T11_processing`) | Codex | Oct 28–29 | in_progress: YouTube; Telegram pending full collection |
 | T06 fix: saved variants (22 terms) vs config (21), generator error | Codex | Oct 29 | not started |
-| Labelling: codebook `docs/codebook.md` v0 written; Claude 50%, Codex 25%, dsh 25%; user re-checks a random sample from each (D-20) | Claude, Codex, dsh, user | Oct 29–30 | codebook v0 ready; labelling starts after T11 |
+| Labelling (D-28): sample of ~1,200 by a local model via Ollama with `docs/codebook.md`; classifier for the rest; tone, topics, n-grams; zip archive for the user | Claude; user re-checks a sample | Oct 29–30 | waits for T11 with Telegram and VK, and for Ollama |
 | Analysis: timeline vs T04 events, stance, criticism lines, actors, message gap | Claude | Oct 30 | not started |
 
 In parallel: stage-0 fixes in `docs/`, report sections 1, 4, 5, 6. Budget with prices and the launch line before
