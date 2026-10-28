@@ -174,7 +174,7 @@ def log_run(out, record):
 
 
 def collect_channel(session, driver_factory, channel, args, key, out):
-    suffix = f'_pilot{args.max_comment_posts}' if args.max_comment_posts else ''
+    suffix = (f'_pilot{args.max_comment_posts}' if args.max_comment_posts else '') + (f'_{args.tag}' if args.tag else '')
     posts_path, comments_path = out / f'posts_{channel}{suffix}.jsonl', out / f'comments_{channel}{suffix}.jsonl'
     if posts_path.exists():
         return {'status': 'skipped_exists'}
@@ -207,6 +207,7 @@ def main():
     parser.add_argument('--since', default='2025-09-01', help='keep posts on or after this date, YYYY-MM-DD (default: 2025-09-01)')
     parser.add_argument('--max-comment-posts', type=int, help='open comments only under the N latest posts; for pilots')
     parser.add_argument('--no-comments', action='store_true', help='posts only, no browser')
+    parser.add_argument('--tag', help='added to output file names, for a repeat run on the same day')
     args = parser.parse_args()
 
     channels = args.channel or [re.sub(r'https://t\.me/', '', row['url']).strip('/')

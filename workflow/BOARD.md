@@ -77,9 +77,9 @@ Branch `stage-1-collection`. No video content; residents' voices also from distr
 | T13 District newspapers and residents' chats: find and read (`workflow/stage1/T13_district_voices`) | dsh (2nd session) | Oct 28–29 | accepted |
 | T12 Price benchmarks for budget lines (`workflow/stage1/T12_price_benchmarks`) | dsh | Oct 28–29 | accepted |
 | VK: global post search + communities, manual login in Brave incognito (`src/collectors/vk_web.py`) | Claude | Oct 28 | stopped after logout (D-26): 303 posts, 1,360 comments; 13 communities not covered |
-| Etalon's own channels: Telegram (collected), project site and press statements (T08) for the message gap; VK community not collected (D-26) | Claude | Oct 29 | ready |
+| Etalon's own channels: Telegram (collected), project site and press statements (T08) for the message gap; VK community not collected (D-26) | Claude | Oct 29 | done: `docs/etalon_channels.md` — no posts about the site in own channels during the conflict |
 | Wordstat and Google Trends export; petition signature snapshot (`Tasks_for_humans.md` 1–3) | user | Oct 28–29 | ready |
-| T14 Tenants, cultural spaces, deputies: public statements (`workflow/stage1/T14_tenants_deputies`) | dsh | Oct 28–29 | in_progress |
+| T14 Tenants, cultural spaces, deputies: public statements (`workflow/stage1/T14_tenants_deputies`) | dsh | Oct 28–29 | review_R1 |
 | T16 Dzen: Selenium pilot, full run only if useful (`workflow/stage1/T16_dzen`) | dsh (2nd session) | Oct 28–29 | in_progress |
 | T15 Media: relabel all 27 T03 articles with `docs/codebook.md` (`workflow/stage1/T15_media_relabel`) | Codex or local Qwen (user decides) | Oct 29 | ready |
 | T11 Processing: raw YouTube + Telegram → `data/processed/corpus.parquet` (`workflow/stage1/T11_processing`) | Codex | Oct 28–29 | in_progress: YouTube; Telegram pending full collection |
