@@ -37,11 +37,11 @@ Two more of the five largest comment sets are under videos that are not about th
 
 | Item | Value |
 |---|---|
-| Channels | 11 public channels from T01 |
+| Channels | 11 public channels from T01, plus 2 district channels from T13 (sosedi_preobrazhenskoe, sokolinaya_gora_vao) |
 | Method | channel search `t.me/s/<channel>?q=` for "Электрозавод" (Telegram matches all case forms; checked on the pilot) and "Система Сити"; comments from the public discussion widget |
 | Window | posts on or after 2025-09-01 |
 | Pilot | 2026-10-28: act_preobrajenka 24 posts, engineer_media 23 posts; comments opened under 3 posts |
-| Full run | not yet run |
+| Full run | 2026-10-28, `data/raw/telegram/2026-10-28/_run.json`, no errors: 13 channels, 140 posts, 1,464 comments. Most comments: moskvichmag 553, archnadzor_official 266, engineer_media 215, mskved 190. Group_etalon: 8 posts, 0 comments |
 | Not covered | closed chats and groups (need login); reactions |
 
 ## Still to add

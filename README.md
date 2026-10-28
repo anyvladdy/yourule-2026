@@ -76,6 +76,8 @@ Most documents come in two versions: one for people and one for the agents. They
 | The current stage | `workflow/stage0/README.md` | `workflow/stage0/T*/CARD.md` |
 | Starting an agent | `workflow/README.md` | `workflow/prompts/` |
 
+Tasks only a person can do (exports, launching agents, re-checks) are in `Tasks_for_humans.md`.
+
 Shared by everyone, on the stage branch: `workflow/BOARD.md` (who has which task), `docs/decisions.md`
 (what we decided and why), `docs/hypotheses.md` (what we want to test), `config/` (search terms and sources).
 

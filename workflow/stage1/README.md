@@ -16,6 +16,13 @@ Tasks:
 | T11 | Codex | One clean table of all posts and comments: no duplicates, authors replaced by codes, each item marked as on topic or not and inside or outside the June–October window |
 | T12 | dsh | Published prices for every kind of cost in the budget, with links, so each budget line has a source |
 | T13 | dsh, second session | Local newspapers (party branches, municipal papers) and residents' chats that discussed Электрозавод |
+| T14 | dsh | What tenants, cultural spaces and deputies said in public about the project |
+| T15 | Codex or a local Qwen | The 27 media articles labelled again with the shared guide `docs/codebook.md` |
+| T16 | dsh, second session | Dzen: a small test first; a full collection only if it finds something new |
+
+Also: VK posts and comments are collected by Claude in a browser where you log in yourself (no API, decision D-21),
+and Claude looks at Etalon's own channels to compare what the company said with what people heard. Your own tasks
+(Wordstat, Google Trends, petition counts, launching agents) are in `Tasks_for_humans.md`.
 
 Next, after T11: a shared guide for labelling posts and comments, then labelling split between Claude, Codex and dsh,
 with a random re-check by the user (decision D-20).
