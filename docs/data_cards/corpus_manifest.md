@@ -44,7 +44,18 @@ Two more of the five largest comment sets are under videos that are not about th
 | Full run | 2026-10-28, `data/raw/telegram/2026-10-28/_run.json`, no errors: 13 channels, 140 posts, 1,464 comments. Most comments: moskvichmag 553, archnadzor_official 266, engineer_media 215, mskved 190. Group_etalon: 8 posts, 0 comments |
 | Not covered | closed chats and groups (need login); reactions |
 
+## VK (Selenium in Brave incognito with the user's manual login, `src/collectors/vk_web.py`)
+
+| Item | Value |
+|---|---|
+| Runs | 2026-10-28, `data/raw/vk/2026-10-28/_run.json`: pilot, run 1, run v2 |
+| Method | global post search «Электрозавод» (relevance order, loads 20 per page at the bottom); post search inside communities (search button on the community page); comments under posts that mention the site, published on or after 2025-09-01 |
+| Communities searched | sokgor, club230930257 (T13); best_vao, vao_officiall, vao_moscow, vaonews, vostochnyiokrug, podsluh_preobr (run v2). vao_officiall and vostochnyiokrug returned no posts |
+| Result (deduplicated by id) | 303 posts, 297 mention the site; 92 from 2025-09-01, 75 from 2026-06-01. 1,360 comments, 1,163 from 2026-06-01, 698 distinct authors (hashes). Comments mostly under best_vao (832), global search (259), vao_moscow (252) |
+| Stopped | run v2 was stopped by hand at 13:43 UTC after the user was logged out of VK on another device (D-26). Not searched: prebr, janjilui, podsluh_lef, club180407106, club177781605, nine city-wide communities, Etalon's VK community |
+| Privacy | people only as salted hashes; mentions of people in texts replaced with `[user]`; communities keep their names |
+
 ## Still to add
 
-VK (Selenium with login, pilot first), district party newspapers (read by hand), the 27 media articles from T03 after
-relabelling. Each gets a section here before its numbers are used.
+District party newspapers and statements (T13, read by hand), tenants and deputies (T14), Dzen (T16, if the pilot finds
+material), the 27 media articles from T03 after relabelling (T15). Each gets a section here before its numbers are used.
