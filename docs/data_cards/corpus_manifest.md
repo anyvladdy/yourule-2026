@@ -70,6 +70,16 @@ Two more of the five largest comment sets are under videos that are not about th
 | Concentration | the largest publication holds 715 of 2,418 YouTube, 365 of 1,338 Telegram and 359 of 1,163 VK reactions |
 | Scripts and checks | `workflow/stage1/T11_processing/v2/` (build, NLP, tests, `out/build_checks.txt`); review `REVIEW_R1.md` |
 
+## Dzen (T16 collection, T17 processing; `data/processed/corpus_dzen.parquet`, not in git)
+
+| Item | Value |
+|---|---|
+| Collection | Dzen search «Электрозавод» in headless Brave without login, reader pace; stopped three times by SmartCaptcha (T16, D-33). Set: `data/raw/dzen/2026-10-28/` |
+| Rows | 1,009: 22 items (20 articles, 2 videos), 349 comments, 638 replies; all items from June 2026 on, so Dzen does not test H8 |
+| Analysis slice | 986 reactions in P3; one item holds 52.8% of them, three items 93.2% |
+| Dates | calendar days only (`date_precision=day`); comment years inferred from the collection date; one comment without a date |
+| Privacy | authors as salted hashes; addressee names at the start of replies replaced with `[user]` (56 rows) |
+
 ## Still to add
 
 District party newspapers and statements (T13, read by hand), tenants and deputies (T14), Dzen (T16, if the pilot finds

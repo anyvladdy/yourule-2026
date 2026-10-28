@@ -150,6 +150,8 @@ def context(df):
 
 
 def draw(args):
+    if (OUT / 'sample.parquet').exists() and not args.force:
+        sys.exit('sample.parquet exists and labels refer to its items; a new draw changes the sample. Use --force.')
     df = load_corpus()
     part = analysis_slice(df)
     check_slice(part)
@@ -374,6 +376,7 @@ def main():
     s = sub.add_parser('sample', help='draw the sample')
     s.add_argument('--size', type=int, default=1200, help='total size, split equally by platform (default 1200)')
     s.add_argument('--per-author', type=int, default=3, help='at most this many items per author (default 3)')
+    s.add_argument('--force', action='store_true', help='replace an existing sample')
     for name in ('label', 'evaluate', 'export'):
         p = sub.add_parser(name)
         p.add_argument('--model', default='qwen3:8b', help='model name for the backend (default qwen3:8b on Ollama)')

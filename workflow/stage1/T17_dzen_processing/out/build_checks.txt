@@ -1,0 +1,39 @@
+T17 Dzen: local processing into the corpus_v2 schema. No texts in this report.
+addressee_prefixes_replaced=56
+comment_without_date=1
+dropped_comment_without_item=0
+dropped_duplicate_comment=0
+dropped_duplicate_item=0
+dropped_rows=0
+output_comments=349
+output_posts=22
+output_replies=638
+output_rows=1009
+raw_comments=987
+raw_items=22
+reply_rows_with_addressee=56
+rows_with_changed_text=58
+PASS schema_equal_to_corpus_v2
+PASS pandas_concat_with_corpus_v2
+PASS unique_ids
+PASS parents_exist
+PASS threads_exist
+PASS context_complete_all_rows
+PASS no_published_at_without_time
+PASS day_rows_keep_day
+PASS in_window_from_day
+PASS period_from_day
+PASS no_unmasked_contact
+PASS no_addressee_left_at_reply_start
+PASS display_names_only_for_posts
+PASS counters_integer_or_null
+PASS views_not_carried
+PASS raw_item_count
+PASS raw_comment_count
+PASS output_rows_match_raw
+PASS raw_inputs_unchanged
+input_sha256=comments.jsonl:667d927dd2ba062fd99cf51c3d919930695067cef72b81bce4c1a9a7ca011273
+input_sha256=items.jsonl:d041daa033deb78172ae94d4abf2659d4e6e5aa51908d2ee4dd55e4653ae1c6a
+parquet_sha256=4678cc4977cf01d74dc2b1fc962eec4526ede33b1fc2dab029a505feecbe32ab
+PASS parquet_read_back
+PASS all_checks

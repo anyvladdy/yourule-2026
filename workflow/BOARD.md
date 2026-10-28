@@ -81,11 +81,11 @@ Branch `stage-1-collection`. No video content; residents' voices also from distr
 | Wordstat and Google Trends export; petition signature snapshot (`Tasks_for_humans.md` 1–3) | user | Oct 28–29 | ready |
 | T14 Tenants, cultural spaces, deputies: public statements (`workflow/stage1/T14_tenants_deputies`) | dsh | Oct 28–29 | review_R1 |
 | T16 Dzen: Selenium pilot, full run only if useful (`workflow/stage1/T16_dzen`) | dsh (2nd session) | Oct 28–29 | accepted: 22 items, 987 comments, all from June 2026; see REVIEW_R1.md |
-| T17 Dzen processing into the corpus_v2 schema (`workflow/stage1/T17_dzen_processing`) | dsh | Oct 28–29 | review_R1: 1009 rows (22/349/638); P3 top item 52.84%, top three 93.20%; see HANDOFF |
+| T17 Dzen processing into the corpus_v2 schema (`workflow/stage1/T17_dzen_processing`) | dsh | Oct 28–29 | accepted: 1,009 rows, 986 reactions in P3; see REVIEW_R1.md |
 | T15 Media: relabel all 27 T03 articles with `docs/codebook.md` (`workflow/stage1/T15_media_relabel`) | Codex or local Qwen (user decides) | Oct 29 | ready |
 | T11 Processing: YouTube + Telegram + VK → `data/processed/corpus_v2.parquet` (`workflow/stage1/T11_processing`) | Codex | Oct 28–29 | accepted after R2: 9 descriptive themes, n-grams once per author; see REVIEW_R2.md |
 | T06 fix: saved variants (22 terms) vs config (21), generator error | Codex | Oct 29 | not started |
-| Labelling (D-28, D-34): sample of ~1,200 by a language model with `docs/codebook.md`; classifier for the rest; tone, topics, n-grams; zip archive for the user | user via OpenRouter (`src/analysis/label_sample.py`); user re-checks a sample | Oct 29–30 | ready: sample of 1,200 drawn; local models rejected (D-34); Dzen joins after T17 |
+| Labelling (D-28, D-34): sample of ~1,200 by a language model with `docs/codebook.md`; classifier for the rest; tone, topics, n-grams; zip archive for the user | user via OpenRouter (`src/analysis/label_sample.py`); user re-checks a sample | Oct 29–30 | ready: sample of 1,200 drawn; local models rejected (D-34); Dzen (T17) to be added to the sample |
 | Analysis: timeline vs T04 events, stance, criticism lines, actors, message gap | Claude | Oct 30 | not started |
 
 In parallel: stage-0 fixes in `docs/`, report sections 1, 4, 5, 6. Budget with prices and the launch line before

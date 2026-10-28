@@ -1,0 +1,11 @@
+summary_type,platform,source_kind,row_type,relevant,relevance_reason,in_window,row_count,unique_authors
+group,dzen,media,comment,True,thread_context,True,276,260
+group,dzen,media,post,True,post_mentions,True,17,0
+group,dzen,media,reply,True,thread_context,True,514,155
+group,dzen,person,comment,True,thread_context,True,60,60
+group,dzen,person,post,True,post_mentions,True,3,3
+group,dzen,person,reply,True,thread_context,False,1,1
+group,dzen,person,reply,True,thread_context,True,123,46
+group,dzen,unknown,comment,True,thread_context,True,13,13
+group,dzen,unknown,post,True,post_mentions,True,2,0
+platform_authors,dzen,,,,,,1009,440
