@@ -78,6 +78,7 @@ def main():
               'total_shown': None, 'stopped': None, 'errors': []}
 
     from selenium import webdriver
+    from selenium.common.exceptions import WebDriverException
     options = webdriver.ChromeOptions()
     for flag in ('--headless=new', '--incognito', '--window-size=1200,1000'):
         options.add_argument(flag)
@@ -92,7 +93,17 @@ def main():
                 offset += args.step
                 continue
             time.sleep(random.uniform(*args.pause))
-            driver.get(BASE if offset == 0 else f'{BASE}index.php?offset={offset}')
+            # A network error or a page that does not load is tried again up to 3 times with longer pauses;
+            # a block page is not an error and is never retried.
+            for attempt in range(4):
+                try:
+                    driver.get(BASE if offset == 0 else f'{BASE}index.php?offset={offset}')
+                    break
+                except WebDriverException as error:
+                    if attempt == 3:
+                        raise
+                    print(f'offset {offset}: {type(error).__name__}, retry {attempt + 1} of 3', flush=True)
+                    time.sleep(30 * (attempt + 1))
             time.sleep(random.uniform(1.5, 3.0))  # let the page settle, as a reader would
             html = driver.page_source
             if BLOCKED.search(html[:5000]) or BLOCKED.search(driver.title or ''):
@@ -122,7 +133,8 @@ def main():
         runs_path = out / '_run.json'
         runs = json.loads(runs_path.read_text(encoding='utf-8')) if runs_path.exists() else []
         runs_path.write_text(json.dumps(runs + [record], ensure_ascii=False, indent=1), encoding='utf-8')
-    return 1 if record['stopped'] or record['errors'] else 0
+    # Exit 2: stopped by a block or captcha (ask the user); 1: other error (safe to resume); 0: done.
+    return 2 if record['stopped'] else 1 if record['errors'] else 0
 
 
 if __name__ == '__main__':
