@@ -27,7 +27,7 @@ review happens within hours of a handoff; the gate summary is written the same d
 | T01 | Telegram + video sources | dsh (2nd session) | now | R1 | review_R1 | Claude |
 | T03 | Media + criticism lines | Claude (was Gemini, D-16) | now | R2 | review_R2 | Codex |
 | T05 | Analogous cases (4–6) | dsh | now | R1 | review_R1 | Claude |
-| T07 | Merge into registry format | OpenCode/gemma4 | card finalised after T01–T03, T08 accepted | – | draft | Claude |
+| T07 | Merge into registry format | OpenCode/gemma4 | card finalised after T01–T03, T08 accepted | – | cancelled 2026-10-29: replaced by the merged tables in `docs/project_facts/` | Claude |
 
 Load: dsh T04 + T01 in parallel, then T08 and T05; Gemini T02 + T03 in parallel;
 Codex T06 (script-based), local model T07. Planner work: Claude integrates; Codex runs scripted checks.
@@ -64,7 +64,12 @@ T07: проверка отложена до появления результа�
       campaign KPI baselines, 8-page/10,000-character/render checks for the report
 
 ### Stage 0 summary
-_(≤ 20 lines, written at the gate: an index of accepted artifacts, ids, uncertainties and decisions)_
+Closed with exceptions on 2026-10-29 (team agreed, `docs/discussion_scheme_board_appendices.md` §2). 3 of 8 gate items
+are checked. Codex fixes applied where the report uses the facts: T04 (D-41), report wording and main-text sources
+(D-44, D-45). Not applied, and why the report does not need them: T03 criticism counts (replaced by the codebook
+labelling of the sample, D-38, D-46); T06 generator (collection finished); T07 registry (replaced by
+`docs/project_facts/`); hypotheses header format (statuses kept in `docs/analysis_findings.md`); T05 analogues are
+not used in the main text (H7 open).
 
 ## Stages 1–3 — cut collection, processing and analysis, Oct 28–30 (D-19, D-20, D-21)
 
@@ -82,13 +87,13 @@ Branch `stage-1-collection`. No video content; residents' voices also from distr
 | T14 Tenants, cultural spaces, deputies: public statements (`workflow/stage1/T14_tenants_deputies`) | dsh | Oct 28–29 | integrated: 12 statements; no deputy spoke in public; see REVIEW_R1.md |
 | T16 Dzen: Selenium pilot, full run only if useful (`workflow/stage1/T16_dzen`) | dsh (2nd session) | Oct 28–29 | accepted: 22 items, 987 comments, all from June 2026; see REVIEW_R1.md |
 | T17 Dzen processing into the corpus_v2 schema (`workflow/stage1/T17_dzen_processing`) | dsh | Oct 28–29 | accepted: 1,009 rows, 986 reactions in P3; see REVIEW_R1.md |
-| T15 Media: relabel all 27 T03 articles with `docs/codebook.md` (`workflow/stage1/T15_media_relabel`) | Codex or local Qwen (user decides) | Oct 29 | ready |
+| T15 Media: relabel all 27 T03 articles with `docs/codebook.md` (`workflow/stage1/T15_media_relabel`) | Codex or local Qwen (user decides) | Oct 29 | cancelled 2026-10-29: the report gives no shares by media article |
 | T11 Processing: YouTube + Telegram + VK → `data/processed/corpus_v2.parquet` (`workflow/stage1/T11_processing`) | Codex | Oct 28–29 | accepted after R2: 9 descriptive themes, n-grams once per author; see REVIEW_R2.md |
-| T06 fix: saved variants (22 terms) vs config (21), generator error | Codex | Oct 29 | not started |
-| Labelling (D-28, D-34): sample of ~1,200 by a language model with `docs/codebook.md`; classifier for the rest; tone, topics, n-grams; zip archive for the user | user via Cheaper Inference or OpenRouter (`src/analysis/label_sample.py`, D-37); user re-checks a sample | Oct 29–30 | done 2026-10-29: 1,522 labels by gemini-3.8-flash (88% on 60 reference items, D-38), shares in `reports/tables/stance_*.csv`, `lines_*.csv`; re-check of 120 done 2026-10-29 by the user (entered by Codex): stance 90%, kappa 0.81 (D-46); sample of 1,522 (400 YouTube, Telegram, VK each + 300 Dzen, D-35; Telegram case thread 22, D-36); local models rejected (D-34) |
+| T06 fix: saved variants (22 terms) vs config (21), generator error | Codex | Oct 29 | cancelled 2026-10-29: collection is finished, the report does not depend on it |
+| Labelling (D-28, D-34): sample of ~1,200 by a language model with `docs/codebook.md`; classifier for the rest; tone, topics, n-grams; zip archive for the user | user via Cheaper Inference or OpenRouter (`src/analysis/label_sample.py`, D-37); user re-checks a sample | Oct 29–30 | done for the sample 2026-10-29 (classifier for all 5,905 texts and the zip archive cancelled: the sample covers every number in the report): 1,522 labels by gemini-3.8-flash (88% on 60 reference items, D-38), shares in `reports/tables/stance_*.csv`, `lines_*.csv`; re-check of 120 done 2026-10-29 by the user (entered by Codex): stance 90%, kappa 0.81 (D-46); sample of 1,522 (400 YouTube, Telegram, VK each + 300 Dzen, D-35; Telegram case thread 22, D-36); local models rejected (D-34) |
 | T18 Speech register and self-disclosure × stance: who is dissatisfied (`workflow/stage1/T18_speech_register`, D-39) | Codex | Oct 29–30 | integrated: `untestable`, markers cover 2.0% and 3.9% of labelled authors (< 5%); see REVIEW_R1.md |
-| Analysis: timeline vs T04 events, stance, criticism lines, actors, message gap | Claude | Oct 29–30 | done except actors (H2): `docs/analysis_findings.md`; signer occupations and daily timeline after the Archi.ru collection |
-| Report drafts s0–s7, appendices A and B | Claude | Oct 29–31 | drafts v0/v1: 8,347 of 10,000 characters; .docx and page check on Oct 31 |
+| Analysis: timeline vs T04 events, stance, criticism lines, actors, message gap | Claude | Oct 29–30 | done: `docs/analysis_findings.md`; actors (H2) not analysed, stated as a limitation in the methods appendix; signer occupations and daily timeline after the Archi.ru collection |
+| Report drafts s0–s7, appendices A and B | Claude | Oct 29–31 | all eight parts drafted, 9,699 of 10,000 characters (`check_length.py`, 2026-10-29); team decisions on the council, cats and scheme fallback included (D-48–D-50); .docx and page check next |
 
 In parallel: stage-0 fixes in `docs/`, report sections 1, 4, 5, 6. Budget with prices and the launch line before
 Nov 1 comes first (Codex review P13).

@@ -5,7 +5,7 @@
 Пустая дата: ссылка взята из заметки без даты открытия; перед цитированием открыть заново.
 Отметка R12: издание признано нежелательным в России; в отчёте не цитируется.
 
-Всего ссылок: 131; с датой открытия: 126.
+Всего ссылок: 133; с датой открытия: 128.
 
 | URL | Открыт | Где используется |
 |---|---|---|
@@ -99,15 +99,17 @@
 | https://t.me/mskved/1805 |  | audiences.md |
 | https://t.me/mskved/1840 |  | audiences.md |
 | https://t.me/s/Group_etalon | 2026-10-29 | etalon_channels.md; проверка фактов отчёта F23 |
+| https://t.me/s/engineer_media/386 | 2026-10-29 | проверка фактов отчёта F27 |
 | https://t.me/sokolinaya_gora_vao | 2026-10-28 | T13 чаты Реальные Соколинцы | Соколиная Гора |
 | https://t.me/sokolinaya_gora_vao/25239 | 2026-10-28 | T13 чаты Реальные Соколинцы | Соколиная Гора |
 | https://t.me/sosedi_preobrazhenskoe | 2026-10-28 | T13 чаты СОСЕДИ Преображенское |
 | https://t.me/sosedi_preobrazhenskoe/4230 | 2026-10-28 | T13 чаты СОСЕДИ Преображенское |
-| https://takiedela.ru/2026/09/zdes-byl-svet/ | 2026-10-28 | T14 высказывания Проект «Красный Вольфрам» (иммерсивные э; T14 высказывания Студия My Pole Space (танец на пилоне); audiences.md |
+| https://takiedela.ru/2026/09/zdes-byl-svet/ | 2026-10-29 | T14 высказывания Проект «Красный Вольфрам» (иммерсивные э; T14 высказывания Студия My Pole Space (танец на пилоне); audiences.md; проверка фактов отчёта F28 |
 | https://team-b.ru/ceny/stoimost-targetingovoy-reklamy/ | 2026-10-28 | цены K09 |
 | https://theblueprint.ru/news/40364 | 2026-10-22 | СМИ A08 |
 | https://theblueprint.ru/news/40411 | 2026-10-22 | СМИ A12; хронология 2026-06-24 |
 | https://theblueprint.ru/news/40684 | 2026-10-22 | СМИ A20 |
+| https://trashbox.ru/link/dobro-ru-android | 2026-10-29 | проверка фактов отчёта F29 |
 | https://vfokuse.mail.ru/articles/69627539-novodel-vmesto-istorii-kak-snos-elektrozavoda-vozmutil-arhitektorov-i-gorozhan/ | 2026-10-22 | СМИ A09 |
 | https://vm.ru/news/1343334-arhitekturnyj-oblik-elektrozavoda-sohranyat-pri-obnovlenii-territorii-kompleksa | 2026-10-22 | СМИ A21; проверка брифа C05 |
 | https://www.bicotender.ru/sport-otdyx-turizm/okazanie-uslug-centralnogo-vedushhego-moderatora-g-moskva-tender338650762.html | 2026-10-28 | цены K16 |
@@ -118,7 +120,7 @@
 | https://www.gazeta.ru/social/news/2026/07/24/28964803.shtml | 2026-10-26 | проверка фактов отчёта F22; хронология 2026-07-24 |
 | https://www.likeni.ru/events/kak-izmenilas-stoimost-kreativnykh-uslug-za-2025-god-issledovanie-akar/ | 2026-10-28 | цены K01 |
 | https://www.m24.ru/news/09092026/939320 | 2026-10-29 | СМИ A26; заявления компании S06; проверка фактов отчёта F17 |
-| https://www.m24.ru/news/17072026/921120 | 2026-10-29 | заявления компании S04; проверка фактов отчёта F06 |
+| https://www.m24.ru/news/17072026/921120 | 2026-10-29 | заявления компании S04; проверка фактов отчёта F06; проверка фактов отчёта F26 |
 | https://www.m24.ru/news/24082026/933860 | 2026-10-22 | заявления компании S05 |
 | https://www.m24.ru/news/26062026/914430 | 2026-10-22 | СМИ A14; заявления компании S03 |
 | https://www.m24.ru/news/30092026/947363 | 2026-10-29 | заявления компании S07; проверка фактов отчёта F18 |
