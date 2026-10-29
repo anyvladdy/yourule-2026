@@ -84,3 +84,14 @@ Two more of the five largest comment sets are under videos that are not about th
 
 District party newspapers and statements (T13, read by hand), tenants and deputies (T14), Dzen (T16, if the pilot finds
 material), the 27 media articles from T03 after relabelling (T15). Each gets a section here before its numbers are used.
+
+## Archi.ru open letter signatures (D-42, D-43; `src/collectors/archi_petition.py`)
+
+| Item | Value |
+|---|---|
+| Run | 2026-10-29, `data/raw/petitions/2026-10-29/archi_signatures.jsonl` and `_run.json`: 99 pages, no block, no errors |
+| Content | 19,752 signatures, numbers 1–19,752 without gaps; 25.06–28.10.2026 (Moscow time) |
+| Kept | number, self-described occupation (79% filled), time, comment (4,017). Names dropped while parsing, never stored |
+| Snapshot | P01 19,752, P02 change.org 3,682, P03 «Яблоко» no counter (user, 2026-10-29, `snapshot.csv`) |
+| Limits | a signature is not a person; occupation is optional and unchecked; only opponents sign |
+| Outputs | `reports/tables/petition_occupations.csv`, `petition_occupation_top.csv`, `petition_daily.csv`, `daily_timeline.csv`, `signature_peaks.csv` |
