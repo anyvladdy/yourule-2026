@@ -4,6 +4,7 @@ Run from the repository root. Lines are priced as unit_cost_rub × qty, except:
   Страховые взносы  = --insurance-rate × payroll (Оплата труда) of the same month
   НДС               = --vat-rate × purchases of the same month (all lines except payroll, contributions, VAT, reserve)
   Резерв            = --reserve-share × everything else, unless the line has its own price
+Each line is rounded to whole roubles before summing, so the CSV lines add up to the printed total.
 Prints totals by category and by month and lists lines that still miss a price or a quantity.
 Exit code 1 if the total is over the limit or a rate is missing; --write fills total_rub in the CSV.
 """
@@ -44,7 +45,7 @@ def main():
         if cost is None or qty is None:
             missing.append(row['line_id'])
             continue
-        totals[row['line_id']] = cost * qty
+        totals[row['line_id']] = round(cost * qty)
         (payroll if row['category'] == PAYROLL else purchases)[row['phase']] += cost * qty
 
     problems = set()
@@ -55,7 +56,7 @@ def main():
                 problems.add(f'{row["category"]}: rate not set')
                 continue
             base = payroll if row['category'] == INSURANCE else purchases
-            totals[row['line_id']] = rate * base[row['phase']]
+            totals[row['line_id']] = round(rate * base[row['phase']])
     for category, base in ((INSURANCE, payroll), (VAT, purchases)):
         lines = {row['phase'] for row in rows if row['category'] == category}
         problems |= {f'{category}: no line for {phase}, its base is not taxed' for phase in base if phase not in lines}
@@ -63,7 +64,8 @@ def main():
     for row in rows:
         if row['category'] == RESERVE:
             own = number(row['unit_cost_rub'])
-            totals[row['line_id']] = own * (number(row['qty']) or 1) if own is not None else args.reserve_share * subtotal
+            totals[row['line_id']] = round(own * (number(row['qty']) or 1) if own is not None
+                                           else args.reserve_share * subtotal)
 
     by_category, by_month = defaultdict(float), defaultdict(float)
     for row in rows:
