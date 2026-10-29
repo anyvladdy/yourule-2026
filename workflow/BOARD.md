@@ -87,7 +87,8 @@ Branch `stage-1-collection`. No video content; residents' voices also from distr
 | T06 fix: saved variants (22 terms) vs config (21), generator error | Codex | Oct 29 | not started |
 | Labelling (D-28, D-34): sample of ~1,200 by a language model with `docs/codebook.md`; classifier for the rest; tone, topics, n-grams; zip archive for the user | user via Cheaper Inference or OpenRouter (`src/analysis/label_sample.py`, D-37); user re-checks a sample | Oct 29–30 | done 2026-10-29: 1,522 labels by gemini-3.8-flash (88% on 60 reference items, D-38), shares in `reports/tables/stance_*.csv`, `lines_*.csv`; re-check sheet of 120 for the user; sample of 1,522 (400 YouTube, Telegram, VK each + 300 Dzen, D-35; Telegram case thread 22, D-36); local models rejected (D-34) |
 | T18 Speech register and self-disclosure × stance: who is dissatisfied (`workflow/stage1/T18_speech_register`, D-39) | Codex | Oct 29–30 | integrated: `untestable`, markers cover 2.0% and 3.9% of labelled authors (< 5%); see REVIEW_R1.md |
-| Analysis: timeline vs T04 events, stance, criticism lines, actors, message gap | Claude | Oct 30 | not started |
+| Analysis: timeline vs T04 events, stance, criticism lines, actors, message gap | Claude | Oct 29–30 | done except actors (H2): `docs/analysis_findings.md`; signer occupations and daily timeline after the Archi.ru collection |
+| Report drafts s0–s7, appendices A and B | Claude | Oct 29–31 | drafts v0/v1: 8,347 of 10,000 characters; .docx and page check on Oct 31 |
 
 In parallel: stage-0 fixes in `docs/`, report sections 1, 4, 5, 6. Budget with prices and the launch line before
 Nov 1 comes first (Codex review P13).
