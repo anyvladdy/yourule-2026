@@ -3,8 +3,9 @@
 Run from the repository root: .venv/bin/python src/collectors/archi_petition.py
 The list is public: https://archi.ru/files/misc/inquiry/19/ shows 200 signatures per page, newest first, pages by
 `index.php?offset=N`. Plain HTTP requests get 403 from the host's protection, so pages are read in headless Chrome
-with a clean incognito profile at reader pace (random pause before every page). A block page or a captcha stops the
-run; it is not worked around (AGENTS §3). The run prints the offset to resume from.
+with a clean incognito profile at reader pace (random pause before every page). On a block page or a captcha the
+browser is closed and, after a cooldown of 10–20 minutes, a new session resumes from the same page, at most 3 times
+per run (D-43). Captchas are not solved and the IP address is not changed. The run prints the offset to resume from.
 
 Each signature line is «<n>. <name>[, <occupation>], DD.MM.YYYY HH:MM:SS» with an optional comment below. The name
 is dropped while parsing and never stored. Kept: number, self-described occupation, time (Moscow), comment.
@@ -68,6 +69,9 @@ def main():
     parser.add_argument('--pause', type=float, nargs=2, default=(8.0, 15.0), metavar=('MIN', 'MAX'),
                         help='random pause before each page, seconds (default 8 15)')
     parser.add_argument('--date', default=datetime.now(MSK).strftime('%Y-%m-%d'), help='output folder date')
+    parser.add_argument('--block-restarts', type=int, default=3, help='restarts after a block or captcha (default 3)')
+    parser.add_argument('--cooldown', type=float, nargs=2, default=(10.0, 20.0), metavar=('MIN', 'MAX'),
+                        help='minutes to wait before a restart after a block (default 10 20)')
     args = parser.parse_args()
 
     out = ROOT / 'data/raw/petitions' / args.date
@@ -75,15 +79,20 @@ def main():
     path = out / 'archi_signatures.jsonl'
     done = {json.loads(line)['offset'] for line in path.open(encoding='utf-8')} if path.exists() else set()
     record = {'version': VERSION, 'started': now(), 'params': vars(args), 'pages': 0, 'signatures': 0,
-              'total_shown': None, 'stopped': None, 'errors': []}
+              'total_shown': None, 'block_restarts': [], 'stopped': None, 'errors': []}
 
     from selenium import webdriver
     from selenium.common.exceptions import WebDriverException
     options = webdriver.ChromeOptions()
     for flag in ('--headless=new', '--incognito', '--window-size=1200,1000'):
         options.add_argument(flag)
-    driver = webdriver.Chrome(options=options)
-    driver.set_page_load_timeout(60)
+
+    def new_driver():
+        browser = webdriver.Chrome(options=options)
+        browser.set_page_load_timeout(60)
+        return browser
+
+    driver = new_driver()
     try:
         offset = args.start
         while True:
@@ -107,7 +116,15 @@ def main():
             time.sleep(random.uniform(1.5, 3.0))  # let the page settle, as a reader would
             html = driver.page_source
             if BLOCKED.search(html[:5000]) or BLOCKED.search(driver.title or ''):
-                raise Stop(f'block or captcha at offset {offset}')
+                if len(record['block_restarts']) >= args.block_restarts:
+                    raise Stop(f'block or captcha at offset {offset} after {args.block_restarts} restarts')
+                wait = random.uniform(*args.cooldown)
+                record['block_restarts'].append({'offset': offset, 'at': now(), 'cooldown_min': round(wait, 1)})
+                print(f'offset {offset}: block or captcha; new browser session in {wait:.0f} min', flush=True)
+                driver.quit()
+                time.sleep(wait * 60)
+                driver = new_driver()
+                continue  # same offset
             rows, total = parse(html, offset)
             record['total_shown'] = total or record['total_shown']
             if not rows:
@@ -133,7 +150,7 @@ def main():
         runs_path = out / '_run.json'
         runs = json.loads(runs_path.read_text(encoding='utf-8')) if runs_path.exists() else []
         runs_path.write_text(json.dumps(runs + [record], ensure_ascii=False, indent=1), encoding='utf-8')
-    # Exit 2: stopped by a block or captcha (ask the user); 1: other error (safe to resume); 0: done.
+    # Exit 2: still blocked after the restarts; 1: other error (safe to resume); 0: done.
     return 2 if record['stopped'] else 1 if record['errors'] else 0
 
 
