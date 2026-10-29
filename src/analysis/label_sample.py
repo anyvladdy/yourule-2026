@@ -424,7 +424,7 @@ def export(args):
     name = labels_path(args).stem.removeprefix('labels_')
     labels = pd.read_json(labels_path(args), lines=True).drop_duplicates('id', keep='last')
     join = lambda values: ';'.join(values)
-    table = pd.DataFrame({'id': labels.id, 'stance': labels.stance, 'flags': labels.flags.map(join),
+    table = pd.DataFrame({'id': labels.id, 'stance': labels.stance, 'flags': labels['flags'].map(join),
                           'criticism_lines': labels.criticism_lines.map(join), 'pro_lines': labels.pro_lines.map(join),
                           'note': labels.note})
     table.to_csv(OUT / f'labels_{name}.csv', index=False)
