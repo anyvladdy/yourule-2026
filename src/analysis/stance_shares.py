@@ -5,9 +5,12 @@ Reads data/interim/labelling/sample.parquet and labels_<model>.jsonl; writes agg
 (no texts, no author hashes, so the tables can go to git).
 
 Shares are among reactions about the site: rows flagged `off_topic` are counted and then left out.
-Inside a platform the sample is a simple random draw, so rows count equally. Across platforms each row carries its
-platform weight (slice size / sample size), so totals estimate the whole slice of 5,905 reactions; the 95% interval
-then uses Kish's effective sample size. The case thread (D-36) is reported on its own line and never mixed in.
+Inside a platform the sample is a random draw with at most 3 rows per author, so rows count equally and messages of
+very active authors are under-drawn. Across platforms each row carries its platform weight (slice size / sample size).
+Totals are shares of this author-capped sample, not an estimate of all 5,905 reactions (Codex F1); the 95% interval
+uses Kish's effective sample size and ignores the author cap, so it is approximate. On 2026-10-29 the oppose share was
+65.7% weighted, 66.2% unweighted and 66.1% with each author counted once. The case thread (D-36) is reported on its
+own line and never mixed in.
 """
 import argparse
 import math
