@@ -111,14 +111,18 @@ go to `data/raw/<source>/<date>/`, which is not in git either.
 Setup once: `uv sync` (installs the pinned packages into `.venv`). Then, from the repository root:
 
 1. `.venv/bin/python src/analysis/budget_check.py --vat-rate 0.22 --insurance-rate 0.30 --reserve-share 0.10 --write`
-   recomputes taxes and reserve in `deliverables/budget.csv` and checks the 10 million limit.
+   recomputes taxes and reserve in `deliverables/budget.csv` and checks the 10 million limit; add
+   `--csv deliverables/budget_variant_b.csv` for variant Б (consultants paid separately).
 2. `.venv/bin/python src/report/figure_waves.py` and `src/report/figure_gantt.py` draw figure 1 and the calendar
    (the calendar also goes to `deliverables/appendix_timeline.pdf`, a separate file for the client).
-3. `.venv/bin/python src/report/build_appendices.py` writes appendices В, Г and Е from the tables.
+3. `.venv/bin/python src/report/build_appendices.py` writes appendices В1, В2, Г and Е from the tables.
 4. `.venv/bin/python src/report/check_length.py` counts the main text (limit 10,000 characters).
 5. `.venv/bin/python src/report/build_docx.py` builds `deliverables/Elektrozavod_report.docx`.
    Check the page count in Word: the main text must fit 8 pages.
 6. `.venv/bin/python src/report/sources.py` rebuilds `docs/sources.md`.
+7. `.venv/bin/python src/report/make_final.py` rebuilds `final/`, the files sent to the team: the report in Word and
+   PDF, the calendar PDF and an Excel file with both budgets and the calendar. The PDF needs LibreOffice with Times New
+   Roman in its font folder, otherwise it substitutes a look-alike font.
 
 The report text lives in `deliverables/drafts/`: only the part between `<!-- text -->` marks goes into the file.
 
