@@ -5,6 +5,8 @@ Takes the text between <!-- text --> and <!-- /text --> in deliverables/drafts/s
 headings included. Appendices (appendix_*.md) are outside the limit and are only listed. Page count is checked on the
 .docx later; here a rough estimate assumes 1,800 characters per page of Times New Roman 12 with single spacing.
 Exit code 1 if the total is over the limit or a section is missing or has no marked text.
+This is the drafts count. The Word file adds section numbers and the figure caption: the final count is the one
+printed by src/report/build_docx.py (with and without paragraph breaks).
 """
 import argparse
 import re

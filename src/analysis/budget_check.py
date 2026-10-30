@@ -30,9 +30,10 @@ def main():
     parser.add_argument('--insurance-rate', type=float, help='effective employer rate, e.g. 0.30; source in T12 (K19)')
     parser.add_argument('--reserve-share', type=float, default=0.0, help='reserve as a share of all other costs')
     parser.add_argument('--write', action='store_true', help='write computed total_rub back to the CSV')
+    parser.add_argument('--csv', default=str(BUDGET), help='budget table (default deliverables/budget.csv)')
     args = parser.parse_args()
 
-    with BUDGET.open(encoding='utf-8', newline='') as stream:
+    with Path(args.csv).open(encoding='utf-8', newline='') as stream:
         reader = csv.DictReader(stream)
         fields, rows = reader.fieldnames, list(reader)
 
@@ -90,7 +91,7 @@ def main():
         for row in rows:
             if row['line_id'] in totals:
                 row['total_rub'] = f'{totals[row["line_id"]]:.0f}'
-        with BUDGET.open('w', encoding='utf-8', newline='') as stream:
+        with Path(args.csv).open("w", encoding='utf-8', newline='') as stream:
             writer = csv.DictWriter(stream, fieldnames=fields, lineterminator='\n')
             writer.writeheader()
             writer.writerows(rows)

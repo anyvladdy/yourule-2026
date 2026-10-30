@@ -27,6 +27,7 @@ TABLES = [
     ('workflow/stage1/T13_district_voices/out/newspapers.csv', 'paper', ['url'], 'T13 газеты'),
     ('workflow/stage1/T14_tenants_deputies/out/statements.csv', 'actor', ['url'], 'T14 высказывания'),
     ('docs/report_fact_check.csv', 'fact_id', ['source_url'], 'проверка фактов отчёта'),
+    ('docs/project_facts/prices_variant_b.csv', 'key', ['source_url'], 'цены варианта Б'),
 ]
 NOTES = ['docs/audiences.md', 'docs/etalon_channels.md', 'docs/analog_cases.md', 'docs/decisions.md',
          'deliverables/budget.csv']

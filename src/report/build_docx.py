@@ -4,8 +4,9 @@ Run from the repository root after build_appendices.py:
 .venv/bin/python src/report/build_docx.py                → deliverables/Elektrozavod_report.docx
 .venv/bin/python src/report/build_docx.py --main-only    → title page and main text only (for the page check)
 Only the text between <!-- text --> marks is used. Supported markup: "## " heading, paragraphs, "1. " list items,
-"**whole line**" in bold, pipe tables, [[figure:path|caption|max height cm]], [[pagebreak]]. Times New Roman 12 for the text (line spacing 1.15 in the main text), 9 in wide tables.
-Prints the character count of the main text with spaces (title page and appendices excluded).
+"**whole line**" in bold, pipe tables, [[figure:path|caption|max height cm]], [[pagebreak]]. Times New Roman 12 for all main-text elements (line spacing 1.15), 9 in wide appendix tables.
+Prints the character count of the main text with spaces (title page and appendices excluded), also with one
+character per paragraph break, the stricter count Codex used.
 """
 import argparse
 import re
@@ -26,7 +27,7 @@ MAIN = ['s0_summary', 's1_situation', 's2_image_concept', 's3_audiences', 's4_st
         's6_budget', 's7_plan']
 # (draft, landscape)
 APPENDICES = [('appendix_a_stakeholders', True), ('appendix_b_matrix', True), ('appendix_c_budget', True),
-              ('appendix_d_calendar', True), ('appendix_e_methods', False), ('appendix_f_sources', True),
+              ('appendix_c2_budget_b', True), ('appendix_d_calendar', True), ('appendix_e_methods', False), ('appendix_f_sources', True),
               ('appendix_g_launch', False)]
 FIGURE_1 = ('reports/figures/fig1_waves.png',
             'Рис. 1. Поиск «Электрозавод» в Яндексе (Москва и область) и подписи под письмом «Архи.ру» по неделям, '
@@ -79,7 +80,7 @@ def heading(doc, text, level=1):
     fmt = p.paragraph_format
     fmt.space_before, fmt.space_after = Pt(10 if level == 1 else 6), Pt(6)
     fmt.keep_with_next = True
-    set_font(p.add_run(text), 14 if level == 1 else 12, bold=True, colour=RGBColor(0, 0, 0))
+    set_font(p.add_run(text), 12, bold=True, colour=RGBColor(0, 0, 0))
     return p
 
 
@@ -142,7 +143,7 @@ def add_figure(doc, path, caption, width_cm, max_height_cm=14.0):
         aspect = im.width / im.height
     p = para(doc, align=WD_ALIGN_PARAGRAPH.CENTER, indent=False, after=2, keep_next=True)
     p.add_run().add_picture(str(ROOT / path), width=Cm(min(width_cm, max_height_cm * aspect)))
-    para(doc, caption, size=10, italic=True, align=WD_ALIGN_PARAGRAPH.CENTER, indent=False, after=8,
+    para(doc, caption, size=12, italic=True, align=WD_ALIGN_PARAGRAPH.CENTER, indent=False, after=8,
          colour=INK_2)
     return len(caption)
 
@@ -250,12 +251,13 @@ def main():
     p = doc.add_paragraph()
     p.add_run().add_break(WD_BREAK.PAGE)
 
-    chars = 0
+    chars, first = 0, len(doc.paragraphs)
     for k, name in enumerate(MAIN):
         chars += render(doc, marked(name), width, 10, number=k if k else None)
         if name == 's1_situation':
             chars += add_figure(doc, *FIGURE_1, width_cm=width * 0.8, max_height_cm=8.0)
 
+    filled = sum(1 for p in doc.paragraphs[first:] if p.text.strip())
     if not args.main_only:
         SPACING['now'] = 1.0
         for name, landscape in APPENDICES:
@@ -267,7 +269,8 @@ def main():
     if args.main_only:
         out = out.with_name(out.stem + '_main.docx')
     doc.save(out)
-    print(f'{out}: main text {chars:,} characters with spaces (limit 10,000)')
+    print(f'{out}: main text {chars:,} characters with spaces, {chars + filled - 1:,} counting one break between '
+          f'paragraphs (limit 10,000)')
 
 
 if __name__ == '__main__':
